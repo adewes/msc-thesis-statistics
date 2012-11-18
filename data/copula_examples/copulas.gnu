@@ -1,0 +1,18 @@
+load "../common.gnu";
+set out "copulas.eps";
+unset key;
+set size 1.0,1.0;
+set multiplot;
+set size 0.5,0.5;
+set label "(a)" at screen 0.0,0.5;
+set label "(b)" at screen 0.5,0.5;
+set label "(c)" at screen 0.0,0.0;
+set label "(d)" at screen 0.5,0.0;
+set origin 0.0,0.5;
+plot "contour_normal_rho=0.7.tsv" w l t "";
+set origin 0.5,0.5;
+plot "contour_frank_theta=2.tsv" w l t "";
+set origin 0.0,0.0;
+plot "contour_gumbel_theta=2.tsv" w l t "";
+set origin 0.5,0.0;
+plot "contour_clayton_theta=2.2.tsv" w l t "";

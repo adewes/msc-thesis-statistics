@@ -1,0 +1,1404 @@
+\documentclass[a4paper,12pt,bigheadings,german]{scrbook}
+
+\sloppy
+
+%\hsize=2.1in
+
+\usepackage{a4wide}
+\usepackage{german}
+\usepackage[latin1]{inputenc}
+%\usepackage[T1]{fontenc}
+
+%\usepackage[condensed,math]{kurier}
+%\usepackage{cmbright}
+%\usepackage{lmodern}
+%\usepackage{fouriernc}
+
+
+\input{mystyles.tex}
+\usepackage[rightcaption]{sidecap}
+
+\usepackage[german, refpage]{nomencl}
+\makenomenclature
+\renewcommand{\nomname}{Symbolverzeichnis}
+\setlength{\nomitemsep}{-\parsep}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\title{\Large{Genetische Programmierung im Risikomanagement}}
+
+
+\subject{Diplomarbeit\vspace*{2cm}}
+
+\author{Freie wissenschaftliche Arbeit für die Diplomprüfung für \\ Kaufleute  an der Wirtschaftswissenschaftlichen Fakultät \\ der Eberhard-Karls-Universität Tübingen.\vspace*{3cm}\\{\large eingereicht von} \\ {\large Andreas Dewes} \\ {\large geboren am 31.05.1983 in Ludwigsburg}}
+
+\date{Abgabetermin: \today}
+
+\publishers{
+Eingereicht bei Herrn Prof. Dr. Michael Merz}
+\usepackage{makeidx}
+
+
+%Formatierung von Definitionen, Algorithmen, Beweisen, etc.
+
+\usepackage{amsthm} 
+
+%\pagestyle{empty}
+
+\psset{linearc=0.15}
+
+
+\theoremstyle{remark}
+
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{alg}{Algorithmus}[section]
+
+\newcommand\toindex[1]{\textbf{#1}\index{#1}}
+\newcommand\toindexi[2]{\textbf{#2}\index{#1}}
+
+\newcommand\mpar[1]{}
+%\newcommand\mpar[1]{\marginpar{\flushleft\sffamily\small #1}}
+
+\setlength{\marginparwidth}{3cm}
+
+\newcommand{\comment}[1]{ }
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+
+\usepackage[font=footnotesize,labelfont=footnotesize]{caption}
+
+\newcommand{\bibref}[3]{#1 \textit{#2}, \textbf{#3}}
+\renewcommand{\TC}[0]{\mathrm{TC}}
+\usepackage{psfrag}
+
+\usepackage[onehalfspacing]{setspace}
+%\typearea[current]{last}
+
+\makeindex
+
+\begin{document}
+
+\pagenumbering{Roman}
+
+\thispagestyle{empty}
+
+\maketitle
+
+
+\begin{verse}
+\begin{quotation}
+It is interesting to contemplate an entangled bank, clothed with many plants of many kinds, with birds singing on the bushes, with various insects flitting about, and with worms crawling through the damp earth, and to reflect that these elaborately constructed forms, so different from each other, and dependent on each other in so complex a manner, have all been produced by laws acting around us. These laws, taken in the largest sense, being Growth with Reproduction; inheritance which is almost implied by reproduction; Variability from the indirect and direct action of the external conditions of life, and from use and disuse; a Ratio of Increase so high as to lead to a Struggle for Life, and as a consequence to Natural Selection, entailing Divergence of Character and the Extinction of less-improved forms. Thus, from the war of nature, from famine and death, the most exalted object which we are capable of conceiving, namely, the production of the higher animals, directly follows. There is grandeur in this view of life, with its several powers, having been originally breathed into a few forms or into one; and that, whilst this planet has gone cycling on according to the fixed law of gravity, from so simple a beginning endless forms most beautiful and most wonderful have been, and are being, evolved. 
+\end{quotation}
+Charles Darwin. \cite{Darwin1859}
+\end{verse}
+
+
+\tableofcontents
+
+\newpage
+
+\nomenclature{$\mathbb{N}$}{Menge der positiven ganzen Zahlen}
+\nomenclature{$\mathbb{R}$}{Menge der reellen Zahlen}
+\nomenclature{$\rho$}{Der Pearsonsche Korrelationskoeffizient zweier Zufallsvariablen}
+\nomenclature{$\sigma$}{Die Standardabweichung einer Zufallsvariablen}
+
+%\addcontentsline{toc}{chapter}{Symbolverzeichniss}
+
+\printnomenclature 
+
+\listoffigures
+
+\listoftables
+%command to compile nomenclature:
+%makeindex diplomarbeit.nlo -s nomencl.ist -o diplomarbeit.nls
+\newpage
+
+\pagenumbering{arabic}
+
+\chapter{Einführung}
+
+\begin{quotation}
+Le risque est l'onde de proue du succès.\footnote{Risiko ist die Bugwelle des Erfolgs.} (Carl Amery)
+\end{quotation}
+
+Der Begriff Risiko ist auf den vulgärlateinischen Ausdruck \emph{risicare/resecare} zurückzuführen, was im ursprünglichen Sinne soviel wie ''Gefahr laufen, wagen'' bedeutete. Auch heute wird der Begriff im Sprachgebrauch oft als ''gefühlte Gefahr'' interpretiert, also als eine Gefahr, deren Auftreten nicht vorhersehbar ist. Im Gegensatz zu diesem allgemeinen Risikobegriff zielt der in dieser Arbeit verwendete Begriff des Risikos jedoch eher auf eine mathematische-betriebswirtschaftliche Sichtweise ab. So wird in Anlehnung an \cite[S. 4]{McNeil05} \toindex{Risiko} im folgenden definiert als
+
+\begin{verse}
+\textbf{Risiko:} Ein jegliches Ereignis, welches die Fähigkeit einer Organisation zur Erreichung ihrer Ziele oder der Durchführung ihrer Strategie negativ beeinflussen kann.
+\end{verse}
+
+Als Organisation ist dabei häufig ein Unternehmen bzw. ein Betrieb im wirtschaftlichen Sinne bezeichnet, es kann sich jedoch z.B. auch um eine natürliche Personen, einen Staat oder eine sonstige Organisationseinheit handeln. Ergänzend sei angemerkt, dass der Eintritt (oder Nichteintritt) des erwähnten Ereignisses üblicherweise nicht mit Sicherheit vorhergesagt werden kann. Wäre dies nicht der Fall, so könnte bereits vor dem Eintreffen des Ereignisses eine sichere Entscheidung über den Umgang mit diesem getroffen werden und eine weitergehende Beschäftigung mit dem zugehörigen ''Risiko'' wäre somit überflüssig. Da risikobedingte Ereignisse im Allgemeinen jedoch nicht mit absoluter Sicherheit vorhergesagt werden können, ist ein Verfahren zum Umgang mit diesen für jede wirtschaftliche Tätigkeit unerlässlich. Ein solches Verfahren wird im folgenden erläutert.
+
+\section{Risikomanagement}
+
+Die für den Umgang mit betriebswirtschaftlichen und allgemeinen Risiken entwickelten Methoden werden meist unter dem Begriff \toindex{Risikomanagement} zusammengefasst. Im engeren, betriebswirtschaftlichen Sinne ist Risikomanagement dabei definiert als \cite[S. 3]{Wolke08}
+
+\begin{verse}
+\textbf{Risikomanagement:} Die unternehmensweite Messung und Steuerung aller betriebswirtschaftlichen Risiken.
+\end{verse}
+
+Die Gründe für den Einsatz von Risikomanagement sind dabei vielfältig und können praktischer aber auch rechtlicher Natur sein. Allgemein wird dabei zwischen \toindexi{Risikomanagement!quantitatives -}{quantitativem} und \toindexi{Risikomanagement!qualitatives -}{qualitativem Risikomanagement} unterschieden.
+
+\subsection{Quantitatives Risikomanagement}
+
+Das quantitative Risikomanagement befasst sich mit im mathematischen Sinne messbaren Risiken. Oft wird dabei auf die geldwerte Definition eines Risikos abgezielt, davon unabhängig können jedoch auch völlig andere Maße der Risikobewertung zugrunde liegen. Beispiele könnte die Entwicklung eines Aktienwertes, die maximale Windstärke an einem bestimmten geographischen Punkt oder auch der Pegelstand eines bestimmten Flusses Gegenstand quantitativer Risikobetrachtungen sein. Die betrachteten Risikogrößen müssen dabei stets zumindest intervallskaliert vorliegen.
+
+\smallskip
+
+Diese Arbeit wird sich vor allem auf die Untersuchung quantitativer Risiken im Zusammenhang mit der Preisentwicklung von Aktienwerten befassen, qualitative Risikoaspekte werden hierbei nicht berücksichtigt.
+
+\subsection{Qualitatives Risikomanagement}
+
+Das qualitative Risikomanagement befasst sich im Gegensatz zum quantitativen Risikomanagement mit der Behandlung von Risiken, die nicht im mathematischen Sinne quantitativ erfasst werden können. Eine typische Anwendung des qualitativen Risikomanagements ist z.B. die Beurteilung der Kreditwürdigkeit einer Organisation durch eine Rating-Agentur. Die Kreditwürdigkeit wird dabei häufig über sog. Scoring-Modelle berechnet, welche qualitative und vereinzelt auch quantitative Merkmale der betrachteten Organisation zu einem Rating verarbeiten, welches als kategorielles Merkmal dann Aufschluss über die Bonität der Organisation gibt. Die betrachteten Kategorien besitzen dabei lediglich eine ordinale Vergleichbarkeit (d.h. man kann alle Kategorien in eine eindeutige Ordnung bringen, jedoch keine Aussage zum ''Abstand'' zweier unterschiedlicher Kategorien machen). 
+
+\subsection{Risikomanagementprozess}
+
+\begin{figure}
+  \centering
+  \hspace{1.5cm} % Because left line connexions change centering...
+  \begin{psmatrix}[mnode=r,colsep=0.4,rowsep=0.4]
+    [name=ident] \pw{Risikoidentifikation} & [name=analysis] \pw{Risikoanalyse} & [name=influence] \pw{Risikosteuerung} & [name=control] \pw{Risikocontrolling} \\[0pt]
+    [name=categories] \pwr{Risikoarten} & [name=indicators] \pwr{Kennzahlen} & [name=instruments] \pwr{Instrumente} & [name=organization] \pwr{Organisation} \\ [0pt]
+    [name=categories_ex] \pw{
+    \parbox{2.6cm}{
+      Marktrisiken \\
+      Ausfallrisiken \\
+      Betriebsrisken \\
+      Absatzrisiken
+    }
+    } &
+    [name=categories_ex] \pw{
+    \parbox{2.6cm}{
+      Max. Verlust \\
+      Volatilität \\
+      Sensitivität \\
+      VaR
+    }
+    } &
+    [name=categories_ex] \pw{
+    \parbox{2.6cm}{
+      Vorsorge \\
+      Abwälzung \\
+      Kompensation \\
+      Diversifikation
+    }
+    } &
+    [name=categories_ex] \pw{
+    \parbox{2.6cm}{
+      Planung \\
+      Kontrolle \\
+      Information \\
+      Koordination
+    }
+    } \\
+  \ncline{->}{ident}{analysis}
+  \ncline{->}{analysis}{influence}
+  \ncline{->}{influence}{control}
+  \ncline{->}{ident}{categories}
+  \ncline{->}{analysis}{indicators}
+  \ncline{->}{influence}{instruments}
+  \ncline{->}{control}{organization}
+  \end{psmatrix}
+  \caption[Risikomanagementprozess nach \cite{Wolke08}]{Der Risikomanagementprozess nach \cite[S. 4]{Wolke08}}\label{fig:risk_management_process}
+\end{figure}
+
+Die praktische Durchführung des Risikomanagements wird üblicherweise als Prozess organisiert, der sich dabei oft an den klassischen Managementprozess anlehnt\cite[S. 4]{Wolke08} und wie in Abb. \ref{fig:risk_management_process} dargestellt unterteilt werden kann. Die einzelnen Stufen des Risikomanagementprozesses sind dabei die \toindexi{Risikomanagement!Risikoidentifikation}{Risikoidentifikation}, die \toindexi{Risikomanagement!Risikoanalyse}{Risikoanalyse}, die \toindexi{Risikomanagement!Risikosteuerung}{Risikosteuerung} und das \toindexi{Risikomanagement!Risikocontrolling}{Risikocontrolling}. Im folgenden werden diese Begriffe kurz erläutert.
+
+\subsubsection{Risikoidentifikation}
+
+Mit der Risikoidentifikation erfolgt die Erfassung aller betriebsrelevanten Einzelrisiken innerhalb der untersuchten Organisation. Diese Identifikation kann hierbei z.B. über Analyseraster, Risikotabellen, Interviews bzw. durch Analyse aller Geschäftsprozesse erfolgen\cite[S. 6 ff.]{Wolke08}. Üblicherweise wird zusätzlich zur Identifikation auch gleich eine Klassifizierung der gefundenen Risiken vorgenommen. Hierbei wird oft zwischen \toindexi{Risikomanagement!naturwissenschaftliches Risiko}{naturwissenschaftlichen} und \toindexi{Risikomanagement!wirtschaftswissenschaftliches Risiko}{wirtschaftswissenschaftlichen Risiken} unterschieden, wobei beide Kategorien u.U. nicht scharf trennbar sind (man denke z.B. an Erdbeben als gleichermaßen naturwissenschaftliches als auch wirtschaftswissenschaftliches Risiko für ein Rückversicherungsunternehmen). Weiterhin kann man in betriebs- und volkswirtschaftliche Risiken trennen, wobei betriebswirtschaftliche Risiken vom untersuchten Betrieb selbst verursacht werden, wohingegen volkswirtschaftliche Risiken quasi global durch die gesamte Wirtschaftstätigkeit aller Wirtschaftsakteure erzeugt werden (z.B. Konjunkturkrisen).
+
+\subsubsection{Risikoanalyse}
+
+Aufbauend auf der Risikoidentifikation folgt die \toindexi{Risikomanagement!Risikomessung}{Risikomessung} und die \textbf{Risikoanalyse}. Die Risikomessung erfasst dabei entweder qualitativ oder quantitativ die identifizierten Risiken anhand von \toindexi{Risikomanagement!Risikofaktor}{Risikofaktoren}. Die Risikoanalyse generiert anschließend aufbauend auf dieser Risikomessung Kennzahlen bzw. sonstige qualitative oder quantitative Maßzahlen, anhand derer das durch einzelne Risikofaktoren gegebene Risiko entscheidungstheoretisch behandelt werden kann. Die Risikoanalyse soll dabei v.a. klären, ob in den späteren Schritten des Risikomanagementprozesses Maßnahmen zur Reduktion einzelner Risiken ergriffen werden müssen. Weiterhin stellt die Risikoanalyse u.U. quantitative Informationen zur späteren Risikoplanung und -steuerung bereit. Einer quantitativen Risikoanalyse entspricht beispielsweise die Modellierung der Volatilität eines Aktienpreises, ein Beispiel für eine qualitative Risikoanalyse wäre hingegen die Erstellung eines Kredit-Ratings durch eine Rating-Agentur.
+
+\subsubsection{Risikosteuerung}
+
+Aufbauend auf der Risikoanalyse stellt die Risikosteuerung Instrumente zur Steuerung der analysierten Risiken bereit. Mögliche Instrumente hierfür sind z.B. die Bereitstellung von Sicherheiten bei der Tätigung von Geschäften, die Einrichtung von Order-Limits sowie die Portfoliooptimierung bei Aktientransaktionen, sowie natürlich die (Rück-)Versicherung einzelner oder zusammengehöriger Risiken.
+
+\subsubsection{Risikocontrolling}
+
+Das Risikocontrolling baut schließlich auf allen vorherigen Stufen des Risikomanagementprozesses auf und zielt auf die Unterstützung der Unternehmensführung beim Risikomanagement durch Planung, Kontrolle und Information ab\cite[S. 239]{Wolke08}. Das Risikocontrolling soll somit die Risikoanalyse und die Risikosteuerung als Prozess im betrachteten Unternehmen verankern und übt eine nicht zu unterschätzende Kontrollfunktion für den Risikomanagementprozess aus.
+
+\section{Genetische Programmierung}
+
+\begin{quotation}
+Am Ende hängen wir doch ab \\
+Von Kreaturen, die wir machten. (Johann Wolfang Goethe - Faust II)
+\end{quotation}
+
+Genetische Programmierung (GP) ist eine Optimierungstechnik aus dem Bereich der Künstlichen Intelligenz und kann dort dem Unterbereich der evolutionären Algorithmen zugerechnet werden. Erfunden wurde genetische Programmierung durch John Koza\cite{Koza92}. Bereits vor der Erfindung von GP wurden sogenannte genetische Algorithmen (GA) eingesetzt um Optimierungsprobleme mit evolutionären Verfahren zu lösen\cite{Holland62,Holland92}. Das Optimierungsverfahren der GA wurde dabei dem Reproduktions- und Paarungsmechanismus eines DNA-Strangs nachempfunden. Da genetische Algorithmen als Grundlage für die Entwicklung der genetischen Programmierung angesehen werden können, werden sie im folgenden kurz erläutert. 
+
+\smallskip
+
+Generell ist bei den GA für ein gegebenes, bereits modelliertes Problem eine eindimensionale Liste von meist numerischen Parametern zu optimieren. In Anlehnung an die Genetik wird diese Liste oft als Strang und ein einzelner Parameter innerhalb der Liste als Gen bezeichnet. Bei der Durchführung des Algorithmus werden dann zunächst viele unterschiedliche und meist zufällig erzeugte Paramterstränge generiert. Diese werden anschließend auf ihre Eignung als Eingabeparameter zur Lösung des betrachteten Problems geprüft. Einige der in diesem Sinne besten Stränge werden anschließend nach einem bestimmten Verfahren paarweise ausgewählt und zunächst einzeln an einer bestimmten Position ''aufgetrennt'', womit jeder Strang in zwei Teilstränge zerfällt. Anschließend werden genau zwei dieser Teilstränge zwischen den Gesamtsträngen ausgetauscht. Schließlich werden noch zufällig ausgewählte Elemente einzelner Stränge ''mutiert''. 
+
+\smallskip
+
+Diese Vorgehensweise entspricht grob dem Konzept der geschlechtlichen Fortpflanzung in der Natur und erzeugt zusammen mit einem passenden Selektionsmechanimus in jedem Schritt des Algorithmus bessere Parameterstränge. Ein Beispiel für den Einsatz eines solchen genetischen Algorithmus wäre z.B. die Optimierung eines Routenplanes für einen reisenden Kaufmann (das sog. \textbf{traveling salesman problem})\cite{Applegate07}, wobei die entsprechende Abfolge der einzelnen Reiseorte als Parameter in den Parametersträngen gespeichert wäre und das Ziel der Optimierung im Auffinden der kürzesten Reiseroute für den Kaufmann liegt. Zu diesem Problem ähnliche Fragestellungen treten heute in der Logistik häufig auf und sind der Klasse der NP-äquivalenten Probleme zuzuordnen, was eine exakte Lösung für eine große Anzahl an Reiseorten extrem erschwert oder gar unmöglich macht. Wären beispielsweise insgesamt 50 Städte zu bereisen, so müssten theoretisch bereits $50! \approx 3.04\cdot 10^{64}$ Lösungen auf ihre Optimalität hin untersucht werden, was einen herkömmlichen Suchalgorithmus für die Optimierung quasi ausschließt. Mit genetischen Algorithmen kann hingegen eine nahezu optimale Lösung in recht kurzer Zeit gefunden werden\cite{Grefenstette85}.
+
+\smallskip
+
+Im Unterschied zu den GA werden bei der GP jedoch nicht nur Parameterstränge für bereits vorgegebene Programme, sondern darüber hinaus auch die zur Lösung des Optimierungsproblems geeigneten Programme selbst erzeugt. Viele der für GA entwickelten Verfahren und Techniken lassen sich dabei unmittelbar auf die GP übertragen\cite{Langdon98,Eiben98}. Sowohl GA als auch GP unterliegen dem sog. Schema-Theorem\cite{Holland92a}, welches besagt, dass die Anzahl der von einem der beiden Verfahren geprüften Lösungen im Suchraum des jeweiligen Optimierungsproblems im Verlauf des Verfahren exponentiell ansteigt, was diese sehr interessant für eine große Klasse ''harter'' Optimierungprobleme macht. Im folgenden werden genetische Algorithmen nicht weiter behandelt, da sie im Rahmen der Arbeit nicht verwendet wurden. Stattdessen wird intensiv auf die Grundlagen der genetischen Programmierung eingegangen.
+
+\subsection{Grundlagen der genetischen Programmierung}
+
+Die für die Durchführung der genetischen Programmierung benötigen Techniken werden ausführlich in den als Standardwerken betrachteten Büchern von J. Koza\cite{Koza92,Koza94,Koza99,Koza03} erläutert. Abb. \ref{fig:genetic_flowchart} zeigt das gebräuchlichste Flussdiagramm zur genetischen Programmierung. Der zur Durchführung der genetischen Programmierung verfolgte Algorithmus wird dabei im folgenden meist als \toindexi{Genetische Programmierung!GP-Algorithmus}{GP-Algorithmus} bezeichnet.
+
+\smallskip
+
+\begin{figure}
+  \centering
+  \hspace{1.5cm} % Because left line connexions change centering...
+  \begin{psmatrix}[mnode=r,colsep=0.4,rowsep=0.4]
+    & [name=gen_0] \pw{$n=0$} \\[0pt]
+    & [name=create_population]  \pw{Anfangspopulation erzeugen}  \\ [0pt]
+      [name=result1] \pw{Resultat ausgeben, Ende.} & [name=term_crit]  \pw{Zielkriterium erfüllt?} \\ [0pt]
+     [name=result2] \pw{Resultat ausgeben, Ende.}  & [name=term_n]  \pw{$n=N$?} \\ [0pt]
+    [name=calc_fitness]  \pw{\parbox{4cm}{Fitness für alle Individuen berechnen}}  \\ [0pt]
+    [name=init_indiv]  \pw{$i=0$}  \\ [0pt]
+    [name=ien]  \pw{$i=M$?} & [name=genp] \pw{$n=n+1$}  \\ [0pt]
+    [name=choose_op]  \pw{\parbox{4cm}{Genetische Operation auswählen}}  \\ [0pt]
+    [name=repr1]  \pw{\parbox{3cm}{Individuum basierend auf seiner Fitness auswählen}} & [name=crossover1] \pw{\parbox{3cm}{Zwei Individuen basierend auf ihrer Fitness auswählen}} & [name=mutation1] \pw{\parbox{3cm}{Ein Individuum basierend auf sein Fitness auswählen}}  \\ [0pt]
+    [name=repr2]  \pw{\parbox{3cm}{Reproduktion ausführen}} & [name=crossover2] \pw{\parbox{3cm}{Crossover ausführen}} &  [name=mutation2]\pw{\parbox{3cm}{Mutation ausführen}}  \\ [0pt]
+    [name=repr3]  \pw{\parbox{3cm}{Individuum in neue Population kopieren}} & [name=crossover3] \pw{\parbox{3cm}{Nachkommen in neue Population kopieren}} &  [name=mutation3] \pw{\parbox{3cm}{Mutant in neue Population kopieren}}  \\ [0pt]
+    [name=ip1]  \pw{$i=i+1$} & [name=ip2] \pw{$i=i+2$} & [name=ip3] \pw{$i=i+1$}  \\ [0pt]
+
+    % Connexions
+    \ncloop[arm=12pt,angleA=270,angleB=-90,loopsize=2.5,armA=8pt,armB=5pt]
+           {<-}{ien}{ip1}
+    \ncloop[arm=12pt,angleA=-90,angleB=-90,loopsize=2.5,armA=8pt,armB=5pt]
+           {<-}{ien}{ip2}
+    \ncloop[arm=12pt,angleA=-90,angleB=-90,loopsize=2.5,armA=8pt,armB=5pt]
+           {<-}{ien}{ip3}
+
+    \ncloop[arm=12pt,angleA=90,angleB=0,loopsize=2.5,armA=8pt,armB=5pt]
+           {->}{genp}{term_crit}
+
+    \ncline{->}{choose_op}{repr1}
+    
+    \ncangle[angleA=0,angleB=0]
+          {->}{ien}{choose_op}
+    \naput[npos=0.3]{Nein}
+%    \lput*[ien]{0}(0.5){Nein}
+
+    \ncline{->}{ien}{genp}
+    \lput*[ien]{0}(0.7){Ja}
+
+    \ncangle[angleA=0,angleB=90]
+          {->}{choose_op}{mutation1}
+    \ncangle[angleA=0,angleB=90]
+          {->}{choose_op}{crossover1}
+
+    \ncangle[angleA=-90,angleB=0]
+          {->}{term_n}{calc_fitness}
+
+    \ncline{->}{term_crit}{term_n}
+    \ncline{->}{calc_fitness}{init_indiv}
+    \ncline{->}{init_indiv}{ien}
+
+    \ncline{->}{gen_0}{create_population}
+    \ncline{->}{create_population}{term_crit}
+    \ncline{->}{term_crit}{result1}\naput[npos=0.3]{Ja}
+    \ncline{->}{term_n}{result2}\naput[npos=0.3]{Ja}
+
+    \ncline{->}{mutation1}{mutation2}
+    \ncline{->}{mutation2}{mutation3}
+    \ncline{->}{mutation3}{ip3}
+
+    \ncline{->}{crossover1}{crossover2}
+    \ncline{->}{crossover2}{crossover3}
+    \ncline{->}{crossover3}{ip2}
+
+    \ncline{->}{repr1}{repr2}
+    \ncline{->}{repr2}{repr3}
+    \ncline{->}{repr3}{ip1}
+
+  \end{psmatrix}
+
+
+  \caption{Flussdiagramm der genetischen Programmierung nach \cite{Koza92}} \label{fig:genetic_flowchart}
+\end{figure}
+
+Zunächst erzeugt der Algorithmus eine große Anzahl zufallsgenerierter \toindexi{Genetische Programmierung!Programm}{Programme}, welche zur Lösung eines gegebenen Optimierungsproblems eingesetzt werden können. Diese Programme werden oft auch als \toindexi{Genetische Programmierung!Individuum}{Individuen} bezeichnet. Die Gesamtmenge dieser Individuen wird hierbei \toindexi{Genetische Programmierung!Population}{Population} genannt. Die einzelnen Individuen können als Computerprogramme ausgeführt werden, erhalten als Eingabe die relevanten Parameter des untersuchten Optimierungsproblems und erzeugen daraus eine oft näherungsweise Lösung des gegebenen Problems. Die Güte der von einem Individuum gefundenen Lösung wird hierbei über die sog. \toindexi{Genetische Programmierung!Fitness}{Fitness} gemessen. Diese Fitness definiert auf der Menge aller Programme eine Quasiordnung im mathematischen Sinne, macht die Individuen also paarweise hinsichtlich ihrer Eignung zur Lösung des gegebenen Problems vergleichbar. Eine höhere Fitness entspricht dabei einer besseren Lösung des Optimierungsproblems. Ist eine initiale Population von Individuen gefunden, so werden im Rahmen des GP-Algorithmus sich wiederholende Optimierungsschritte zur Verbesserung der Fitness der Individuen ausgeführt. Diese Schritte werden im folgenden kurz erläutert.
+
+\smallskip
+
+In jedem Schritt werden zunächst alle Individuen in der vorhandenen Population anhand ihrer Fitness beurteilt. Dabei wird geprüft, ob von einem oder mehreren Individuen ein bereits zuvor gewähltes Optimierungskriterium erfüllt wurde. Falls dies der Fall ist, wird der Algorithmus beendet und die generierten Individuen werden als Lösung ausgegeben, u.U. wird für die Ausgabe dabei auch nur das beste Individuum berücksichtigt. Der Algorithmus endet ebenso, falls eine vorgegebene Anzahl an Optimierungsschritten erreicht wurde. Ist keines dieser beiden Kriterien gegeben, so wird im nächsten Schritt anhand eines vorher festgelegten Verfahrens eine vorgegebene Anzahl von Individuen aus der ursprünglichen Population anhand ihrer Fitness ausgewählt. Die gewählten Individuen werden anschließend zufallsgesteuert bestimmten \toindexi{Genetische Programmierung!Genetische Operation}{genetischen Operationen} unterzogen und zu einer neuen Population zusammengefasst. Die gebräuchlichsten genetischen Operationen sind hierbei
+
+\begin{itemize}
+ \item \toindexi{Genetische Programmierung!Reproduktion}{Reproduktion}: Ein einzelnes ausgewähltes Individuum wird unverändert in die neue Population übernommen.
+ \item \toindexi{Genetische Programmierung!Mutation}{Mutation}: Ein einzelnes ausgewähltes Individuum wird mutiert, d.h. seine Programmstruktur wird zufällig geändert um ein neues Individuum zu erzeugen.
+ \item \toindexi{Genetische Programmierung!Crossover}{Crossover}: Zwei ausgewählte Individuen werden ''gepaart``, wobei wiederum zwei neue Individuen als genetische Nachkommen der ursprünglichen Programme entstehen.
+\item \toindexi{Genetische Programmierung!Permutation}{Permutation}: Die Reihenfolge einzelner Programmteile innerhalb des ausgewählten Individuums wird zufällig permutiert.
+\item \toindexi{Genetische Programmierung!Shrink-Mutation}{Shrink-Mutation}: Das Programm des ausgewählten Individuums wird zufallsgesteuert gekürzt, womit ein neues Individuum erzeugt wird. 
+\end{itemize}
+
+Nach der Durchführung dieser Schritte liegt schließlich eine neue \toindex{Generation} von Individuen vor und der nächste Optimierungsschritt kann ausgeführt werden. Da bei jedem Schritt möglichst eine Verbesserung der gefundenen Lösung angestrebt wird, muss die Auswahl der Individuen aus der ursprünglichen Generation so erfolgen, dass solche Individuen mit hoher Fitness eine erhöhte Auswahlwahrscheinlichkeit aufweisen. Um dies zu erreichen, eignen sich verschiedene \toindexi{Genetische Programmierung!Selektion}{Selektionsverfahren}. Bei der \toindexi{Genetische Programmierung!Selektion!fitness-proportional}{fitnessproportionalen Selektion} werden einzelne Individuen statistisch anhand ihrer Fitness ausgewählt. Der Wert der Fitness ist dabei proportional zur Auswahlwahrscheinlichkeit eines Individuums. Dieses Verfahren verlangt die Verwendung der sog. \toindexi{Genetische Programmierung!Fitness!normierte Fitness}{normierten Fitness} $f^n_i$, welche stets im Intervall $[0,1]$ liegt (der Index $i$ bezeichnet hierbei das jeweilige Individuum). Die normierte Fitness wird dabei ausgehend von der \toindexi{Genetische Programmierung!Fitness!rohe Fitness}{rohen Fitness} $f^r_i$ (welche einen beliebigen Wertebereich besitzen kann), über die \toindexi{Genetische Programmierung!Fitness!standardisierte Fitness}{standardisierte} und die \toindexi{Genetische Programmierung!Fitness!angepasste Fitness}{angepasste Fitness} berechnet. Die standardisierte Fitness ist dabei dabei nach obiger Definition der rohen Fitness (ein höherer Wert der rohen Fitness entspricht einer besseren Lösung) definiert als $f^s_i=\max\limits_j{f^n_j}-f^n_i$, wobei der Index $j$ über alle Individuen einer Generation läuft. D.h. ein Wert $f^s_i=0$ entspricht stets der Fitness des \emph{besten} Individuums innerhalb der Generation. Die angepasste Fitness schließlich berechnet sich aus der standardisierten Fitness als $f^a_i =1/\left(1+f^s_i\right)$, d.h. sie nimmt für das beste Individuum der Generation den Wert $f^a_i=1$ an und sinkt mit steigendem Wert von $f^s_i$. Die normierte Fitness berechnet sich schließlich aus der angepassten Fitness als \cite[S. 95 ff.]{Koza92}
+
+\nomenclature{$f^r$}{Rohe Fitness in der genetischen Programmierung} 
+\nomenclature{$f^s$}{Standardisierte Fitness in der genetischen Programmierung} 
+\nomenclature{$f^a$}{Angepasste Fitness in der genetischen Programmierung} 
+\nomenclature{$f^n$}{Normierte Fitness in der genetischen Programmierung} 
+
+\begin{equation}
+f^n_i = \frac{f^a_i}{\sum\limits_j f^a_j}
+\end{equation}
+
+Die normierte Fitness hat einige vorteilhafte Eigenschaften und kann als Wahrscheinlichkeitsmaß zur fitnessbasierten Selektion herangezogen werden.
+
+Im Gegensatz hierzu wählt die in dieser Arbeit eingesetzte \toindexi{Genetische Programmierung!Selektion!Tournament-Selektion}{Tournament-Selektion} Individuen in einer Art ''Gruppenwettkampf'' anhand ihrer relativen Fitness aus. Die Tournament-Selektion läuft dabei folgendermaßen ab:
+
+\begin{alg}[Tournament-Selektion (TS)]
+\mbox{}
+\begin{enumerate}
+  \item Wähle zufällig $m$ Individuen $(i_1,\hdots,i_{ m } )$ aus der Ausgangspopulation aus.
+  \item Vergleiche die Fitness der ausgewählten Individuen und selektiere das Individuum $i_k$ mit der größten Fitness, so dass $f_{i_k}>f_{i_j}$ für $\forall j=1,\hdots m$ .
+  \item Entferne das selektierte Individuum $i_k$ aus der Ausgangspopulation.
+\end{enumerate} 
+\end{alg}
+
+Die Tournament-Selektion (TS) hat dabei den großen Vorteil, dass die gewählte Fitness nicht normiert sein muss und dass auch kein globaler Vergleich aller Fitness-Werte für die Selektion benötigt wird. Weiterhin bildet TS die biologische Evolution realitätsgetreuer ab als z.B. die fitnessproportionale Selektion, da in der Natur üblicherweise nur kleine Gruppen von Individuen um die Selektion kämpfen und nicht etwa ein Vergleich sämtlicher Individuen einer Population stattfindet (abgesehen vielleicht von einigen Vogel- und Säugetierarten, die sich zur Paarung in einer großen Brutkolonie zusammenfinden). Die Größe der einzelnen Wettkampfgruppen ist dabei ein wichtiger Parameter und sollte sorgfältig gewählt werden. In allen im folgenden durchgeführten Untersuchungen wurde das Tournament-Verfahren zur Selektion eingesetzt.
+
+\subsection{Repräsentation der Individuen}
+
+\begin{SCfigure}
+\includegraphics{figures/gp_program}
+\caption{Die Baumrepräsentation eines genetischen Programms $x+3\cdot x$}\label{fig:genetic_tree}
+\end{SCfigure}
+
+Zur Repräsentation der Individuen in der genetischen Programmierung wird üblicherweise eine Baumdarstellung gewählt\cite[S. 105 ff.]{Banzhaf02}. Ein \toindexi{Genetische Programmierung!Baum}{Baum} ist hierbei eine hierarchische Struktur bestehend aus einem oder mehreren \toindexi{Genetische Programmierung!Baum!Knoten}{Knoten}, wobei einer dieser Knoten als sogenannte \toindexi{Genetische Programmierung!Baum!Wurzel}{Wurzel} des Baums fungiert. Jeder Knoten kann einen oder mehrere Unterknoten besitzen. Weiterhin wird zwischen \toindexi{Genetische Programmierung!Baum!Ast}{Ästen (Branches)} und \toindexi{Genetische Programmierung!Baum!Blatt}{Blättern (Leafs)} des Baumes unterschieden. Äste besitzen hierbei einen oderer mehrere Unterknoten, Blätter besitzen hingegen keinen solchen Nachfolger. Im Rahmen der Programmierung werden Äste auch oft als \toindexi{Genetische Programmierung!Nichtterminal-Symbol}{Nichtterminal-Symbole} und Blätter als \toindexi{Genetische Programmierung!Terminal-Symbol}{Terminal-Symbole} bezeichnet, wobei Terminal-Symbole (engl. ''to terminate'' = ''abschließen'') die Enden des Progammbaumes markieren. Abb. \ref{fig:genetic_tree} zeigt beispielhaft die Baumdarstellung des Programms $x+3\cdot x$. Die genetischen Operatoren (Crossover, Mutation, Shrink-Mutation) lassen sich in der Baumrepräsentation eines Programms sehr einfach realisieren, was im folgenden gezeigt wird.
+
+\subsection{Genetische Operatoren}
+
+Die genetischen Operatoren modifizieren einzelne Teile des Programmbaumes, indem sie vorhandene Knoten ersetzen, löschen oder austauschen. Im folgenden seien kurz die einzelnen Operatoren und ihre Wirkung auf die Programmstruktur erläutert.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{figures/gp_mutation.eps}
+\caption[Veranschaulichung des genetischen Mutationsoperators]{Veranschaulichung des genetischen Mutationsoperators anhand des Programms $x+3$, welches zu $x+x\cdot 5$ mutiert wird. Der zur Mutation ausgewählte Knoten sowie die ihn ersetzende Baumstruktur ist grau unterlegt.} \label{fig:gp_mutation}
+\end{figure}
+
+\subsubsection{Mutation}
+
+Abb. \ref{fig:gp_mutation} zeigt beispielhaft die Wirkung des Mutationsoperators auf das Programm $x+3$. Für die Mutation wird dabei zunächst ein Knoten des Baumes zufällig ausgewählt (grau unterlegt). Dieser Knoten wird anschließend durch einen neuen, zufallsgenerierten Baum ersetzt. Das so entstehende Programm kann dabei sowohl länger als auch kürzer sein als das ursprüngliche Programm. Unter der \toindexi{Genetische Programmierung!Baum!Länge}{Länge} eines Programms wird dabei die Gesamtzahl der Knoten in seiner Baumdarstellung verstanden.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{figures/gp_crossover.eps}
+\caption[Veranschaulichung des genetischen Crossover-Operators]{Veranschaulichung des genetischen Crossover-Operators. Die beiden Eltern-Programme $x\cdot 3+y$ und $3+x^2$ erzeugen den Nachwuchs $x^2+y$ sowie $3+x\cdot 3$, der aus einer Mischung des genetischen Materials der beiden Elternteile entsteht.} \label{fig:gp_crossover}
+\end{figure}
+
+
+\subsubsection{Crossover} 
+
+Der genetische Crossover erfolgt ähnlich wie die Mutation, jedoch werden hierfür insgesamt zwei Individuen aus der Population selektiert. Abb. \ref{fig:gp_crossover} zeigt beispielhaft den Crossover zwischen den zwei Programmen $x\cdot 3+y$ und $3+x^2$. Hierbei wird zunächst von jedem Programm zufällig ein Teil des Baumes für den Crossover ausgewählt (grau unterlegt).  Anschließend werden diese Bäume zwischen den beiden Individuen ausgetauscht. Auf diese Weise entstehen zwei neue Baumstrukturen, welche beide jeweils genetische Merkmale beider ''Elternteile'' tragen. Die Gesamtlänge der beiden Programme bleibt bei dieser Operation unverändert, ebenso wird kein neues Genmaterial in die Programme eingebracht. Es sei angemerkt, dass die jeweils ausgetauschten Unterbäume nicht zwangsweise die gleiche Länge bzw. die gleiche Position innerhalb des jeweiligen Gesamtbaumes aufweisen müssen.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{figures/gp_shrink.eps}
+\caption[Veranschaulichung des genetischen Shrink-Operators]{Veranschaulichung des genetischen Shrink-Operators. Ein genetisches Program wird in seiner Länge verkürzt, indem ein zufällig ausgewählter Nicht-Terminal/Ast des Programmbaumes durch ein zufallsgeneriertes Terminal/Blatt ersetzt wird.}\label{fig:gp_shrink}
+\end{figure}
+
+\subsubsection{Shrink-Mutation}
+
+Die Shrink-Mutation, dargestellt in Abb. \ref{fig:gp_shrink} verläuft analog zur normalen Mutation, jedoch wird nun zufällig ein Ast (und keinesfalls ein Blatt) aus dem Baum ausgewählt (grau unterlegt). Dieser Ast wird im zweiten Schritt durch ein Blatt ersetzt und der Baum wird so insgesamt gekürzt. Die Shrink-Mutation gehört nicht zu den unbedingt notwendigen Operatoren, die für einen funktionalen GP-Algorithmus benötigt werden, ist aber sehr nützlich um die durchschnittliche Programmlänge innerhalb der Population gering zu halten. Diese Verkleinerung ist oft nötig, da die Programmlänge im Verlauf des GP-Algorithmus nahezu exponentiell anwachsen kann, was als \toindexi{Genetische Programmierung!Bloat}{Bloat} bezeichnet wird und oft unerwünscht ist. Alternativ zur Shrink-Mutation kann auch schlicht eine Maximallänge für die Programme einer Population festgelegt werden, wobei zu lange Programme einfach aus der Population entfernt und durch neue, zufallsgenerierte Programme ersetzt werden. Da hierbei jedoch große Mengen an genetischer Information verloren gehen ist die Shrink-Mutation in den meisten Fällen der Längenlimitierung vorzuziehen.
+
+\subsection{Weiterführende Konzepte}
+
+Neben den bereits vorgestellten Konzepten und Operatoren existieren weitere, fortgeschrittenere Konzepte der genetischen Programmierung, welche vorwiegend zur Erweiterung der Funktionalität dieser Methode eingeführt wurden. Ein oft verwendetes Konzept ist dabei die sog. \toindexi{Genetische Programmierung!automatisch definierte Funktion (ADF)}{automatisch definierte Funktion (ADF)} (automatically defined function)\cite{Koza92}. Eine solche ADF stellt im Prinzip ein eigenständiges genetisches Programm dar, welches im Verlauf des GP-Algorithmus wie andere Programme auch durch Anwendung der genetischen Operatoren verändert werden kann. Dabei besitzt jedes reguläre genetische Programm einer Population eine oder mehrere ADFs. Jede ADF kann in einem regulären Programm als Nichtterminal aufgerufen werden. Somit steht eine ADF als Hilfsfunktion für ein reguläres genetisches Programm zur Verfügung und kann von diesem an mehreren Stellen im Programmbaum benutzt werden. Beispielsweise könnte bei der Berechnung der Differenz der Fläche zweier Rechtecke eine automatisch definierte Funktion die Berechnung des Flächeninhaltes eines jeden Rechtecks übernehmen, was die Lösung des Gesamtproblems innerhalb eines regulären Programmes sehr vereinfacht. ADFs sind somit sehr nützlich um komplexe Aufgaben in mehrere, einfacher zu lösende Teilaufgaben zu untergliedern. Diese einzelnen Teilaufgaben können dann jede für sich durch genetische Programmierung gelöst werden. Innerhalb dieser Arbeit werden ADFs jedoch nicht verwendet, daher werden sie auch nicht weitergehend diskutiert. Für weitere Details zu ADFs kann z.B. \cite{Koza96} herangezogen werden.
+
+\smallskip
+
+Eine weitere interessante Entwicklung ist die Erweiterung der genetischen Programmierung hin zu einem sog. \toindexi{Genetische Programmierung!genereller Problemlöser}{generellen Problemlöser} (general problem solver (GPS))\cite{Newell95,Feigenbaum95}. Dabei wird darauf abgezielt, dem GP-Algorithmus unabhängig vom betrachteten Problem einen Satz von Nichtterminalsymbolen zur Verfügung zu stellen, der eine Modellierung eines jeglichen denkbaren Sachverhalts ermöglicht, in Analogie zu dem vollständigen Satz an Operatoren den eine Turing-Maschine\cite{Turing36} zur Darstellung eines beliebigen Computerprogrammes benötigt. Hiermit wäre es prinzipiell möglich, jedes logisch fassbare Problem unter Formulierung einer passenden Fitnessfunktion und eines Satzes von Eingabewerten (Terminalsymbolen) mittels genetischer Programmierung zu lösen. Generell soll der generelle Problemlöser dabei auch menschliches Denken simulieren können\cite{Newell95}. Aufgrund des sog. \toindexi{Genetische Programmierung!No Free Lunch Theorem}{No Free Lunch Theorems (NFLT)}\cite{Wolpert97} ist es jedoch prinzipiell nicht möglich, einen Optimierungsalgorithmus zu entwerfen, der auf allen denkbaren Klassen von Optimierungsproblemen eine gleichmäßige Performance (im Sinne der Qualität und der Zeit zum Auffinden guter Lösungen) aufweisen würde. Daher ist der Einsatz von genetischer Programmierung generell nicht für alle denkbaren Optimierungsprobleme zu empfehlen, kann aber trotzdem bei einer großen Anzahl bestimmter Probleme eine signifikant höhere Performance aufweisen als andere Verfahren. Im Rahmen dieser Arbeit wird nicht näher auf das Konzept des GPS eingegangen.
+
+\subsection{Praktische Aspekte der genetischen Programmierung}
+
+\nomenclature{${\cal N}$}{Menge der Nichtterminalsymbole in der genetischen Programmierung} 
+\nomenclature{${\cal T}$}{Menge der Terminalsymbole in der genetischen Programmierung} 
+
+Bei der Behandlung eines gegebenen Problems mittels genetischer Programmierung sind zunächst alle relevanten Eingabeparameter (Terminalsymbole) zu erfassen. Weiterhin muss eine Fitnessfunktion gefunden werden, die sich dazu eignet die Qualität der gefundenen Lösungen zu bewerten. Schließlich ist eine Auswahl von Nichtterminalsymbolen zu treffen, welche innerhalb der zu generierenden genetischen Programme eingesetzt werden können. Ein üblicher Satz von Nichtterminalsymbolen für ein numerisches Optimierungsproblem sind die arithmetischen Operatoren ${\cal N} =\{+,-,\cdot,/\}$. Abschließend sind noch eine Reihe von Evolutionsparametern festzulegen, welche das Resultat des GP-Algorithmus teilweise sehr stark beeinflussen können. Die wichtigsten Parameter hierbei sind
+
+\begin{itemize}
+\item \toindexi{Genetische Programmierung!Populationsgröße}{Populationsgröße}\nomenclature{$\mathtt{p}$}{Populationsgröße in der genetischen Programmierung} ($\mathtt{p}$): Gibt die Anzahl an Individuen in einer Population an. Typischer Wert: $10000$ 
+\item \toindexi{Genetische Programmierung!Mutationsrate}{Mutationsrate} \nomenclature{$\mathtt{mr}$}{Mutationsrate in der genetischen Programmierung}(\texttt{mr}): Gibt den prozentualen Anteil der Population an, welcher in jedem Optimierungsschritt einer Mutation unterzogen wird. Typischer Wert: $5 \%$. Wird zusätzlich Shrink-Mutation verwendet, so gibt \nomenclature{$\mathtt{sr}$}{Shrink-Mutationsrate in der genetischen Programmierung} $\mathtt{sr}$ die Shrink-Mutationsrate an.
+\item \toindexi{Genetische Programmierung!Crossover-Anteil}{Crossover-Anteil} \nomenclature{$\mathtt{cs}$}{Crossover-Anteil in der genetischen Programmierung}(\texttt{cs}): Gibt den prozentualen Anteil der Population an, welcher in jedem Optimierungsschritt der Crossover-Operation unterzogen wird. Typischer Wert: $50 \%$
+\item \toindexi{Genetische Programmierung!Tournament-Größe}{Tournament-Größe} \nomenclature{$\mathtt{ts}$}{Tournament-Größe in der genetischen Programmierung}(\texttt{ts}): Gibt die Größe einer Tournament-Runde innerhalb des Selektionsmechanismus an. Typischer Wert: $6$
+\end{itemize}
+
+Die Wahl der vorgestellten Parameter hat dabei direkten Einfluss auf die Qualität der aus dem GP-Algorithmus erhaltenen Lösungen, die Konvergenzgeschwindigkeit des Verfahrens sowie dessen Stabilität. Im folgenden sei daher im Rahmen einer Sensitivitätsanalyse kurz der Einfluss einzelner Parameter auf den GP-Algorithmus beschrieben.
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics{data/mutation_rate_survey/all}
+\end{center}
+\caption{(a) Durchschnittliche Länge und (b) durchschnittliche Fitness der genetischen Programme innerhalb einer Population in Abhängigkeit der Mutationsrate und der Generation.} \label{fig:mutation_rate_survey}
+\end{figure}
+
+
+\subsection{Sensitivitätsanalyse} 
+
+Die Evolutionsparameter $\mathtt{p},\mathtt{mr},\mathtt{cs}$ und $\mathtt{ts}$ bestimmen maßgeblich den Verlauf des GP-Algorithmus und sollten daher mit Sorgfalt gewählt werden. Die Mutationsrate als vermutlich wichtigster Evolutionsparameter bestimmt dabei maßgeblich die Konvergenzgeschwindigkeit sowie die Wachstumsgeschwindigkeit der Länge der generierten Lösungen. In der Standardimplementierung des Mutationsoperators besitzt dieser die Eigenschaft, die mutierten Individuen im Hinblick auf ihre Länge zu vergrößern, d.h. die Mutation fördert die Komplexität innerhalb der genetischen Population. Weiterhin gelangen durch den Mutationsoperator neue, vorher nicht vorhandene Gene in die Population, gleichzeitig werden jedoch vorhandene Gene u.U. ausgelöscht. Die Mutationsrate sollte daher so gewählt werden, dass einerseits kein zu starkes Komplexitätswachstum auftritt, andererseits aber genügend neue genetische Informationen in die Population gelangt und letztendlich auch bereits vorhandene genetische Information nicht übermäßig geschädigt wird.  
+
+\bigskip
+
+Abb. \ref{fig:mutation_rate_survey} zeigt den Einfluss der Mutationsrate $\mathtt{mr}$ auf die durchschnittliche Länge der einzelnen Individuen in einer Population sowie auf deren durchschnittliche Fitness. Die Daten für die Abbildung wurden mithilfe der \texttt{ESProgram}-Klasse generiert, auf welche im nachfolgenden Kapitel sowie im Appendix genauer eingegangen wird. Wie man in Abb. \ref{fig:mutation_rate_survey}a leicht erkennen kann, steigt die durchschnittliche Länge der Individuen innerhalb einer Population im Verlaufe des Verfahrens üblicherweise umso stärker an, je höher die Mutationsrate liegt. Aus Abb. \ref{fig:mutation_rate_survey}b lässt sich weiterhin folgern, dass eine übermäßig hohe Mutationsrate zu einer geringeren durchschnittlichen Fitness der Individuen führt. Generell betrachtet kommt es in der Population dabei unabhängig von der gewählten Mutationsrate zunächst zu einem rapiden Anstieg der durchschnittlichen Fitness. Dieser ist auf die Verbreitung der fittesten Individuen innerhalb der Population bzw. auf das Aussterben der weniger fitten Individuen zurückzuführen\cite{Eiben98}. Nach dieser schnellen Anpassungsphase tritt üblicherweise ein weniger schnelles, lineares Ansteigen der durchschnittlichen Fitness auf, welches durch die schrittweise genetische Verbesserung einzelner Individuen zustande kommt. 
+
+\bigskip
+
+Die Populationsgröße $\mathtt{p}$ ist ein weiterer wesentlicher Parameter und sollte nicht zu klein gewählt werden. Generell gilt, je größer die Population, desto mehr genetische Information enthält diese und umso effizienter läuft der GP-Algorithmus ab. In den in dieser Arbeit durchgeführten Untersuchungen wurden bspw. keine Populationen mit weniger als $\mathtt{p}=1000$ Individuen untersucht.
+
+\bigskip
+
+Der Crossoveranteil $\mathtt{cs}$ sollte so gewählt werden, dass es nicht zu übermäßigem genetischen Crossover der Individuen kommt. Ist der Crossoveranteil zu hoch, so kommt es zu einer Überreproduktion der fittesten Individuen (vergleichbar dem Inzest innerhalb einer biologischen Population) und damit zu einer degenerierenden Wirkung des Crossoveroperators. Schließlich wird die Population hierduch immer weniger genetische Information tragen und letztlich frühzeitig zu einer einzigen Lösung konvergieren. Dies wird in der Literatur als \toindexi{Genetische Programmierung!vorzeitige Konvergenz}{vorzeitige Konvergenz} (premature convergence)\cite[S. 104 ff.]{Koza92} bezeichnet und ist unbedingt zu vermeiden.
+
+\bigskip
+
+Die Tournamentgröße $\mathtt{ts}$ kann über einen recht großen Bereich frei gewählt werden ohne die Resultate des GP-Algorithmus wesentlich zu stören. Bei zu  großer Tournamentgröße kann es jedoch wiederum zur vorzeitigen Konvergenz des Algorithmus durch Überselektion der fittesten Individuen kommen.
+
+\bigskip
+
+Generell betrachtet müssen die optimalen Evolutionsparameter für jedes Problem individuell bestimmt werden, alternativ können sie jedoch auch selbst mittels eines genetischen Algorithmus oder eines anderen Optimierungsverfahrens festgelegt werden, was aufgrund der hohen Laufzeit des GP-Algorithmus häufig jedoch nicht durchführbar ist.
+
+\section{Anwendungen genetischer Programmierung}
+
+Genetische Programmierung wird heute in vielen Bereichen der Ingenieurwissenschaften, Informatik und nicht zuletzt auch in der Finanzmathematik eingesetzt. \cite{Koza92} setzte beispielsweise GP ein, um sog. ''black art'' Probleme zu lösen. Dies schließt beispielsweise das Design analoger elektronischer Schaltungen, elektromagnetischer Antennen, chemischer Reaktionsnetzwerke und optischer Systeme ein. Im Bereich der künstlichen Intelligenz wird genetische Programmierung zur Erzeugung intelligenter Steuerungssysteme eingesetzt. Innerhalb der Finanzmathematik erfreut sich genetische Programmierung mittlerweile einer Vielzahl von Anwendungen wie z.B. der technischen Analyse von Aktienkursen\cite{Subramanian06}, dem Portfoliomanagement\cite{Chen08}, der Vorhersage von Volatilitäten\cite{Chen08,Heigl08}, der Simulation von Kreditratings\cite{Kleinau03} und der Berechnung von Optionspreisen\cite{Kleinau03,Heigl08}. Weiterhin wird genetische Programmierung im Bereich der evolutionären Kunst\cite{Bentley01} und des evolutionären Designs\cite{Bentley99} eingesetzt.
+
+
+\chapter{Risikoanalyse mit genetischer Programmierung}
+
+Das folgende Kapitel beschreibt die konkrete Anwendung genetischer Programmierung im Risikomanagement anhand zweier praxisrelevanter Fragestellungen. Es soll dabei gezeigt werden, dass mittels genetischer Programmierung generierte Risikomodelle vergleichbare bzw. teilweise bessere Ergebnisse erzielen können als mittels Standardverfahren generierte Modelle. 
+
+\bigskip
+
+Genetische Programmierung eignet sich besonders gut für den Bereich der quantitativen Risikoanalyse, da die in der Analyse zu generierenden Risikomodelle meist recht einfach anhand von Maßzahlen hinsichtlich ihrer Qualität beurteilt werden können. Weiterhin basieren die meisten Modelle auf quantitativen Eingabeparametern, welche oft recht einfach aus den zu untersuchenden Risikogrößen abgeleitet werden können. Diese beiden Eigenschaften machen es möglich, mittels genetischer Programmierung automatisiert Risikomodelle zu erstellen und gegen reale Daten zu testen. Im Vergleich hierzu ist die Risikoidentifikation beispielsweise ein Prozess, der kaum automatisiert ablaufen kann und stets menschliches Zutun benötigt. Der folgende Teil der Arbeit konzentriert sich daher gänzlich auf den Bereich der Risikoanalyse.
+
+\section{Risikoanalyse von Zeitreihen}
+
+Die Risikoanalyse von Zeitreihen besitzt in der Risikoabschätzung bei Aktien- und Optionspreisen ein überaus wichtiges Anwendungsgebiet und weist heute im Finanzsektor eine überragende Bedeutung auf. Gerade die katastrophale Entwicklung der Finanz- und späteren Wirtschaftskrise im vergangenen und aktuellen Jahr zeigt hierbei deutlich die Wichtigkeit eines adäquaten Risikomanagements. Ausgelöst wurde die Krise nach heutigem Wissensstand vermutlich durch mangelndes qualitatives, aber auch quantitatives Risikomanagement seitens der Finanzindustrie. Es ist daher zu erwarten, zumindest aber zu erhoffen, dass insbesondere dem quantitativen Risikomanagement und damit auch der Analyse von Wertpapierrisken zukünftig noch größere Bedeutung zugemessen werden wird. Die vorliegende Arbeit setzt den Schwerpunkt der folgenden Abschnitte daher auf die Analyse quantitativer Wertpapierrisken mithilfe genetischer Programmierung (GP). Es wird dabei gezeigt werden, wie mittels GP die heute gebräuchlichsten Risikomaße für univariate Zeitreihen verlässlich abgeschätzt werden können. Die Resultate des GP-Algorithmus werden anschließend mit klassischen Schätzverfahren verglichen und hinsichtlich ihrer Qualität und Praxiseignung beurteilt.
+
+\subsection{Univariate Risikomaße}
+
+Die Abschätzung univariater Risikomaße ist von hoher Bedeutung in einer Vielzahl von Anwendungsgebieten, beispielsweise bei der Bewertung von Aktien und Aktienoptionen. In den vergangenen Jahrzehnten wurden eine Vielzahl mehr oder weniger geeigneter Risikomaße hierfür entwickelt, eine Übersicht der gebräuchlichsten findet sich z.B. in \cite[S. 34 ff.]{McNeil05}.
+
+\bigskip
+
+Betrachtet wird dabei grundsätzlich meist eine Reihe von Realisierungen $x_t$ eines zeitdiskreten, univariaten stochastischen Prozesses der Form
+
+\begin{equation}
+X \; : \; \Omega \times T \to \mathbb{R}, \; (\omega,t) \to x_t(\omega) 
+\end{equation}
+welcher auf dem Wahrscheinlichkeitsraum $(\Omega,{\cal F},P)$ definiert ist und wobei $T \in \{\mathbb{N}_0\}$ gilt. Die Realisierungen $x_t$ des Prozesses werden oft als \toindexi{Risikomanagement!Risikofaktor}{Risikofaktoränderungen} interpretiert. Üblicherweise ist die genaue Form des datengenerierenden Prozesses dabei unbekannt. Der Begriff \toindex{Risiko} bezieht sich in diesem Sinne auf die Wahrscheinlichkeitsverteilung der Realisierungen von $X$. Im praktischen Kontext oft gestellte Fragen lauten daher in etwa ''Wie hoch ist die Auftrittswahrscheinlichkeit einer Realisierung $x_t>z$?'' bzw. ''Welcher Wert $x$  wird mit einer gegebenen Wahrscheinlichkeit $p_0$ von den Realisierungen $x_t$ der Zeitreihe nicht erreicht oder überschritten?''. Die Beantwortung solcher Fragen führt zur Entwicklung statistischer \toindexi{Risikomaß}{Risikomaße}. Ein Risikomaß ist in diesem Sinne eine reellwertige Funktion $\rho:{\cal M} \to \mathbb{R}$, wobei ${\cal M}\subset X^0(\Omega,{\cal F},P)$ eine Teilmenge der Menge $X^0(\Omega,{\cal F},P)$ der fast sicher beschränkten Realisierungen des betrachteten Wahrscheinlichkeitsprozesses bezeichnet. Im folgenden seien einige gebräuchliche Risikomaße exemplarisch genannt:
+
+\begin{itemize}
+\item \toindexi{Risikomaße!Zentrale Momente}{Zentrale Momente}: Das zentrale Moment $k$-ter Ordnung ist definiert als 
+\begin{equation}
+\mu_k := \mathrm{E}\left(\left[X-\mu\right]^k\right)
+\end{equation}
+Hierbei ist $\mu$ der Erwartungswert der Zufallsvariablen $X$. Zentrale Momente können als Kenngrößen von Zufallsvariablen leicht interpretiert werden, gebräuchlich zur Risikoabschätzung ist dabei vor allem das zentrale Moment zweiter Ordnung, auch \toindexi{Risikomaße!Varianz}{Varianz} genannt: 
+\begin{equation}
+\mathrm{var}(X) := \mathrm{E}(X)^2-\mathrm{E}(X^2)
+\end{equation}
+Die Varianz beschreibt also Abweichungen der Zufallsvariable vom Mittelwert, unterscheidet jedoch nicht zwischen positiven und negativen Abweichungen, was den Einsatz als Risikomaß problematisch macht (da Verluste und Gewinne gleich behandelt werden).
+\item \toindexi{Risikomaße!Partialmomente}{Partialmomente}:
+Häufig werden untere Partialmomente zur Risikoabschätzung genutzt, diese beschreiben die negative Abweichung einer Zufallsvariablen von einem gegebenen Wert und besitzen daher nicht den Nachteil der zentralen Momente, welche Abweichungen in beide Richtungen vom Mittelwert berücksichtigen. Das untere Partialmoment $k$-ter Ordnung ist beispielsweise gegeben als
+\begin{equation}
+\mu_k^- := \mathrm{E}\left(\max{\left\{c-X,0\right\}}^k\right)
+\end{equation}
+\item \toindexi{Risikomaße!Value at Risk}{Value at Risk (VaR)}: Der VaR gibt den Wert der Zufallsvariablen $X$ an, der mit Wahrscheinlichkeit $\alpha$ nicht überschritten wird. Der VaR berechnet sich als
+\nomenclature{$\alpha$}{Sicherheitsniveau für die Berechnung des Value at Risk sowie Signifikanzniveau für Fehler 1. Art}
+\begin{equation}
+\mathrm{VaR}_\alpha  = \inf{\left\{x \in \mathbb{R} : P(X>x)\le 1-\alpha\right\}} = \inf{\left\{x \in \mathbb{R} : F_X(x)\ge \alpha\right\}} \label{eq:var}
+\end{equation}
+Dabei ist $F_X(x)$ die kumulative Wahrscheinlichkeitsfunktion der Zufallsvariablen $X$. Der VaR ist heute eines der gebräuchlichsten und am häufigsten eingesetzten Risikomaße.
+\item \toindexi{Risikomaße!Conditional Value at Risk}{Conditional Value at Risk (CVaR)}: Der CVaR wird auch oft als \toindexi{Risikomaße!Expected Shortfall}{Expected Shortfall (ES)} bzw. \toindexi{Risikomaße!Expected Tail Loss}{Expected Tails Loss (ETL)} bezeichnet. Er gibt den Erwartungswert von $X$ an, unter der Bedingung, dass der Value at Risk zum Sicherheitsniveau $\alpha$ überschritten wurde und ist somit gegeben als 
+\begin{equation}
+\mathrm{CVaR}_\alpha := \mathrm{E}(X|X>\mathrm{VaR}_\alpha)
+\end{equation}
+Oft wird stattdessen auch die Größe $\mathrm{CVaR}'_\alpha=\mathrm{CVaR}_\alpha-\mathrm{VaR}_\alpha$ betrachtet, was dem Exzess-Verlust über dem erwarteten VaR entspricht.
+\end{itemize}
+Die oben angeführten Risikomaße werden in der Literatur häufig aufgrund ihrer teilweise falschen Modellannahmen kritisiert. Beispielsweise schlägt \cite{Mandelbrot08} eine Ersetzung der konventionellen statistischen Risikomaße durch sog. \toindexi{Risikomaß!fraktales Risikomaß}{fraktale Risikomaße} wie z.B. den \toindexi{Risikomaße!Hurst-Koeffizient}{Hurst-Koeffizienten} bzw. der \toindexi{Risikomaße!Fraktale Dimension}{fraktalen Dimension} vor. Problematisch an diesem Ansatz ist jedoch die schwierige Interpretierbarkeit solcher Risikomaße, da diese nicht ohne weiteres in geldwerte Größen umgerechnet werden können.
+
+\bigskip
+
+Unabhängig von der Gültigkeit der zugrunde liegenden Modellannahmen sollte ein gutes, sprich \toindexi{Risikomaß!kohärentes Risikomaß}{kohärentes Risikomaß} $\rho(X)$ nach \cite{Artzner01} folgende Eigenschaften erfüllen \cite[S. 239 ff.]{McNeil05}:
+
+\begin{itemize}
+\item \toindexi{Risikomaß!Translationsinvarianz}{Translationsinvarianz}: Für alle $X \in {\cal M}$ und alle $l \in \mathbb{R}$ gilt $\rho(X+l)=\rho(X)+l$.
+\item \toindexi{Risikomaß!Subadditivität}{Subadditivität}: Für alle $X_1$,$X_2 \in {\cal M}$ gilt $\rho(X_1+X_2)\le \rho(X_1)+\rho(X_2)$.
+\item \toindexi{Risikomaß!Positive Homogenität}{Positive Homogenität}: Für alle $X\in {\cal M}$ und jedes $\lambda>0$ gilt $\rho(\lambda X)=\lambda \rho(X)$.
+\item \toindexi{Risikomaß!Monotonie}{Monotonie:} Für $X_1$, $X_2 \in {\cal M}$ mit $X_1\le X_2$ gilt fast sicher $\rho(X_1)\le \rho(X_2)$.
+\end{itemize}
+Nicht alle der oben angeführten Risikomaße erfüllen die hier gestellten Anforderungen, in den nächsten Abschnitten wird dies am Beispiel des Value at Risk genauer erläutert.
+
+\subsection{Value at Risk (VaR)}
+
+Der Value at Risk (VaR) wie in Gl. (\ref{eq:var}) definiert ist heute eines der weitverbreitetsten und am häufigsten eingesetzten Risikomaße. Eine der ersten Fälle der Verwendung des VaR zur Risikoabschätzung findet sich in \cite{Markowitz52}. In den 1990er Jahren wurde der VaR schließlich u.a. durch J.P. Morgan's RiskMetrics popularisiert \cite{JPMorgan96} und gehört seit jener Zeit zum Standardwerkzeug des quantitativen Risikomanagements. Der VaR ist nach \cite{Artzner01} kein kohärentes Risikomaß da er nicht zwangsweise subadditiv ist. In \cite[S. 57]{McNeil05} findet sich eine Liste der gebräuchlichsten Verfahren zur Berechnung des VaR. Diese Verfahren werden im folgenden eingesetzt, um die später mittels genetischer Programmierung abgeschätzten VaR-Werte mit den von den Standardverfahren generierten Werten zu vergleichen und eine Aussage zur Güte des berechneten VaR zu machen. Folgende Standardverfahren zur Berechnung des VaR werden hierbei berücksichtigt \cite{McNeil05,Reiss07}.
+
+
+\begin{itemize}
+\item{\toindexi{Risikomaße!Value at Risk!Varianz-Kovarianz}{Varianz-Kovarianz (VC)}: Standardisierte unbedingte Varianz-Kovarianz Methode unter Annahme multivariater gaußscher Risikofaktoränderungen.}
+
+\item{\toindexi{Risikomaße!Value at Risk!Historische Simulation}{Historische Simulation (HS)}: Standardisierte unbedingte historische Simulationsmethode.}
+
+\item{\toindexi{Risikomaße!Value at Risk!Varianz-Kovarianz, student-t}{Varianz-Kovarianz, student-t  (VC-t)}: Unbedingte Varianz-Kovarianz Methode, bei welcher eine multivariate $t$-Verteilung an die Risikofaktoränderungen angepasst wird.}
+
+\item{\toindexi{Risikomaße!Value at Risk!Historische Simulation, GARCH$(1,1)$}{Historische Simulation, GARCH$(1,1)$ (HS-GARCH)}: Bedingte Version der historischen Simulationsmethode, bei der ein normalverteiltes GARCH$(1,1)$-Modell an die historisch simulierten Risikofaktoränderungen angepasst wird, um die Volatilität der nächsten Risikofaktoränderung abzuschätzen.}
+
+\item{\toindexi{Risikomaße!Value at Risk!Varianz-Kovarianz, GARCH$(1,1)$}{Varianz-Kovarianz, GARCH$(1,1)$ (VC-GARCH)}: Schätzung des VaR mit der Varianz-Kovarianz Methode, wobei ein GARCH$(1,1)$-Modell an die Volatilität angepasst wird.}
+
+\item{\toindexi{Risikomaße!Value at Risk!Historische Simulation, EWMA}{Historische Simulation, EWMA (HS-EWMA)}: Bedingte Version der historischen Simulationsmethode, bei der die Volatilität mittels exponentieller Glättung prognostiziert wird.}
+
+\item{\toindexi{Risikomaße!Value at Risk!Varianz-Kovarianz, EWMA}{Varianz-Kovarianz, EWMA (VC-EWMA)}: Varianz-Kovarianz Verfahren mit exponentieller Glättung der Volatilität.}
+
+\item{\toindexi{Risikomaße!Value at Risk!Historische Simulation, GARCH-t}{Historische Simulation, GARCH-$t(1,1)$ (HS-GARCH-t)}: Historische Simulationsmethode mit GARCH-$(1,1)$ Modellierung der Volatilität unter Annahme $t$-verteilter Risikofaktoränderungen}
+
+\item{\toindexi{Risikomaße!Value at Risk!Varianz-Kovarianz, GARCH-t}{Varianz-Kovarianz, GARCH-$t(1,1)$ (VC-GARCH-t)}: Varianz-Kovarianz Methode mit multivariater GARCH$(1,1)$ Modellierung der Volatilität und $t$-verteilten Risikofaktoränderungen}
+
+\item{\toindexi{Risikomaße!Value at Risk!Extremwerttheorie}{Extremwerttheorie (EVT)}: Bedingte Schätzung mit GARCH$(1,1)$ Modellierung unter Zuhilfenahme der Extremwerttheorie.}
+
+\end{itemize}
+
+Die hier aufgeführten Verfahren sind die heute gebräuchlichsten zur Berechnung des VaR und werden im folgenden Abschnitt detailliert erläutert.
+
+\subsection{Abschätzung des VaR}
+
+Im folgenden soll der tagesbasierte Value at Risk sowohl mittels klassischer Verfahren als auch mithilfe genetischer Programmierung für ausgesuchte Aktienwerte modelliert werden. Anschließend soll ein Vergleich zwischen den einzelnen Verfahren durchgeführt werden, um sie auf ihre Praxiseignung zu untersuchen. Getestet wird dabei unter Verwendung von Aktienpreisdaten, welche von \cite{Yahoo08} bezogen wurden. Diese Daten sind bereits von Dividendenausschüttungen, Aktienaufteilungen und anderen störenden Faktoren bereinigt und können somit direkt zur Analyse herangezogen werden. Der Aktienpreis zum Zeitpunkt $t\in \mathbb{N}$ (wobei $t$ sich auf Tageszeiträume beziet) wird dabei im folgenden als $p_t$ bezeichnet, untersucht wurden jedoch vielmehr die relativen negativen Änderungen dieses Preises, welche gegeben sind als 
+
+\begin{equation}
+x_t := -\frac{p_t-p_{t-1}}{p_{t-1}}
+\end{equation}
+
+Zur Berechnung des Value at Risk $\mathrm{VaR}_\alpha(x_t|x_1,\hdots,x_{t-1})$ zum Zeitpunkt $t$ und zum Sicherheitsniveau $\alpha$ mittels genetischer Programmierung muss zunächst eine Fitnessfunktion sowie eine Menge von Terminal- und Nichtterminalsymbolen definiert werden. Die Wahl der Fitnessfunktion sollte dabei so erfolgen, dass sich darin alle aus Gl. (\ref{eq:var}) ergebenden Eigenschaften des VaR widerspiegeln. Folgende drei Eigenschaften eines guten VaR-Modells lassen sich direkt aus Gl. (\ref{eq:var}) ableiten.
+
+\begin{enumerate}
+\item Die Anzahl der Überschreitungen $x_t > \mathrm{VaR}_\alpha(x_t|x_1,\hdots,x_{t-1})$ für $t=1,\hdots,T$ liegt möglichst nahe am erwarteten Wert $P(X>\mathrm{VaR}_\alpha)\cdot T=(1-\alpha)\cdot T$.
+\item Der durchschnittliche Wert $1/T\cdot\sum\limits_{t=1}^T \mathrm{VaR}_\alpha(x_t|x_1,\hdots,x_{t-1})$ des VaR ist möglichst gering.
+\item Die einzelnen Überschreitungen sind zeitlich unabhängig voneinander verteilt.
+\end{enumerate}
+
+Die erste Forderung ergibt sich unmittelbar aus Gl. (\ref{eq:var}), die zweite aus den Eigenschaften des Infimums in Gl. (\ref{eq:var}). 
+
+\bigskip
+
+Die dritte Forderung folgt ebenfalls direkt aus Gl. (\ref{eq:var}) und kann überprüft werden, indem die Verteilung der Wartezeiten zwischen aufeinanderfolgenden VaR-Überschreitungen untersucht wird. Hierauf wird später detailliert eingegangen werden, zunächst wird jedoch auf eine genauere Betrachtung verzichtet und lediglich eine Fitnessfunktion definiert, welche die beiden ersten Forderungen der obigen Liste berücksichtigt und somit gegeben ist als
+ 
+\begin{eqnarray}
+f_\mathrm{VaR} & := & -\ln{\left[1+\frac{1}{T}\cdot\sum\limits_{t=1}^T \mathrm{VaR}_\alpha(x_t|x_1,\hdots,x_{t-1})\right]} \nonumber \\ & &-\gamma\ln{\left[1+\left((1-\alpha)\cdot T - \sum\limits_{t=1}^T\mathbf{1}\left\{x_t>\mathrm{VaR}_\alpha(x_t|x_1,\hdots,x_{t-1})\right\}\right)^2\right]} \nonumber \\
+ & &  \label{eq:f_var}
+\end{eqnarray}
+
+Die Logarithmierung der einzelnen Terme entspricht hierbei einer multiplikativen Minimierung der einzelnen Zielkriterien, wobei der Faktor $\gamma$ das relative Gewicht der einzelnen Kriterien festlegt. Die Fitness sehr guter VaR-Modelle liegt somit nahe bei $f_\mathrm{VaR}=0$, schlechte Modelle hingegen weisen Werte $f_\mathrm{VaR} \ll 0$ auf.
+
+\bigskip
+
+Als Nichtterminalsymbole werden die gebräuchlichsten arithmetischen Operatoren sowie der Logarithmus $\ln{x}$, die Exponentialfunktion $\exp{x}$, das Argumentenminimum $\min{(a,b)}$, Argumentenmaximum $\max{(a,b)}$ und der Argumentendurchschnitt $\mathrm{avg}(a,b)=(a+b)/2$ gewählt. Damit gilt ${\cal N} =\{+,-,\cdot,/,\exp,\log,\min,\max,\mathrm{avg}\}$. Als Terminalsymbole werden lediglich die gebräuchlichsten statistischen Kennzahlen der jeweiligen Zeitreihe herangezogen. Dies sind
+
+\begin{itemize}
+  \item  Blockmaxima (\texttt{max})und Blockminima (\texttt{min}): \toindexi{Terminals!max}{}\toindexi{Terminals!min}{} Größte bzw. kleinste Beobachtungen von $x_t$ in einem Zeitfenster $h$
+  \begin{eqnarray}
+  \mathtt{max}_t & := & \max\limits_{i=t-h-1}^{t-1}{x_i} \label{eq:max} \\
+  \mathtt{min}_t & := & \min\limits_{i=t-h-1}^{t-1}{x_i} \label{eq:min}
+  \end{eqnarray}
+  \item Klassische Standardabweichung \toindexi{Terminals!sigma}{} (\texttt{sigma}): Standardabweichung im Zeitfenster $h$
+  \begin{eqnarray}
+  \mu^h_t & = & \frac{1}{h}\sum\limits_{i=t-h-1}^{t-1}x_i \nonumber \\
+  \mathtt{sigma}_t & := & \sqrt{\sum\limits_{i=t-h-1}^{t-1}\left(x_i-\mu^h_t\right)^2} \label{eq:sigma}
+  \end{eqnarray}
+  \item \toindexi{Terminals!mu}{} Klassischer Mittelwert (\texttt{mu}): Mittelwert über alle Realisierungen bis zum Zeitpunkt $t$:
+  \begin{eqnarray}
+    \mathtt{mu}_t & := & \frac{1}{t-1}\sum\limits_{i=1}^{t-1}x_i
+  \end{eqnarray}
+  \item EWMA-Mittelwert (\texttt{mu\_ma}) und EWMA-Standardabweichungen (\texttt{sigma\_ma}): \toindexi{Terminals!mu\_ma}{} \toindexi{Terminals!sigma\_ma}{} Exponentiell gewichtete Standardabweichung, rekursiv berechnet als
+  \begin{eqnarray}
+  \mathtt{mu\_ma}_2 & = & x_1 \nonumber \\ 
+  \mathtt{sigma\_ma}_2^2 & = & x_1^2 \nonumber \\
+  \mathtt{mu\_ma}_t & = & \gamma\cdot \mathtt{mu\_ma}_{t-1}+(1-\gamma)\cdot x_{t-1} \\
+  \mathtt{sigma\_ma}_t^2 & = & \gamma\cdot \mathtt{sigma\_ma}_{t-1}^2+(1-\gamma)\cdot\left(x_{t-1}-\mathtt{mu\_ma}_{t-1}\right)^2 \label{eq:sigma_ewma}
+  \end{eqnarray}
+  \item  GARCH- (\texttt{sigma\_garch}) und GARCH-t-Standardabweichungen (\texttt{sigma\_garch\_t}): \toindexi{Terminals!sigma\_garch}{} \toindexi{Terminals!sigma\_garch-t}{} Standardabweichungen, welche mittels eines GARCH(1,1) Modells berechnet werden unter der Annahme normal- bzw. t-verteilter Risikofaktoränderungen. Ein GARCH(1,1) Modell für $\sigma^2_t$ hat die Form
+  \begin{equation}
+  \sigma^2_t = a+b x_{t-1}^2+c\sigma^2_{t-1}
+  \end{equation} 
+  Da $\sigma^2_t$ nicht direkt beobachtet werden kann, müssen die Parameter $a$, $b$ und $c$ über eine (quasi-) maximum-likelihood Methode (QMLE) \cite[S. 117 ff.]{Hamilton94} geschätzt werden. Hierzu wird die Wahrscheinlichkeit\cite[S. 150 ff.]{McNeil05}
+  \begin{eqnarray}
+  L(a,b,c;\mathbf{X}) & = & \prod\limits_{t=1}^T\frac{1}{\sigma_t}g\left(\frac{x_t}{\sigma_t}\right) \label{eq:sigma_garch} \\
+  \sigma_t & = & \sqrt{a+b x_{t-1}^2+c\sigma^2_{t-1}} \nonumber
+  \end{eqnarray} 
+  numerisch maximiert, wobei $g(x)$ entweder als Normal- oder als t-Verteilung angesetzt wird. Üblicherweise gilt $\sqrt{a}\ll \sigma_t$, daher wird im folgenden stets $a=0$ gesetzt, was zu besseren Resultaten beim Einsatz der QMLE-Methode führt.
+  \item Handelsvolumen (\texttt{vol}): \toindexi{Terminals!vol}{} Das normierte Handelsvolumen, rekursiv definiert mithilfe des Tagesvolumens $V_t$ als
+  \begin{eqnarray}
+   \overline{V}_2 & = & V_1 \nonumber \\
+  \overline{V}_t & = & \gamma\cdot \overline{V}_{t-1}+(1-\gamma)\cdot V_{t-1} \nonumber \\
+  \mathtt{vol}_t & = & \frac{V_{t-1}}{\overline{V}_t} \label{eq:vol}
+  \end{eqnarray}
+\end{itemize}
+
+Weiterhin werden Gesamtmaxima- (\texttt{max\_tot}), -minima (\texttt{min\_tot}) und die Gesamtstandardabweichung (\texttt{sigma\_tot}) der Zeitreihe verwendet. Es gilt somit ${\cal T} = \{\mathtt{max}, \mathtt{min}, \mathtt{mu}, \mathtt{mu\_ma},\mathtt{sigma\_ewma}, \mathtt{sigma\_garch}, \mathtt{sigma\_garch\_t}, $ $\mathtt{vol},\mathtt{max\_tot},\mathtt{min\_tot},\mathtt{sigma\_tot}\}$
+
+Weiterhin werden zufallsgenerierte Zahlen im Intervall $[-10,10]$ als Terminalsymbole verwendet, diese treten bei der Zufallsgenerierung eines Terminals mit einer gewählten Wahrscheinlichkeit von 50 \% auf. Abb. \ref{fig:var_terminals} zeigt exemplarisch einige der oben angeführten Terminalsymbole am Beispiel des \texttt{S \& P} Aktienindexes. Zusätzlich zu den hier berücksichtigten Terminalsymbolen können prinzipiell auch die mithilfe der klassischen Verfahren berechneten VaR-Werte als Terminals auftreten. Durch die Spezifizierung der Terminal- und Nichtterminalsymbole sowie durch die Festlegung einer Fitnessfunktion ist das genetische Programmierungsproblem vollständig spezifiziert, lediglich die Evolutionsparameter müssen noch festgelegt werden. Für alle im folgenden beschriebenen Untersuchungen wurde dabei $\mathtt{mr}=0.05$, $\mathtt{sr}=0.025$, $\mathtt{cs}=0.5$, $\mathtt{ts}=6$ sowie $\mathtt{p}=1000$ oder $\mathtt{p}=10000$ gewählt.
+
+\smallskip
+
+Ein häufig auftretendes Problem bei der Generierung numerischer Modelle anhand von Testdaten ist die sogenannte \toindex{Überanpassung} (engl. \toindex{Overfitting}). Überanpassung tritt sehr leicht bei der Minimierung einer Zielfunktion auf, wenn die generierten Modelle hinsichtlich ihrer Parameteranzahl nicht beschränkt sind (was bei der genetischen Programmierung naturgemäß der Fall ist). So erklärt ein überangepasstes Modell zwar scheinbar perfekt die beobachteten und zur Modellerzeugung herangezogenen Daten, versagt aber bei Anwendung auf Datensätze, die nicht mit dem Testdatensatz übereinstimmen. Um Überanpassung zu vermeiden, wurde die Optimierung der mittels GP generierten VaR-Modelle lediglich basierend auf 60 \% der vorhandenen Datensätzen durchgeführt. Die verbleibenden 40 \% der Datensätze wurden anschließend verwendet, um die generierten Modelle mittels Backtesting auf ihre Tauglichkeit zu überprüfen.
+
+\smallskip
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics{./data/var_s_and_p_good/terminals.eps}
+\end{center}
+\caption[Darstellung einiger verwendeter Terminalsymbole zur Berechnung des Value at Risk]{Werte einiger Terminalsymbole für den \texttt{S \& P} Aktienindex. Gezeigt sind (a) die Standardabweichung berechnet mit einem GARCH(1,1) und GARCH-t(1,1) Ansatz nach Gl. (\ref{eq:sigma_garch}), (b) das Handelsvolumen berechnet nach Gl. (\ref{eq:vol}), (c) Blockminima und -maxima berechnet nach Gln. (\ref{eq:min}) und (\ref{eq:max}), (d) die klassisch nach Gl. (\ref{eq:sigma}) sowie mittels EWMA-Verfahren nach Gl. (\ref{eq:sigma_ewma}) berechnete Standardabweichung.}\label{fig:var_terminals}
+\end{figure}
+
+Zur Berechnung des VaR mithilfe der klassischen Verfahren wurden die folgende Algorithmen eingesetzt.
+
+
+\begin{alg}[Berechnung von $\mathrm{VaR}^\mathrm{HS}_\alpha$] \label{alg:var_hs}
+\mbox{}
+\begin{itemize}
+\item[(1)] Sei $\{a_1,\hdots,a_n\}$ mit $n=1\hdots T$ gegeben, so dass $y_n=x_{a_n}$ und $y_n\ge y_{n+1}$. Dann gilt $y_T=\min\limits_t{x_t}$ sowie $y_0=\max\limits_t{x_t}$
+\item[(2)] Berechne $m=\mathrm{int}\left(\left[1-\alpha\right] T\right)$
+\item[(3)] Setze $\mathrm{VaR}_\alpha^\mathrm{HS}=y_m$
+\end{itemize}
+\end{alg}
+
+\begin{alg}[Berechnung von $\mathrm{VaR}^\mathrm{VC}_\alpha$] \label{alg:var_vc}
+\mbox{}
+\nomenclature{$\hat{\mu}(X)$}{Mittelwert der Stichprobe $X$}
+\nomenclature{$\hat{\sigma}(X)$}{Standardabweichung der Stichprobe $X$}
+\begin{itemize}
+\item[(1)] Berechne $\hat{\sigma}=\sqrt{\mathrm{\hat{var}}(X)}$ und $\hat{\mu}=\mathrm{\hat{E}}(X)$.
+\item[(2)] Setze $\mathrm{VaR}^\mathrm{VC}_\alpha=\hat{\mu}+\hat{\sigma}\Phi^{-1}\left(\alpha\right)$, wobei $\Phi^{-1}(u)$ die inverse kumulative Verteilungsfunktion der Normalverteilung ist.
+\end{itemize}
+\end{alg}
+
+\begin{alg}[Berechnung von $\mathrm{VaR}^{\mathrm{VC}\mbox{-}t}_\alpha$] \label{alg:var_vc_t}
+\mbox{}
+\begin{itemize}
+\nomenclature{$\nu$}{Anzahl der Freiheitsgrade der student-t Verteilung}
+\item[(1)] Berechne $\hat{\sigma}=\sqrt{\mathrm{\hat{var}}(X)\left(\nu - 2\right)/\nu}$ und $\hat{\mu}=\mathrm{\hat{E}}(X)$.
+\item[(2)] Setze $\mathrm{VaR}^\mathrm{VC_t}_\alpha=\hat{\mu}+\hat{\sigma}t_\nu^{-1}\left(\alpha\right)$, wobei $t_\nu^{-1}(\alpha)$ die inverse kumulative Verteilungsfunktion der student-t Verteilung mit $\nu$ Freiheitsgraden ist.
+\end{itemize}
+\end{alg}
+
+\begin{alg}[Berechnung von $\mathrm{VaR}^\mathrm{HS \mbox{-} GARCH}_\alpha$] \label{alg:var_hs_garch}
+\mbox{}
+\begin{itemize}
+\item[(1)] Berechne $\hat{\mu}=\mathrm{\hat{E}}(X)$.
+\item[(2)] Passe ein GARCH$(m,n)$ Modell nach Gl. (\ref{eq:sigma_garch}) mit normalverteilten Risikofaktoränderungen an die Zeitreihe $x_t$ an, s.d. $\hat{\sigma}^2(x_t|x_{t-1},x_{t-2},\hdots) \sim \mathrm{GARCH}(m,n)$.
+\item[(2)] Setze $x_t'=\left(x_t-\hat{\mu}\right)/\hat{\sigma}(x_t|x_{t-1},x_{t-2},\hdots)$
+\item[(2)] Berechne $\mathrm{VaR}^\mathrm{HS'}$ der normierten Zeitreihenwerte $x_t'$ nach Alg. \ref{alg:var_hs} und setze $\mathrm{VaR}^\mathrm{HS\mbox{-}GARCH}_\alpha(x_t) = \hat{\mu}+\mathrm{VaR}^\mathrm{HS'}\cdot \hat{\sigma}(x_t|x_{t-1},x_{t-2},\hdots)$
+\end{itemize}
+\end{alg}
+
+\begin{alg}[Berechnung von $\mathrm{VaR}^\mathrm{HS \mbox{-} EWMA}_\alpha$]
+Die Berechnung von $\mathrm{VaR}^\mathrm{HS \mbox{-} EWMA}_\alpha$ erfolgt analog zu Algorithmus \ref{alg:var_hs_garch}, anstatt eines GARCH$(m,n)$-Modells wird jedoch ein exponentiell gewichteter laufender Durchschnitt nach Gl. (\ref{eq:sigma_ewma}) verwendet um $\hat{\sigma}(x_t|x_{t-1},x_{t-2},\hdots)$ zu schätzen.
+\end{alg}
+
+\begin{alg}[Berechnung von $\mathrm{VaR}^\mathrm{VC \mbox{-} GARCH}_\alpha$] \label{alg:var_vc_garch}
+Die Berechnung von $\mathrm{VaR}^\mathrm{VC \mbox{-} GARCH}_\alpha$ erfolgt analog zu Algorithmus \ref{alg:var_vc}, anstatt der unbedingten empirischen Varianz $\hat{\sigma}^2=\mathrm{\hat{var}}(X)$ wird jedoch ein GARCH$(m,n)$-Modell nach Gl. (\ref{eq:sigma_garch}) an die historischen Werte von $x_t$ angepasst um $\hat{\sigma}(x_t|x_{t-1},x_{t-2},\hdots)$ zu schätzen.
+\end{alg}
+
+\begin{alg}[Berechnung von $\mathrm{VaR}^\mathrm{VC \mbox{-} EWMA}_\alpha$] \label{alg:var_vc_ewma}
+Die Berechnung von $\mathrm{VaR}^\mathrm{VC \mbox{-} EWMA}_\alpha$ erfolgt analog zu Algorithmus \ref{alg:var_vc_garch}, jedoch wird exponentielles Glätten zur Schätzung von $\hat{\sigma}(x_t|x_{t-1},x_{t-2},\hdots)$ verwendet. 
+\end{alg}
+
+\begin{alg}[Berechnung von $\mathrm{VaR}^\mathrm{VC \mbox{-} GARCH\mbox{-}t}_\alpha$] \label{alg:var_vc_garch_t}
+Analog zu Algorithmus \ref{alg:var_vc_garch} unter Annahme student-t verteilter Risikofaktoränderungen innerhalb des GARCH$(m,n)$-Modells nach Gl. (\ref{eq:sigma_garch}).
+\end{alg}
+
+\begin{alg}[Berechnung von $\mathrm{VaR}^\mathrm{HS \mbox{-} GARCH\mbox{-}t}_\alpha$] \label{alg:var_hs_garch_t}
+Analog zu Algorithmus \ref{alg:var_hs_garch}, jedoch Modellierung  des GARCH$(m,n)$ Modells nach Gl. (\ref{eq:sigma_garch}) mit student $t$-verteilten Risikofaktoränderungen. 
+\end{alg}
+
+\begin{alg}[Berechnung von $\mathrm{VaR}^\mathrm{EVT}_\alpha$] \label{alg:var_evt}
+Betrachtet wird die \toindexi{Risikomaße!Value at Risk!Exzess-Verteilung}{Exzess-Verteilung}
+\nomenclature{$u$}{Schwellenparameter für die Peak-Over-Treshold Methode}
+\begin{equation}
+F_u(x) = P(X-u \le  x  | X > u) = \frac{F(x+u)-F(u)}{1-F(u)}
+\end{equation}
+
+der Überschreitungen von $x$ über einen Schwellenwert $u$. An diese Exzess-Verteilung wird eine \toindexi{Risikomaße!Value at Risk!Generalisierte Pareto-Verteilung}{generalisierte Pareto-Verteilung} der Form\cite[S. 275]{McNeil05}
+
+\nomenclature{$\xi$}{Shape-Paramter der generalisierten Pareto-Verteilung}
+\nomenclature{$\beta$}{Skalen-Paramter der generalisierten Pareto-Verteilung}
+
+\begin{equation}
+G_{\xi,\beta}(x) = \left\{\begin{array}{lcl} 1-\left(1-\xi\cdot x/\beta\right)^{-1/\xi} & , & \xi \ne 0 \\ 1- \exp{\left(-x/\beta\right)} & , & \xi = 0 \end{array} \right.
+\end{equation}
+angepasst. Der Value at Risk (und der Conditional Value at Risk) berechnet sich anschließend als
+
+\begin{eqnarray}
+\mathrm{VaR}_\alpha^\mathrm{EVT} & = & u+\frac{\beta}{\xi}\left(\left[\frac{1-\alpha}{\bar{F}(u)}\right]^{-\xi}-1\right) \\
+\mathrm{CVaR}_\alpha^\mathrm{EVT} & = & \frac{\mathrm{VaR}_\alpha^\mathrm{EVT}}{1-\xi}+\frac{\beta-\xi\cdot u}{1-\xi}
+\end{eqnarray}
+
+Zusätzlich kann $\mathrm{GARCH}(m,n)$- bzw. EWMA-Modellierung zur Berücksichtigung einer zeitabhängigen Volatilität verwendet werden.
+
+\end{alg}
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics{./data/var_dax_good/var_zoo.eps}
+\end{center}
+\caption[Der Value-at-Risk Zoo.]{Der Value-at-Risk Zoo. Gezeigt sind die mittels Varianz-Kovarianz, historischer Simulation, Extremwerttheorie und genetischer Programmierung berechneten $99\%$ VaR-Modelle für den \texttt{deutschen Aktienindex}. Die Volatilität wurde bei den bedingten VaR-Modellen mittels exponentiellem Glätten sowie GARCH(1,1)-Modellierung geschätzt.} \label{fig:var_zoo}
+\end{figure}
+
+Abb.\ref{fig:var_zoo} zeigt exemplarisch die mittels obiger Verfahren berechneten $99\%$ VaR-Werte für den deutschen Aktienindex. Zusätzlich wird der mittels genetischer Programmierung berechnete VaR gezeigt.
+
+\subsection{Statistische Tests für den VaR}
+
+Um zu prüfen, ob die vom GP-Algorithmus bzw. von den klassischen Algorithmen gefundenen VaR-Modelle korrekt sind, kann ein statistischer Test angewandt werden. Aus Gl. (\ref{eq:var}) ergibt sich unmittelbar, dass für eine Realisierung $x_t$ die Wahrscheinlichkeit einer Übertretung der VaR-Schranke als $P\left[x_t>\mathrm{VaR}_\alpha(x_t|x_1,\hdots,x_{t-1})\right]=1-\alpha$ gegeben ist. Die Variable $Y_t:=\mathbf{1}\left[x_t>\mathrm{VaR}_\alpha(x_t|x_1,\hdots,x_{t-1})\right]$ ist somit Bernoulli-verteilt mit $P(Y_t=y_t)=(1-\alpha)^{y_t}\cdot \alpha ^{1-y_t}$ und $y_t \in \{0,1\}$. Die Gesamtzahl der Abweichungen $Y:=\sum\limits_{t=1}^T  Y_t$ ist daher binomial-verteilt mit\cite{Reich04}
+
+\begin{equation}
+F_Y(y) = P(Y\le y)=\sum\limits_{k=0}^{\lfloor y \rfloor}\left(\begin{array}{c} T \\ k \end{array}\right)(1-\alpha)^k\cdot \alpha^{T-k} \label{eq:binomial}
+\end{equation}
+
+Mit obiger Gleichung kann bei gegebenem Signifikanzniveau leicht der kritische (d.h. die im statistischen Sinne gerade noch akzeptable) Wertebereich für positive bzw. negative Abweichungen vom Erwartungswert an der Anzahl an Übertretungen für ein gegebenes Modell und eine gegebene Anzahl an Beobachtungen $T$ berechnet werden, womit letztendlich Hypothesen über korrekte bzw. inkorrekte VaR-Modelle getestet werden können. Dieses als \toindexi{Risikomaße!Value at Risk!Backtesting}{Backtesting} bekannte Verfahren wird standardmäßig eingesetzt, um die Qualität von VaR-Modellen zu beurteilen. Im Rahmen von Basel II \cite{BaselII,Philippe02} wurden Kriterien für die Güte eines VaR-Modells formuliert. Danach ist der obigen Binomialteststatistik ein 5 \%-iges Signifikanzniveau zugrunde zu legen. Weist dabei z.B. ein betrachtetes 99 \% VaR-Modell mehr als 4 Überschreitungen innerhalb eines Zeitraumes von 250 Tagen auf, so muss der VaR-Wert mittels entsprechender Korrekturfaktoren erhöht werden. In den folgenden Untersuchungen werden die Übertretungen des VaR für die gesamte untersuchte Zeitperiode (und nicht lediglich für einen 250-Tageszeitraum) betrachtet, hiervon abgesehen werden jedoch die gleichen Kriterien zur Beurteilung der Modelle herangezogen.
+
+\subsection{Wartezeitenverteilung} 
+
+Wie bereits angesprochen, sollten Übertretungen des VaR zeitlich unabhängig voneinander auftreten. Um dies zu überprüfen, kann ebenfalls ein statistischer Test herangezogen werden. Interessanterweise scheint in der Literatur die Überprüfung eines VaR-Modells meist lediglich hinsichtlich der Anzahl der Überschreitungen zu erfolgen, nicht jedoch anhand der spezifischen zeitlichen Verteilung dieser Überschreitungen. Jedoch gerade eine mangelnde Erfassung der Heteroskedastizität einer betrachteten Zeitreihe kann durch die bloße Betrachtung der Anzahl an Überschreitungen nicht beurteilt werden. Denn selbst ein durch entsprechende Korrekturfaktoren angepasstes VaR-Modell (welches eine akzeptable Anzahl an Überschreitungen liefert) kann noch falsche VaR-Werte produzieren, was sich dann jedoch sehr leicht an der Verteilung der Wartezeiten zwischen aufeinanderfolgenden Überschreitungen erkennen lässt. Dies soll im folgenden kurz erläutert werden. Die Indikatorfunktion einer VaR-Überschreitung
+
+\begin{equation}
+\mathbf{1}\left\{x_t>\mathrm{VaR}_\alpha(x_t|x_1,\hdots,x_{t-1})\right\}
+\end{equation}
+
+ist Bernoulli-verteilt und somit gilt für die Wahrscheinlichkeit, dass die Wartezeit $t_w$ zwischen zwei aufeinanderfolgenden Überschreitungen den Wert $k$ annimmt die Wahrscheinlichkeit 
+
+\begin{equation}
+P(t_w=k) = \alpha^{k}\cdot(1-\alpha) \label{eq:wt_p}
+\end{equation}
+
+Die Verteilungsfunktion der Wartezeitenverteilung lässt sich aus Gl. (\ref{eq:wt_p}) leicht berechnen und ist gegeben als
+
+\begin{equation}
+F_w(k) = P(t_w \le k) = 1 - \alpha^k \label{eq:wt_cdf}
+\end{equation}
+
+Ist das betrachtete VaR-Modell nun korrekt, so sollte die empirische Verteilungsfunktion der Wartezeiten gegen Gl. (\ref{eq:wt_cdf}) konvergieren. Dies kann leicht über einen Kolmogorov-Smirnow bzw. einen $\chi^2$-Test geprüft werden, was im folgenden für die mittels genetischer Programmierung erzeugten Modelle sowie für die klassischen VaR-Modelle gezeigt wird. Zur Durchführung des Kolmogorov-Smirnow Tests muss dabei zunächst die empirische Verteilungsfunktion $F_n(k)$ der Wartezeiten ermittelt werden. Anschließend wird die maximale Differenz
+
+\begin{equation}
+D_\mathrm{max} =  \| F_n - F_w \| = \sup\limits_k | F_n(k)-F_w(k)| \label{eq:ks}
+\end{equation}
+
+zwischen empirischer und hypothetischer Verteilungsfunktion ermittelt. Der so gefundene Wert wird anschließend bei gegebenem Konfidenzniveau mit dem tabellierten kritischen Wert der Kolmogorov-Smirnow Verteilung verglichen. Überschreitet er diesen, so kann die Hypothese, dass beide Verteilungen identisch sind, abgelehnt werden. Liegen mehr als $n=40$ Beobachtungen vor, so ist der kritische Wert näherungsweise gegeben als $D_\mathrm{crit}(n)\approx 1.36/\sqrt{n}$.
+
+\bigskip
+
+Für den $\chi^2$-Test unterteilt man die beobachteten Wartezeiten zunächst in $m$ Intervalle. $n_i$ bezeichne dann die Anzahl der Beobachtungen im $i$-ten Intervall. Anschließend berechnet man anhand der hypothetischen Verteilungsfunktion nach Gl. (\ref{eq:wt_cdf}) und der gegebenen Intervallgrenzen die erwartete Anzahl an Beobachtungen in jedem Intervall $n_{i0}$ und hieraus schließlich die Prüfgröße
+
+\begin{equation}
+\chi^2 = \sum\limits_{i=1}^m \frac{\left(n_i-n_{i0}\right)^2}{n_{i0}} \label{eq:chi_square}
+\end{equation}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{data/es_dax/wt}
+\caption[Kumulative Verteilungsfunktionen der Wartezeitenverteilungen für verschiedene VaR-Modelle.]{Kumulative Verteilungsfunktionen der Wartezeitenverteilungen für verschiedene VaR-Modelle am Beispiel des deutschen Aktienindex. Die durchgezogene Linie zeigt dabei die theoretisch zu erwartende Verteilung.} \label{fig:wt}
+\end{figure}
+
+Sind die einzelnen $n_j$ hinreichend groß, so ist diese Prüfgröße $\chi^2(x,m-1)$ verteilt mit $m-1$ Freiheitsgraden. Durch Vergleich des ermittelten Wertes von $\chi^2$ mit dem kritischen Wert der $\chi^2(x,m-1)$ Verteilung kann so bei gegebenen Konfidenzniveau die Verteilungshypothese überprüft werden. In den folgenden Untersuchungen werden für alle VaR-Modelle die berechneten $\chi^2$-Werte angegeben. Gl. (\ref{eq:chi_square}) eignet sich darüber hinaus auch sehr gut, um die Güte des VaR-Modells zu messen, denn die Verteilung nach Gl. (\ref{eq:wt_cdf}) ''prüft'' sowohl auf eine korrekte Übertretungswahrscheinlichkeit $1-\alpha$, als auch auf die korrekte Verteilung der Wartezeiten zwischen aufeinanderfolgenden Überschreitungen. Daher kann Gl. (\ref{eq:chi_square}) direkt zur Berechnung der Fitness eines genetisch generierten VaR-Modells herangezogen werden, sollte aber um weitere Kriterien ergänzt werden, um eine gute Konvergenz des GP-Algorithmus sicherzustellen. Die im folgenden generierten VaR-Modelle verwenden dabei lediglich die Fitnessfunktion nach Gl. (\ref{eq:f_var}). Abb. \ref{fig:wt} zeigt exemplarisch die Wartezeitenverteilung für verschiedene VaR-Modelle am Beispiel des deutschen Aktienindex.
+
+\subsection{Test des GP-Algorithmus}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{./data/var_normal_sample/var.eps}
+\caption[Mittels genetischer Programmierung generierte VaR-Modelle für Testdaten]{Mittels genetischer Programmierung generierte VaR-Modelle für numerische generierte Zeitreihen mit einem GARCH(1,1) Varianzmodell und einer Normal- ($\sigma=1$, $\mu=0$) bzw. Extremwertverteilung ($\xi = 0$, $\sigma=1$). (a) Normalverteilte Zufallsvariable, bestes Modell nach 19 Generationen: {\tt avg(max\_tot, sigma\_t$^2$ )} (b) Extremwertverteilte Zufallsvariable, bestes Modell nach 12 Generationen: {\tt avg(max, avg( exp( sqrt( sqrt(  log(8.886) +max\_tot ) ) ) ,max\_tot) )}   } \label{fig:var_test}
+\end{figure}
+
+
+Um die Funktionsfähigkeit des GP-Algorithmus zu testen, wurden zunächst numerisch Testzeitreihen mit bekannter Verteilung erzeugt. Diese Testzeitreihen wurden dabei mithilfe der inversen Verteilungsfunktion $F^{-1}(u) : [0,1] \to \mathbb{R}$ der gewünschten Verteilung generiert. Hierzu wurden zunächst gleichmäßig verteilte Pseudozufallszahlen $u_i \in [0,1]$ berechnet. Anschließend wurden durch Anwendung der inversen Verteilungsfunktion $x_i=F^{-1}(u_i)$ die gewünschten Zufallszahlen mit der entsprechenden Verteilung generiert. Zur Erzeugung der gleichmäßig verteilten Zufallszahlen wurde dabei die Funktion \texttt{ran3} der Algorithmensammlung \cite{NRC++} benutzt.
+
+\smallskip
+
+Für die Testzeitreihen wurden anschließend Werte des 99 \% VaR mittels genetischer Programmierung und mithilfe der klassischen Verfahren berechnet. Diese Werte konnten anschließend mit den tatsächlichen VaR-Werten verglichen werden, welche aufgrund der bekannten Verteilung der Testdaten vorlagen. Zum Testen wurden sowohl \textbf{normal-} als auch \textbf{extremwertverteilte} Zeitreihenmodelle eingesetzt. Abb. \ref{fig:var_test} zeigt exemplarisch jeweils eine generierte normal- und extremwertverteilte Zeitreihe mit dem realen und dem durch den GP-Algorithmus berechneten VaR. Wie man sieht, stimmt der vom GP-Algorithmus berechnete $99\%$-VaR in beiden Fällen sehr gut mit dem realen VaR überein. Im Falle der Normalverteilung wurde vom genetischen Algorithmus das VaR-Modell {\tt avg(max\_tot, sigma\_t$^2$ )} generiert, welches auf der GARCH-t(1,1) modellierten Standardabweichung beruht. Im Falle der extremwertverteilten Zeitreihe hat der Algorithmus das Modell {\tt avg(max, avg( exp( sqrt( sqrt(  log(8.886) +max\_tot ) ) ) ,max\_tot) )} erzeugt, welches statt der Volatilität nun Blockmaxima zur Prognose des VaR einsetzt. Beide Modelle liefern sehr gute Vorhersagewerte für den VaR mit jeweils 97 bei erwarteten 99 Übertretungen für die normalverteilte Zeitreihe und 91 bei 99 erwarteten Übertretungen für die extremwertverteilte Zeitreihe. Die Abweichungen vom Erwartungswert der Übertretungen liegen dabei beide innerhalb des zu tolerierenden Bereichs bei einem $5 \%$ Signifikanzniveau, somit kann die Nullhypothese eines korrekten VaR-Modells nicht zurückgewiesen werden. Die klassischen VaR-Modelle lieferten für die normalverteilte Zeitreihe 83 (HS,VC), 91 (HS-GARCH), 90 (VC-GARCH), 92 (HS-EWMA), 132 (VC-EWMA), 88 (HS-GARCH-t), 112 (VC-GARCH-t), und 56 (EVT) Überschreitungen sowie für die extremwertverteilte Zeitreihe 86 (HS), 319 (VC), 195 (HS-GARCH), 245 (VC-GARCH), 164 (HS-EWMA), 422 (VC-EWMA), 189 (HS-GARCH-t), 338 (VC-GARCH-t) sowie 121 (EVT) Überschreitungen. 
+
+\subsection{VaR-Modelle für Aktienwerte}
+
+Im nächsten Schritt wurde der GP-Algorithmus mit den Preisdaten verschiedener Aktien und Aktienindizes getestet. Die Ergebnisse des Algorithmus wurden anschließend zusammen mit den klassischen VaR-Verfahren auf ihre Qualität hin überprüft. Dabei wurden die betrachteten Modelle sowohl hinsichtlich der Anzahl als auch der Verteilung der VaR-Überschreitungen getestet. Untersucht wurden die drei Aktienwerte \texttt{American Express (Amex)}, \texttt{Morgan Stanley}, \texttt{Freddie Mac} sowie der \texttt{Standard \& Poor's} Aktienindex und der \texttt{deutsche Aktienindex (Dax)}.
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics{./data/var_dax_good/var_evolve.eps}
+\end{center}
+\caption[Value at Risk (VaR) des deutschen Aktienindex]{Value at Risk (VaR) des deutschen Aktienindex, berechnet mittels genetischer Programmierung (GP). Gezeigt ist das jeweils beste VaR-Modell nach (a)1, (b) 5, (c) 8 und (d) 12 Generationen.} \label{fig:var_evolve}
+\end{figure}
+
+\subsubsection{Evolution der VaR-Modelle}
+
+Abb. \ref{fig:var_evolve} zeigt beispielhaft die Entwicklung eines 99 \% VaR-Modells für den deutschen Aktienindex im Verlauf des GP-Algorithmus. Abb. \ref{fig:var_evolve}a zeigt das beste VaR-Modell der 1. Generation, \ref{fig:var_evolve}b das beste Modell der 5. Generation, \ref{fig:var_evolve}c der 8. Generation und \ref{fig:var_evolve}d der 12. Generation. An den gezeigten Abbildungen lässt sich dabei sehr anschaulich die Evolution der generierten Modelle ablesen. Zunächst wird vom GP-Algorithmus ein recht grobes VaR-Modell erzeugt, dieses weist eine hohe Volatilität und einen ebenfalls recht hohen Durchschnittswert auf. Dieses grobe Modell wird vom GP-Algorithmus schrittweise durch Mutation und Crossover verbessert. Wie man sieht, sinkt dabei sowohl die Volatilität des VaR-Modells als auch dessen durchschnittlicher Wert. Letztendlich entsteht ein sehr gutes VaR-Modell, welches in großen Teilen dem mittels Extremwerttheorie erzeugten Modell ähnelt und die Heteroskedastizität der betrachteten Zeitreihe sehr gut berücksichtigt.
+
+\begin{table}
+\centering
+\begin{tabular}{r|llllllllll|}
+Aktie & Erw. & GP & VC & HS & $\mathrm{VC}_\mathrm{EWMA}$ & $\mathrm{HS}_\mathrm{EWMA}$  \\ \hline
+Amex & $79 \pm 17$ & \emph{79}(0) & 137(58) & 119(40) & 113(34) & 56(23)\\
+M. Stanley & $38 \pm 12$ & \emph{47}(9) & 82(44) & 62(24) & 64(26) & 39(1) \\
+S \& P & $39 \pm 12$ & \emph{36}(3) & 123(84) & 64(25) & 83(44) & 27(12) \\
+Fr. Mac & $49 \pm 14$ & \emph{55}(6) & 117(68) & 97(48) & 75(26) & 51(2) \\ 
+Dax & $45 \pm 13$ & \emph{47}(2) & 123(78) & 74(29) & 77(32) & 41(4) \\ \hline
+Aktie & Erw. & $\mathrm{VC}_\mathrm{GARCH}$ & $\mathrm{HS}_\mathrm{GARCH}$ & $\mathrm{VC}_\mathrm{GARCH-t}$ & $\mathrm{HS}_\mathrm{GARCH-t}$ & EVT   \\ \hline
+Amex & $79 \pm 17$ & 118(39) & 84(5) & 140(61) & 79(0) & 64(15)\\
+M. Stanley & $38 \pm 12 $ & 148(110) & 58(20) & 163(125) & 56(18) & 31(7)\\
+S \& P & $39 \pm 12$ & 59(20) & 24(15) & 77(38) & 25(14) & 22(17) \\
+Fr. Mac & $49 \pm 14 $ & 61(12) & 47(2) & 73(24) & 48(1) & 42(7) \\
+Dax & $45 \pm 13 $ & 44(1) & 36(9) & 77(32) & 38(7) & 34(11) \\
+\end{tabular}
+\caption[Schätzungen des 99\%-VaR für drei Aktienwerte (American Express, Morgan Stanley, Freddie Mac) und zwei Aktienindizes (Dax, Standard \& Poor's)]{Schätzungen des 99\%-VaR für drei Aktienwerte (American Express, Morgan Stanley, Freddie Mac) und zwei Aktienindizes (Dax, Standard \& Poor's). Angeführt sind jeweils die erwartete sowie beobachtete Anzahl an Übertretungen für jedes Verfahren. Die Werte in Klammern geben die Abweichung von beobachteter zu erwarteter Anzahl an Übertretungen an. Ein Konfidenzniveau von $\alpha=0.05$ wurde dabei für die Berechnung des zulässigen Betrags der Abweichungen zugrunde gelegt.}\label{tab:var_backtesting}
+\end{table}
+
+\subsubsection{Backtesting der VaR-Modelle} 
+
+Tab. \ref{tab:var_backtesting} zeigt die Resultate des Backtesting der 99 \% VaR-Modelle für die untersuchten Aktientitel. Gezeigt ist jeweils der Erwartungswert der Anzahl an Überschreitungen des korrekten VaR-Modells sowie die innerhalb eines 5 \%-igen Konfidenzintervalls nach der Binomialverteilung nach Gl. (\ref{eq:binomial}) maximal zu tolerierende positive bzw. negative Abweichung von diesem Erwartungswert. Weiterhin sind für jedes berechnete VaR-Modell die Anzahl an Überschreitungen angegeben, die geklammerten Werte zeigen hierbei die absolute Abweichung vom Erwartungswert.
+
+\bigskip
+
+Wie sich zeigt, sind die bedingten VaR-Modelle den unbedingten Modellen (HS,VC) klar überlegen. Weiterhin zeigt sich für (bedingte wie unbedingte) Varianz/Kovarianz-Modelle eine signifikante Unterschätzung des zugrunde liegenden Preisrisikos aufgrund der unterschätzten Wahrscheinlichkeitsmasse in den Randbereichen der empirischen Verteilung, den sog. ''fat tails''. Die bedingte historische Simulationsmethode weist hierbei einen klaren Vorteil auf, da sie sowohl die heteroskedastische Natur der zugrunde liegenden Zeitreihe als auch die empirische Verteilung der (normierten) Zeitreihenwerte berücksichtigt. Daher weisen sämtliche HS-Modelle eine geringere Fehlerrate im Vergleich zu den VC-Modellen auf. Übertroffen werden die bedingten HS-Modelle lediglich durch die bedingte VaR-Modellierung mithilfe der Extremwerttheorie, welche explizit die hohe Wahrscheinlichkeitsmasse im Randbereich der empirischen Verteilungen berücksichtigt. Besser noch als die Extremwertmethode schneidet der genetische Algorithmus hinsichtlich der Erwartungstreue der Überschreitungen ab.
+
+\subsubsection{Verteilung der VaR-Überschreitungen} 
+
+Im nächsten Schritt wurde die statistische Verteilung der Überschreitungen für die einzelnen VaR-Modelle untersucht. Dazu wurde die empirische Verteilung der Wartezeiten zwischen aufeinanderfolgenden Überschreitungen untersucht und mit der theoretisch zu erwartenden, geometrischen Verteilung nach Gl. (\ref{eq:wt_cdf}) verglichen. Der Vergleich erfolgte dabei sowohl anhand des $\chi^2$-Tests nach Gl. (\ref{eq:chi_square}) als auch anhand des Kolmogorov-Smirnow Test gem. Gl. (\ref{eq:ks}). Die Ergebnisse der beiden Tests für die einzelnen Aktienwerte sind in Tab. \ref{tab:chi_square} sowie Tab. \ref{tab:ks} zusammengefasst. Wie sich zeigt, lässt sich für die mittels genetischer Programmierung generierten VaR-Modelle die Hypothese der korrekten Verteilung der Wartezeiten für drei der fünf Aktienwerte nicht zurückweisen, lediglich für die beiden Werte \texttt{American Express} und \texttt{Morgan Stanley} weisen die Teststatistiken leicht überkritische Werte auf. Im allgemeinen ist ersichtlich, dass die mittels GP erzeugten VaR-Modelle hinsichtlich der Wartezeitenverteilung keine schlechteren Eigenschaften als die konventionellen Modelle zeigen und diese oftmals sogar übertreffen. Eindeutig lässt sich aufgrund überkritischer Teststatistiken weiterhin das fehlerhafte Verhalten der unbedingten VaR-Modelle für die untersuchten Zeitreihen nachweisen. Auch für andere Verfahren lassen sich Rückschlüsse auf die Gültigkeit der entsprechenden Modelle ziehen. So schneiden wie bereits vorher die bedingten Modelle weitaus besser als die unbedingten ab, weiterhin weisen die mittels historischer Simulation generierten VaR-Modelle im Vergleich mit den VC-Modellen fast durchgängig kleinere Werte der Teststatistiken auf. Die für das Extremwertverfahren ermittelten Teststatistiken sind dabei qualitativ mit denen der anderen bedingten Verfahren vergleichbar und lassen im Vergleich zum GP-Verfahren keinerlei signifikante Rückschlüsse auf die relative Qualität der beiden Verfahren zu.
+
+\begin{table}
+\centering
+\begin{tabular}{r|llllllllll|}
+Aktie & GP & VC & HS & $\mathrm{VC}_\mathrm{EWMA}$ & $\mathrm{HS}_\mathrm{EWMA}$  \\ \hline
+Amex & 0.93 & 10.91  & 97.13 & 1.48 & 1.22 \\
+M. Stanley & 1.28 & 3.50 & 0.76  & 2.38 & 0.64 \\
+S \& P & 0.40 & 3.67 & 0.66 & 1.30 & 0.91 \\
+Fr. Mac  & 0.57 & 4.71 & 3.15 & 1.14 & 0.72 \\ 
+Dax  & 0.35 & 5.77 & 0.71 & 0.91 & 0.36 \\ \hline
+Aktie & $\mathrm{VC}_\mathrm{GARCH}$ & $\mathrm{HS}_\mathrm{GARCH}$ & $\mathrm{VC}_\mathrm{GARCH-t}$ & $\mathrm{HS}_\mathrm{GARCH-t}$ & EVT   \\ \hline
+Amex &  1.04 & 0.37 & 5.90 & 94.41 & --- \\
+M. Stanley & 8.08 & 1.45 & 8.62 & 1.32 & 0.51 \\
+S \& P & 0.72 & 0.24 & 1.09 & 0.17 & 0.88  \\
+Fr. Mac & 0.85 & 0.40 & 1.12 & 0.39 & --- \\
+Dax & 0.37 & 0.36 & 1.03 & 0.60 & 0.69 \\
+\end{tabular}
+\caption[Werte der $\chi^2$-Teststatistik für die geschätzten VaR-Modelle.]{Werte der $\chi^2$-Teststatistik für die geschätzten VaR-Modelle. Alle Angaben in Einheiten des kritischen Wertes $\chi^2(0.95,n)$.} \label{tab:chi_square}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{r|llllllllll|}
+Aktie & GP & VC & HS & $\mathrm{VC}_\mathrm{EWMA}$ & $\mathrm{HS}_\mathrm{EWMA}$  \\ \hline
+Amex & 2.08 & 3.32 & 2.80 &  1.77 & 1.00  \\
+M. Stanley & 1.85 & 3.40 & 2.59 & 1.99 & 1.57 \\
+S \& P & 0.83 & 4.00 & 2.21 & 1.97 & 1.01 \\
+Fr. Mac  & 0.65 & 4.25 & 3.93 & 1.78 & 1.18 \\ 
+Dax  & 0.63 & 4.35 & 2.92 & 1.38 & 0.62 \\ \hline
+Aktie & $\mathrm{VC}_\mathrm{GARCH}$ & $\mathrm{HS}_\mathrm{GARCH}$ & $\mathrm{VC}_\mathrm{GARCH-t}$ & $\mathrm{HS}_\mathrm{GARCH-t}$ & EVT   \\ \hline
+Amex & 1.86 & 0.71 & 5.83 & 2.15 & --- \\
+M. Stanley & 4.91 & 2.06 & 5.09 & 1.82 & 1.43\\
+S \& P & 1.06 & 1.01 & 1.61 & 0.90 & 0.66 \\
+Fr. Mac & 1.17 & 1.02 & 1.54 & 1.10 & 2.33 \\
+Dax & 0.51 & 0.71 & 1.39 & 0.73 & 0.97 \\
+\end{tabular}
+\caption[Werte $d_\mathrm{max}$ der Kolmogorov-Smirnov Teststatistik für die geschätzten VaR-Modelle.]{Werte $d_\mathrm{max}$ der Kolmogorov-Smirnov Teststatistik für die geschätzten VaR-Modelle. Alle Angaben in Einheiten des kritischen Wertes $d_\mathrm{max}^\mathrm{crit}$.} \label{tab:ks}
+\end{table}
+
+
+\subsubsection{Interpretation der VaR-Modelle}
+
+Einer der größten Vorteile der genetischen Programmierung gegenüber anderen Verfahren der künstlichen Intelligenz wie z.B. den neuronalen Netzen ist die unmittelbare Interpretierbarkeit der erzeugten Programme bzw. Modelle. So ist es möglich, die erzeugten Programme in direkt lesbarer Form zu betrachten und ihre Struktur auszuwerten. Dies soll im folgenden für die gefundenen VaR-Modelle durchgeführt werden. Tab. \ref{tab:genetic_solutions} zeigt die für die untersuchten Aktienwerte gefundenen Modelle mit der jeweils höchsten Fitness innerhalb der betrachteten Endpopulation. Wie sich zeigt, bringt der GP-Algorithmus vorwiegend VaR-Modelle hervor, welche auf der geschätzten Standardabweichung der Zeitreihen basieren. Einige der Modelle enthalten darüber hinaus zusätzliche Komponenten wie z.B. Blockmaxima und -minima sowie die Mittelwerte verschiedener Kennzahlen. Generell gesehen wirken die gefundenen Modelle für den Betrachter eher exotisch und schwer erklärbar. Gerade im Auffinden solch unkonventioneller Modelle liegt jedoch die Stärke des GP-Algorithmus, der frei von menschlicher Beeinflussung aus bekannten Modellen auf zufällige (durch Mutation) sowie auf deterministische (durch Crossover) Weise neue Modelle erzeugt. Dieses Vorgehen ähnelt dabei sehr stark dem kreativen Lösungsfindungsprozess eines Menschen, der ebenfalls aus bereits vorhandenem Wissen neue Modelle erzeugt und teilweise auch durch Nachdenken oder Intuition dem bekannten Modell neue Elemente hinzufügt. Nachdem die genetischen VaR-Modelle einmal erzeugt wurden, können sie sehr leicht zur Berechnung zukünftiger VaR-Werte verwendet werden. In der Praxis können die gefundenen VaR-Modelle dabei auch nach jedem betrachteten Handelstag -oder nach einem längeren Zeitraum- durch einen erneuten Durchlauf des GP-Algorithmus  verbessert und eventuell an neue Gegebenheiten (Strukturbrüche, extreme Ereignisse) angepasst werden, was für die klassischen Modelle nicht möglich ist. Der hieraus entstehende Feedback-Mechanismus ist dabei wesentlich flexibler als die z.B. in \cite{BaselII} vorgeschlagene, auf der Anzahl an Übertretungen basierende Skalierung des VaR zur Behandlung von Modellverletzungen.
+
+\begin{table}
+\begin{tabular}{r|l}
+Dax & $\mathtt{sigma}/(1 - \ln{(\mathtt{max\_tot})})$ \\
+Morgan Stanley & $ \mathtt{max\_tot}/(\mathtt{max\_tot} - \ln{(\mathtt{sigma})})  $ \\
+Freddie Mac & $ 0.08+\mathtt{ma\_sigma} ^2 $ \\
+S \& P & $ \mathrm{avg}(0.072,\mathtt{sigma\_t}) * \sqrt{ \mathtt{sigma\_t}+ \mathrm{min}(\mathtt{sigma\_tot},\mathtt{min}) }  $ \\
+Amex & $\mathrm{min}( \mathtt{min}/\mathtt{mu\_tot} , \mathrm{avg}(\mathtt{sigma},\mathtt{max}) ) ^{\mathtt{max}+\mathtt{max} + 2.906^\mathtt{sigma}}$   \\
+\end{tabular}
+\caption{Mittels genetischer Programmierung gefundene VaR-Modelle für die untersuchten Aktienwerte.} \label{tab:genetic_solutions}
+\end{table}
+
+\smallskip
+
+Ein weiterer klarer Vorteil des genetischen Verfahrens ist, dass jederzeit neue Terminal- und Nichtterminalsymbole für die Berechnung des VaR eingeführt werden können. Würde sich z.B. herausstellen, dass der VaR einer betrachteten Zeitreihe mit einer bestimmten externen Kennzahl oder Größe auf eine bestimmte Weise korreliert ist, so könnte diese Kennzahl bzw. Größe dem Algorithmus sehr einfach zur Verfügung gestellt und somit zur Modellierung des VaR verfügbar gemacht werden. Solche externen Kennzahlen könnten dabei z.B. Wechselkurse, Klimadaten, Absatzzahlen oder auch Expertenschätzungen sein. Eine Berücksichtigung solcher Kennzahlen bzw. Größen ist im Rahmen der klassischen Verfahren zur Berechnung des VaR dabei sehr schwierig bzw. oft gänzlich unmöglich. 
+
+\subsection{Conditional Value at Risk (CVaR)}
+
+Wie bereits angesprochen, ist der VaR kein kohärentes Risikomaß, da er sich nicht zwangsläufig subadditiv verhält und somit Diversifikationseffekte unterschätzen kann. Ausgehend vom VaR kann jedoch der sog. Conditional Value at Risk (CVaR), oft auch als Expected Shortfall (ES) bezeichnet, abgeschätzt werden. Der CVaR ist im Gegensatz zum VaR ein kohärentes Risikomaß und kann ebenfalls sehr leicht interpretiert werden, da er als Erwartungswert des Verlustes bei der Überschreitung des VaR definiert ist. Um den CVaR ausgehend vom VaR zu berechnen werden im folgenden zwei unterschiedliche Verfahren eingesetzt. Diese sind
+
+\begin{itemize}
+\item die Berechnung des CVaR mittels Anpassung eines linearen Modells an die bestehenden VaR-Werte,
+\item die Berechnung des CVaR mittels genetischer Programmierung, ausgehend vom bestehenden VaR-Modell.
+\end{itemize} 
+
+Die zu optimierende Fitnessfunktion ist in beiden Fällen die negative Abweichung des CVaR vom tatsächlich beobachteten Zeitreihenwert, d.h.
+
+\begin{equation}
+f_\mathrm{CVaR}= -\sum\limits_{i=1}^m \left(x_{a_i}-\mathrm{CVaR}_{a_i}\right)^2 \label{eq:es_fitness}
+\end{equation}
+, wobei $m$ die Anzahl der VaR-Überschreitungen bezeichnet und $\left\{a_1,\hdots,a_m\right\}$ die Zeitindizes der einzelnen Überschreitungen enthält. Beide Verfahren werden im folgenden kurz erläutert.
+
+\subsubsection{Berechnung des CVaR als lineare Funktion des VaR}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{data/es_vs_var}
+\caption[Relative Preisänderung $x_t$ bei Überschreitung von $\mathrm{VaR}_\alpha(x_t|x_{t-1},\hdots)$ als Funktion des selbigen.]{Relative Preisänderung $x_t$ bei Überschreitung von $\mathrm{VaR}_\alpha(x_t|x_{t-1},\hdots)$ als Funktion des selbigen, dargestellt für die fünf untersuchten Aktienwerte.} \label{fig:es_vs_var}
+\end{figure}
+
+In diesem Ansatz wird davon ausgegangen, dass sich der CVaR als
+
+\begin{equation}
+\mathrm{CVaR}(x_t|\mathrm{VaR}_1,\hdots,\mathrm{VaR}_t,x_1,\hdots,x_{t-1}) = a'\cdot\mathrm{VaR}_t+b' \label{eq:es_var_linear}
+\end{equation}
+schreiben lässt, also eine lineare Funktion des VaR ist. Dieser Ansatz ist für das EVT-Modell sowie die VC-Modelle gerechtfertigt und stellt auch für die HS-Modelle eine gute Näherung dar. Abb. \ref{fig:es_vs_var} zeigt die Werte $x_{a_i}$ der VaR-Überschreitungen der untersuchten Zeitreihen, dargestellt als Funktion von $\mathrm{VaR}_{a_i}$. Wie man sieht, scheint die Linearitätsannahme generell gerechtfertigt zu sein, jedoch weichen die betrachteten Aktienwerte teilweise drastisch unterschiedliche Streuungen in den Überschreitungen auf, was sich aus später an den entsprechenden CVaR-Modellen bemerkbar machen wird. Um die Fitnessfunktion nach Gl. (\ref{eq:es_fitness}) zu maximieren kann nach Einsetzen von Gl. (\ref{eq:es_var_linear}) eine einfache OLS-Regression durchgeführt werden. Die Koeffizienten $a'$ und $b'$ ergeben sich hieraus dann zu
+
+\begin{eqnarray}
+a' & = & \frac{\sum\limits_{i=1}^m \left(x_{a_i}-\overline{x}\right)\cdot\left(\mathrm{VaR}_\alpha(x_{a_i})-\overline{\mathrm{VaR}}_\alpha  \right)  } {\sum\limits_{i=1}^m \left( \mathrm{VaR}_\alpha(x_{a_i})-\overline{\mathrm{VaR}}_\alpha \right) } \\
+b' & = & \overline{x}-a'\cdot \mathrm{\overline{VaR}}_\alpha
+\end{eqnarray}
+Die Mittelwerte $\overline{x}$ und $\overline{\mathrm{VaR}}_\alpha$ sind dabei nur über die Indizes $a_i$ zu bilden. Die nach obiger Gleichung geschätzten Koeffizienten liefern einen näherungsweise erwartungstreuen Schätzer für den CVaR. Die Größe $-f_\mathrm{CVaR}/m$ gibt dabei die mittlere quadratische Abweichung des CVaR von den realisierten Verlustwerten an und eignet sich gut, um die Qualität verschiedener CVaR-Modelle zu vergleichen. Daher wurden für alle generierten VaR-Modelle aus dem letzten Abschnitt die linearen CVaR-Koeffizienten und hieraus die mittleren quadratischen Abweichungen berechnet. Dies erlaubt es, die Qualität der einzelnen VaR-Verfahren auch im Hinblick auf ihre Eignung zur Abschätzung des CVaR zu überprüfen und zu vergleichen. 
+
+\begin{table}
+\centering
+\begin{tabular}{r|llllllllll|}
+Aktie           & GP           & VC & HS & $\mathrm{VC}_\mathrm{EWMA}$ & $\mathrm{HS}_\mathrm{EWMA}$  \\ \hline
+Amex        & 63.52 & 77.37 & 85.61 & 63.63 & 69.58 \\
+M. Stanley  & 112.37 & 151.37 & 173.27 & 54.04 & 64.83 \\
+S \& P      & 6.50 & 13.79 & 19.62 & 4.26 & 5.86  \\ 
+Fr. Mac    & 472.17 & 704.39 & 815.63 & 770.67  & 916.0 \\ 
+Dax         & 14.37 & 12.68 & 11.23 & 12.11 & 16.73 \\ \hline
+Aktie        & $\mathrm{VC}_\mathrm{GARCH}$ & $\mathrm{HS}_\mathrm{GARCH}$ & $\mathrm{VC}_\mathrm{GARCH-t}$ & $\mathrm{HS}_\mathrm{GARCH-t}$ & EVT   \\ \hline
+Amex         & 56.12 & 66.76 & 38.01 & 51.68 & --- \\
+M. Stanley  & 66.20 & 79.43 & 63.35 & 77.46 & 122.69 \\
+S \& P      & 5.84 & 6.91 & 7.14 & 6.95 & 9.58 \\
+Fr. Mac     & 770.67 & 916.00 & 572.51 & 841.81 & 1349.32 \\
+Dax         & 16.74 & 18.21 & 12.53 & 17.50 &  19.70 \\
+\end{tabular}
+\caption{Werte von $-f_\mathrm{CVaR}/m$ nach Gl. (\ref{eq:es_fitness}), berechnet für verschiedene Aktien und VaR-Modelle.} \label{tab:es}
+\end{table}
+
+Tab. \ref{tab:es} enthält die berechneten Werte $f_\mathrm{CVaR}/m$ und erlaubt den Vergleich der gefundenen CVaR-Modelle für alle untersuchten Aktienwerte. Wie man sieht, schneiden die bedingten Modelle wiederum besser als die unbedingten ab, jedoch lässt sich bei Verwendung der OLS-Regression kein signifikanter Qualitätsunterschied zwischen den einzelnen bedingten Modellen feststellen.
+
+\subsubsection{Berechnung des CVaR mit genetischer Programmierung}
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics{./data/es_morgan_stanley/es.eps}
+\end{center}
+\caption[Mittels genetischer Programmierung generiertes CVaR-Modell für den Aktienwert Morgan Stanley]{Mittels genetischer Programmierung generiertes CVaR-Modell für den Aktienwert Morgan Stanley, basierend auf dem durch genetische Programmierung gefundenen VaR-Modell. Runde Punkte markieren die Überschreitungen des VaR.} \label{fig:es_gp}
+\end{figure}
+
+Alternativ zum linearen Modell kann der CVaR auch mittels genetischer Programmierung modelliert werden. Dazu wird die Fitnessfunktion nach Gl. (\ref{eq:es_fitness}) unter Verwendung der gleichen Terminal- und Nichtterminalsymbole wie im Falle des VaR minimiert. In Abb. \ref{fig:es_gp} ist ein mittels genetischer Programmierung erzeugtes CVaR-Modell für den Aktienwert Morgan Stanley gezeigt. Es hat sich im Rahmen der Untersuchungen dabei jedoch gezeigt, dass die linearen CVaR-Modelle im Vergleich zu den mittels genetischer Programmierung generierten Modellen üblicherweise einen geringeren quadratischen Fehler aufweisen, daher wird nicht weiter auf die erstellten Modelle eingegangen. U.U. kann eine CVaR-Modellierung mithilfe des GP-Algorithmus jedoch nützlich sein, wenn neben Gl. (\ref{eq:es_fitness}) noch zusätzliche Nebenbedingungen oder Anforderungen durch das CVaR-Modell optimiert werden sollen.
+
+
+\section{Risikomessung mit Copulas}
+
+In den letzten Abschnitten wurde das Preisrisiko isoliert für einzelne Aktienwerte betrachtet. In der Praxis werden jedoch häufig \toindexi{Portfolio}{Portfolios} aus mehreren Einzelaktien zusammengestellt, um so durch einen möglichen Diversifikationseffekt das Gesamtrisiko des Portfolios gegenüber dem Risiko der Einzelpositionen zu verringern. Der genaue Diversifikationseffekt bei der Zusammenstellung einzelner Aktien zu einem Portfolio hängt dabei jedoch in starkem Maße von der gegenseitigen statistischen Abhängigkeit der einzelnen Aktienpositionen ab. In der Praxis wird die statistische Abhängigkeit zwischen zwei Zufallsvariablen $X_1$ und $X_2$ dabei meist über den sog. Korrelationskoeffizienten erfasst, welcher definiert ist als
+
+\begin{equation}
+\rho(X_1,X_2) = \frac{E\left(\left[X_1-\overline{X}_1\right]\cdot\left[X_2-\overline{X}_2\right]\right)}{\sigma(X_1)\cdot\sigma(X_2)}
+\end{equation}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{data/copula_test_gumbel/gumbel_vs_clayton}
+\caption[Beispiele für unterschiedlich verteilte Zufallsvariablen mit gleicher Korrelation]{(a) Eine mithilfe der Gumbel-Copula mit Parameter $\theta=2.0$ numerisch generierte Stichprobe zweier Zufallsvariabler mit normalverteilten Rändern. (b) Gleiches Verfahren, jedoch auf Grundlage einer Clayton-Copula mit $\theta=2.0$. In beiden Fällen ist der Korrelationskoeffizient $\rho \approx 0.68$.}\label{fig:copula_rho}
+\end{figure}
+
+Der Korrelationskoeffizient kann leicht berechnet werden und liegt stets im Wertebereich $\rho(X_1,X_2)\in [-1,1]$, wobei ein Wert $\rho(X_1,X_2)=0$ dem Fall statistisch (linear) unabhängiger Variablen entspricht und $\rho(X_1,X_2)=\pm 1$ eine perfekte (anti-)lineare Beziehung zwischen $X_1$ und $X_2$ impliziert. Problematisch am Korrelationskoeffizienten ist jedoch die Tatsache, dass er keine Aussagen über die genaue Art der Abhängigkeit zwischen $X_1$ und $X_2$ macht. So können zwei völlig unterschiedlich verteilte Paare von Zufallsvariablen problemlos den gleichen Wert des Korrelationskoeffizienten aufweisen. Abb. \ref{fig:copula_rho} verdeutlicht dies. Gezeigt sind dort zwei Paare unterschiedlich verteilter Zufallsvariablen, welche beide den gleichen Wert des Korrelationskoeffizienten aufweisen. Der stärkste Korrelationsbereich für die Variablenwerte aus Abb. \ref{fig:copula_rho}a liegt hierbei im unteren Wertebereich der Verteilungen, wohingegen in Abb. \ref{fig:copula_rho}b der obere Wertebereich die stärkste Korrelation aufweist. Entsprächen die gezeigten Verteilungen der Preisänderung eines Portfolios aus zwei Aktien, so wäre das Gesamtrisiko der beiden Portfolios trotz des identischen Korrelationskoeffizienten sehr unterschiedlich. Als bessere Alternative zum Korrelationskoeffizienten und zur exakteren Beschreibung der Abhängigkeitsstruktur zwischen mehreren statistischen Variablen kommen daher sog. \toindexi{Copula}{Copulas}\cite{Joe97,Trivedi05} zum Einsatz. Eine Funktion $C : [0,1]^d \to [0,1], (u_1,\hdots,u_d) \to C(u_1,\hdots,u_d)$ wird dabei als Copula bezeichnet, wenn sie folgende Eigenschaften erfüllt\cite[S. 185]{McNeil05}
+
+\begin{defn}{Eigenschaften von Copulas}
+\begin{itemize}
+\item[(1)] Der Wert von $C(u_1,\hdots,u_d)$ nimmt mit allen Variablen $u_i$ zu.
+\item[(2)] $C(1,\hdots,1,u_k,1,\hdots,1)=u_k$ für alle $k\in\{1,\hdots,d\}$ und $u_k\in[0,1]$.
+\item[(3)] Für alle $(a_1,\hdots,a_d)$, $(b_1,\hdots,b_d)\in [0,1]^d$ mit $a_i\le b_i$ gilt 
+\begin{equation}
+\sum\limits_{i_1=1}^2\hdots\sum\limits_{i_d=1}^2(-1)^{i_1+\hdots+i_d}C(u_{1i_1},\hdots,u_{di_d})\ge 0 \label{eq:copula_3}
+\end{equation}
+wobei $u_{j1}=a_j$ und $u_{j2}=b_j$ für alle $j\in\{1,\hdots,d\}$ gilt.
+\end{itemize} \label{defn:copulas}
+\end{defn}
+
+Die Bedingungen (1) und (2) lassen sich leicht mit der Interpretation von $C(u_1,\hdots,u_d)$ als Verteilungsfunktion der stetigen Zufallsvariablen $u_i\in[0,1]$ rechtfertigen, Bedingung (3) stellt zusätzlich sicher, dass bei der Auswertung von $C(u_1,\hdots,u_d)$ als Wahrscheinlichkeitsintegral keine negativen Wahrscheinlichkeiten auftreten können. Die Summe in Ungl. (\ref{eq:copula_3}) entspricht hierbei einem $d$-dimensionalen Wahrscheinlichkeitsintegral. Der linke Teil von Ungl. (\ref{eq:copula_3}) ist somit proportional zu $P(a_1\le U_1 \le b_1,\hdots,a_d \le U_d \le b_d)$. 
+
+\bigskip
+
+Die Beziehung zwischen Copulas und multivariaten Wahrscheinlichkeitsverteilungen wird durch Sklar's Theorem erfasst.
+
+\begin{thm}[Sklar 1959]
+Sei $F$ eine gemeinsame Verteilungsfunktion mit Randverteilungen $F_1,\hdots,F_d$. Dann existiert eine Copula $C: [0,1]^d \to [0,1]$, so dass für alle $x_1,\hdots,x_d$ in $\mathbb{\overline{R}}=[-\infty,\infty]$ gilt 
+\begin{equation}
+  F(x_1,\hdots,x_d)=C(F_1(x_1),\hdots,F_d(x_d)) \label{eq:sklar_1}
+\end{equation}
+Wenn die Ränder stetig sind ist $C$ eindeutig bestimmt, andernfalls ist $C$ vollständig bestimmt auf $\mathrm{Ran} F_1\times \hdots \times \mathrm{Ran} F_d$, wobei $\mathrm{Ran}F_i=F_i(\mathbb{\hat{R}})$ das Begrenzungsintervall der Wertemenge von $F_i$ bezeichnet. Umgekehrt ist $F$ aus Gl. (\ref{eq:sklar_1}) eine gemeinsame Verteilungsfunktion mit Randverteilungen $F_1,\hdots,F_d$, falls $F_1,\hdots,F_d$ univariate Verteilungsfunktionen sind und $C$ eine Copula ist. 
+\end{thm}
+
+\subsection{Beispiele}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{data/copula_examples/copulas.eps}
+\caption[Verschiedene Copulas]{(a)Normal-Copula mit $\rho=0.7$, (b) Frank-Copula mit $\theta=2.0$, (c) Gumbel-Copula mit $\theta=2.0$ und (d) Clayton-Copula mit $\theta=2.0$} \label{fig:copula_examples}
+\end{figure}
+
+
+Nachfolgend einige Beispiele oft verwendeter Copulas, die auch in den weiteren Untersuchungen verwendet werden.
+
+\begin{itemize}
+\item Die \toindexi{Copula!Unabhängigkeitscopula}{Unabhängigkeitscopula} entspricht dem Fall unabhängig verteilter Zufallsvariablen und ist definiert als
+\begin{equation}
+ C_\Pi (u_1,\hdots,u_d)=\prod\limits_{i=1}^d u_i  \label{eq:independence_copula}
+\end{equation}
+\item Die \toindexi{Copula!Gaußcopula}{Gaußcopula} (auch als \toindexi{Copula!Normalcopula}{Normalcopula} bezeichnet) modelliert multivariat-normalverteilte Zufallsvariablen und hat für $d=2$ die Integraldarstellung
+\begin{equation}
+C_\rho^{Ga}(u_1,u_2)=\int\limits_{-\infty}^{\Phi^{-1}(u_1)}\int\limits_{-\infty}^{\Phi^{-1}(u_2)}\frac{1}{2\pi(1-\rho^2)^{1/2}}\exp{\left\{-\frac{s_1^2-2\rho s_1 s_2+s_2^2}{2(1-\rho^2)}\right\}}\mathrm{d}s_1\mathrm{d}s_2 \label{eq:normal_copula}
+\end{equation}
+\item Eine \toindexi{Copula!t-Copula}{t-Copula} besitzt die Darstellung
+\begin{equation}
+  C_{\nu,P}^t(\mathbf{u})=\mathbf{t}_{\nu,\mathbf{P}}\left(t_\nu^{-1}(u_1),\hdots,t_\nu^{-1}(u_d)\right)
+\end{equation}
+wobei $t_\nu$ der Verteilungsfunktion einer univariaten $t$-Verteilung und $\mathbf{t}_{\nu,\mathbf{P}}$ der gemeinsamen Verteilungsfunktion eines Vektors $\mathbf{X} \sim t_d(\nu,\mathbf{0},\mathbf{P})$ mit der Korrelationsmatrix $\mathbf{P}$ entspricht.
+\item Eine \toindexi{Copula!Archimedische Copula}{Archimedische Copula} kann in der Form 
+
+\begin{equation}
+C_H(u_1,\hdots,u_d) = \Psi^{-1}\left(\sum\limits_{i=1}^d \Psi\left(u_i\right)\right)
+\end{equation}
+
+geschrieben werden, wobei $\Psi(u)$ als Generatorfunktion bezeichnet wird. Wichtige Vertreter der archimedischen Copulaklasse sind die \toindexi{Copula!Clayton-Copula}{Clayton-Copula}, welche als 
+
+\nomenclature{$\theta$}{Shape-Paramter der Gumbel-, Clayton- bzw. Frank-Copula}
+
+\begin{equation}
+C_C(u_1,u_2) = \left(u_1^{-\theta}+u_2^{-\theta}-1\right)^{-1/\theta} \label{eq:clayton_copula}
+\end{equation}
+
+gegeben ist, die \toindexi{Copula!Gumbel-Copula}{Gumbel-Copula} mit der Funktionsdarstellung
+
+\begin{equation}
+C_G(u_1,u_2) = \exp{\left[-\left(\left(-\ln{u_1}\right)^\theta+\left(-\ln{u_2}\right)^\theta\right)^{1/\theta}\right]} \label{eq:gumbel_copula}
+\end{equation}
+
+und die \toindexi{Copula!Frank-Copula}{Frank-Copula} mit der Darstellung
+
+\begin{equation}
+C_F(u_1,u_2) = -\frac{1}{\theta}\ln{\left(1+\frac{\left(\exp{(-\theta u_1)}-1\right)\left(\exp{(-\theta u_2)}-1\right)}{\exp{(-\theta)}-1}\right)} \label{eq:frank_copula}
+\end{equation}
+
+\end{itemize}
+
+Die obige Liste stellt lediglich eine kleine Auswahl der gebräuchlichsten Copula-Klassen dar. Eine Vielzahl weiterer Copulamodelle findet sich beispielsweise in \cite[S. 139 ff.]{Joe97}. Abb. \ref{fig:copula_examples} zeigt zum Vergleich die Wahrscheinlichkeitsdichte der Normal-, Frank-, Clayton- und Gumbel-Copula.
+
+\subsection{Risikomaße \& Copulas}
+
+Copulas eignen sich sehr gut zur Risikomessung bei statistisch abhängigen Variablen. Interessant für das Risikomanagement ist dabei beispielsweise die Messung der gegenseitigen Abhängigkeit einzelner Aktienwerte innerhalb eines Portfolio und dies insbesondere in den Randbereichen der Verteilungen, wo $u_i\to 1$ bzw. $u_i\to 0$. Gebräuchliche Maße zur Erfassung der Abhängigkeit in diesen Bereichen sind die sog. \toindexi{Risikomaße!Upper Tail Dependence}{Upper Tail Dependence}- sowie \toindexi{Risikomaße!Lower Tail Dependence}{Lower Tail Dependence}-Koeffizienten. Diese sind gegeben als
+
+\begin{eqnarray}
+\lambda_l & = & \lim\limits_{q\to 0^{+}}\frac{P(X_2 \le F_2^\leftarrow(q),X_1 \le F_1^\leftarrow(q))}{P(X_1 \le F_1^\leftarrow(q))} \nonumber \\
+& = & \lim\limits_{q\to 0^+}\frac{C(q,q)}{q} \label{eq:ltd} \\
+\lambda_u & = & \lim\limits_{q\to 1^-}\frac{\hat{C}(1-q,1-q)}{1-q} \nonumber \\
+& = & \lim\limits_{q\to 0^+} \frac{\hat{C}(q,q)}{q} \label{eq:utd}
+\end{eqnarray}
+
+und können direkt aus einer gegebenen Copula berechnet werden, weisen jedoch nicht zwangsläufig einen finiten Wert auf. In Gl. (\ref{eq:utd}) tritt die sog. \toindexi{Copula!Survival Copula}{Survival Copula} auf, welche gegeben ist als $\hat{C}(1-q_1,1-q_2)=1-q_1-q_2+C(q_1,q_2)$. Wie sich aus Gl. (\ref{eq:ltd}) ersehen lässt, gibt der Coefficient of Lower Tail Dependence (CLTD) die Wahrscheinlichkeit an, dass beide Variablen $X_1$ und $X_2$ einen gegebenen Wert $F_1^\leftarrow(q)$ bzw. $F_2^\leftarrow(q)$ unterschreiten, wobei $q\to 0$ gilt. Der Koeffizient ist dabei normiert auf die Wahrscheinlichkeit $P(X_1 \le F_1^\leftarrow (q))$. Der CLTD misst also die Stärke der gegenseitigen Abhängigkeit der beiden Zufallsvariablen im Falle extremer Ausprägungen. Der Coefficient of Upper Tail Dependence (CUTD) lässt sich analog interpretieren. Weitere gebräuchliche Abhängigkeitsmaße, welche sich direkt aus einer Copula berechnen lassen, sind z.B. \toindexi{Copula!Kendall's tau}{Kendall's tau} sowie \toindexi{Copula!Spearman's rho}{Spearman's rho}, gegeben als
+
+\begin{eqnarray}
+\tau & = & 4\int C \; dC - 1 \\
+\rho_S & = & 12 \int \int \hat{C}(u,v)\; du\; dv -3
+\end{eqnarray}
+
+Wegen der direkten Berechenbarkeit der oben angesprochenen Risikomaße bei Vorliegen eines Copulamodells ist es im Kontext der Risikoanalyse äußerst interessant, ein passendes Copulamodell mithilfe von gegebenen Zeitreihendaten zu generieren. Dies kann, wie in den folgenden Abschnitten gezeigt wird, sehr effizient mittels genetischer Programmierung erfolgen.
+
+\subsection{Copula-Modellierung mit genetischer Programmierung}
+
+Im folgenden soll gezeigt werden, wie mittels genetischer Programmierung Copulamodelle generiert werden können. Dazu ist es zunächst nötig, ein passendes Qualitätskriterium für die Anpassung eines Copulamodells an einen gegebenen Datensatz zu bestimmen. Dieses Qualitätskriterium kann dann als Fitnessfunktion im GP-Algorithmus verwendet werden. Ein sehr robustes und leicht zu implementierendes Gütemaß ist dabei die sog. Log-Likelihood Funktion. Diese gibt den Logarithmus der Wahrscheinlichkeit an, mit welcher die untersuchte empirische Stichprobe vom einem gewählten Copulamodell generiert wurde. Seien im folgenden $\mathbf{\hat{U}}_i=(u_{i1},\hdots,u_{id})$ mit $i=1\hdots T$ die beobachteten Werte der untersuchten empirischen Verteilungsfunktionen $u_{ij}=\hat{F}_j^\leftarrow(x_{ij})$. Die Likelihood-Funktion für ein Copula-Modell $C_\mathbf{\theta}$ mit Parametervektor $\mathbf{\theta}$ ist dann gegeben als
+
+\begin{equation}
+\ln{ L(\mathbf{\theta};\mathbf{\hat{U}_1},\hdots,\mathbf{\hat{U}_t}}) = \sum\limits_{i=1}^T \ln{C_\mathbf{\theta}(\mathbf{\hat{U}_i})} \label{eq:copula_ll}
+\end{equation}
+
+Diese Gleichung kann direkt als Fitness-Funktion für den GP-Algorithmus herangezogen werden. Um entsprechende Copula-Modelle mittels genetischer Programmierung zu generieren werden dabei sogenannte \toindexi{Copula!Misch-Copula}{Misch-Copulas} eingesetzt. Diese werden folgendermaßen definiert: Seien $C_1(u_1,\hdots,u_d)$ sowie $C_2(u_1,\hdots,u_d)$ zwei Copulas. Die Mischcopula
+
+\begin{equation}
+C_m(u_1,\hdots,u_d) = \delta\cdot C_1(u_1,\hdots,u_d)+(1-\delta)\cdot C_2(u_1,\hdots,u_d) \label{eq:copula_mixing}
+\end{equation}
+
+\nomenclature{$\delta$}{Mischparamter des genetischen Mischoperators}
+
+\begin{SCfigure}
+\includegraphics{figures/gp_mixing}
+\caption{Der genetische Mischoperator.} \label{fig:gp_mixing}
+\end{SCfigure}
+
+
+mit $\delta \in [0,1]$ ist dann ebenfalls eine Copula und erfüllt alle Eigenschaften nach Def. \ref{defn:copulas}. Der Mischprozess kann beliebig oft wiederholt werden, um immer komplexere Copulamodelle zu erzeugen. Um den Mischoperator nach Gl. (\ref{eq:copula_mixing}) innerhalb des GP-Algorithmus umzusetzen, muss dieser zunächst als Nichtterminal modelliert werden. Dieses zu modellierende Nichtterminal enthält dabei einen Mischparameter $\delta$ sowie die beiden zu mischenden Copulas $C_1$ und $C_2$ als Parameter. Abb. \ref{fig:gp_mixing} zeigt die Baumstruktur des Mischoperators. Der Operator besitzt eine sogenannte syntaktisch eingeschränkte Struktur, d.h. seine Unterknoten können nicht beliebig mit Terminal und Nicht-Terminalsymbolen besetzt werden. Vielmehr muss der erste Unterknoten des Operators stets mit einer reellen Zahl $\delta \in [0,1]$ besetzt werden, wohingegen die beiden verbleibenden Knoten zwingendermaßen mit Nicht-Terminalsymbolen (d.h. Copulamodellen oder weiteren Mischoperatoren) besetzt werden müssen. Auch Copulamodelle selbst sind dabei syntaktisch beschränkt, da als Parameter nur reelle Zahlen und nicht wiederum andere Copulas auftreten dürfen. Um all diese syntaktischen Beschränkungen umzusetzen ist es nötig, spezielle Crossover-, Mutations- und Shrink-Operatoren für den GP-Algorithmus zu implementieren. Als für die Mischung einzusetzenden Copulamodelle wurden die Normalcopula nach Gl. (\ref{eq:normal_copula}) sowie die Gumbel-, Clayton- und Frank-Copulas nach Gln. (\ref{eq:clayton_copula}$\hdots$ \ref{eq:frank_copula}) gewählt. Zusammenfassend wurde also eine Nichtterminalmenge ${\cal N } = \{ \mathtt{mix},\mathtt{normal},\mathtt{clayton},\mathtt{gumbel},\mathtt{frank} \}$ definiert, Als Terminalsymbole wurden lediglich reelle Zahlen im Intervall $[-10,10]$ definiert.
+
+\subsection{Test des GP-Algorithmus}
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{r|cccccc}
+Copula/Modell & Normal & Gumbel & Clayton & Frank & GP \\ \hline
+Normal & \textbf{71.92} & --- & 160.62 & 97.07 & 72.62 \\
+Gumbel & 143.37 & \textbf{99.74} & 277.62 & 164.51 & 101.46 \\
+Clayton &  267.13 & 311.16 & \textbf{97.09} & 195.20 & 100.26 \\
+Frank & 118.94 & 139.72 & 125.91 & \textbf{114.26} & 113.57 \\
+Mischung & 307.31 & 292.25 & 292.58 & 302.19 & \textbf{105.51} \\ 
+\end{tabular}
+\caption[Werte des $\chi^2$-Tests für verschiedene Copula-Testdatensätze]{Werte des $\chi^2$-Tests für verschiedene Copula-Testdatensätze (linke Spalte) bei Anpassung unterschiedlicher Copulamodelle (obere Zeile).}\label{tab:copula_test}
+\end{table}
+
+
+Um die Funktionsfähigkeit des GP-Algorithmus zur Copulamodellierung zu testen, wurden erneut Datensätze mit bekannter Verteilung generiert. Die Erzeugung der bivariat verteilten Zufallszahlen mit gegebenen Randverteilungen $F_1(x)$ und $F_2(x)$ sowie gegebener Copula $C(u_1,u_2)$ erfolgte dabei nach folgendem Algorithmus.
+
+\begin{alg}[Erzeugung bivariater Zufallszahlen mit der Copulamethode] \label{alg:copula_sample}
+\mbox{}
+\begin{enumerate}
+\item Wähle einen Intervallparameter $du$.
+\item Für $i=1\hdots n$ wiederhole folgenden Ablauf:
+\subitem Erzeuge Pseudozufallszahlen $u_i,v_i$ sowie $h_i$ mit gleichmäßiger Verteilung auf dem $[0,1]$-Intervall.
+\subitem Berechne $p_i=C(u_i+du,v_i+du)+C(u_i,v_i)-C(u_i+du,v_i)-C(u_i,v_i+du)$.
+\subitem Ist $h_i<p_i$, so berechne die Werte $x_i=F_1(u_i)$ und $y_i=F_2(v_i)$ und speichere diese. Ansonsten gehe zu 2. 
+\end{enumerate}
+\end{alg}
+
+Die vorgestellte Methode beinhaltet einen Fehler der Größenordnung $\sqrt{du}$ in der Verteilung der erzeugten Zufallszahlen, $du$ sollte daher möglichst klein gewählt werden.
+
+\smallskip
+
+Für die so generierten Testdatensätze wurden anschließend mittels genetischer Programmierung Copulamodelle erzeugt. Ebenfalls wurden Standardcopulas (Normal-, Clayton-, Gumbel- und Frank-Copula) an die Testdaten angepasst. Zur Bewertung der relativen Güte der generierten Modelle wurden die Testdaten anschließend in Intervalle $\mathbf{I}_{ij}=[0.1\cdot i,0.1\cdot (i+1)]\times [0.1\cdot j,0.1\cdot (j+1)]$ mit $i,j=0\hdots 9$ unterteilt und mittels $\chi^2$-Test mit den aus den geschätzten Modellen zu erwartenden Häufigkeiten verglichen. Der kritische Wert der $\chi^2$-Teststatistik war dabei stets gegeben als $\chi^2(0.95,99)\approx 123.23$.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{data/copula_test_mixture/copula.eps}
+\caption[Verteilung der Quantilwerte generierter Copula-Testdaten]{Verteilung der Quantilwerte der generierten Testdaten (Quadrate). Die durchgezogene Linie zeigt die vorgegebene Wahrscheinlichkeitsverteilung der Testcopula, die gestrichelte Linie die Wahrscheinlichkeitsverteilung der vom GP-Algorithmus gefundenen Copula.} \label{fig:copula_test}
+\end{figure}
+
+
+\bigskip
+
+Tab. \ref{tab:copula_test} zeigt die Ergebnisse dieses Tests, für den jeweils $n=2000$ Variablenwerte gemäß dem in der linken Spalte angegebenen Copula-Modell erzeugt wurden. Wie man sieht, liegen die Teststatistiken der Schätzungen der jeweils passenden Modelle (siehe Zeilenköpfe) zu den Testdaten stets innerhalb des akzeptablen Bereichs der $\chi^2$-Statistik, was natürlich zu erwarten war. Darüber hinaus schafft es der GP-Algorithmus (rechte Spalte), für alle gegebenen Testdatensätze Modelle mit unterkritischem $\chi^2$-Wert zu generieren. Neben elementaren Copulas wurde dabei auch eine Mischcopula der Form \texttt{mix(0.5,normal(u,v,-0.7), mix(0.4,gumbel(u,v,4.0),clayton(u,v,2.0)))} als Testmodell verwendet. Diese kann mit den elementaren Copula-Modellen aus der linken Spalte nicht korrekt beschrieben werden. Der genetische Algorithmus hingegen schafft es, wiederum ein gültiges Modell für diesen Testdatensatz zu erzeugen. Der Test zeigt somit, dass genetische Programmierung für eine große Bandbreite an Daten gültige Copulamodelle erzeugen kann.
+
+\subsection{Evolution der Copulamodelle}
+
+Abb. \ref{fig:copula_evolve} zeigt beispielhaft die Evolution eines Copulamodells im Verlauf des GP-Algorithmus, dargestellt für die oben als Testmodell verwendete Mischcopula. Dabei wird vom Algorithmus zunächst ein recht einfaches Copulamodell erzeugt, welches jedoch bereits Teile der positiven und negativen Korrelationen der Testdaten berücksichtigt (Abb. \ref{fig:copula_evolve}a). Dieses Ausgangsmodell wird anschließend durch Mutation und Crossover weiter verbessert. Dabei werden nach und nach die in den Testdaten vorhandenen Abhängigkeiten in das Modell eingeführt, bis schließlich ein fast optimales Modell entstanden ist (Abb. \ref{fig:copula_evolve}d). Abb. \ref{fig:copula_test} zeigt das endgültige mittels GP generierte Copulamodell sowie das vorgegebene Testmodell zum Vergleich.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{data/copula_test_mixture/copula_rel.eps}
+\caption[Evolution von Copulamodellen bei der genetischen Programmierung]{Die Evolution des Copulamodells beim Ablauf des GP-Algorithmus. Gezeigt ist die Wahrscheinlichkeitsverteilung der besten Copula der (a)1., (b)10., (c) 20. und (d) 30. Generation.} \label{fig:copula_evolve}
+\end{figure}
+
+\bigskip
+
+\subsection{Copula-Modelle für Aktienportfolios}
+
+Im folgenden werden mittels genetischer Programmierung Copulamodelle für Portfolios bestehend aus zwei Einzelaktien/Aktienindizes generiert und auf ihre Qualität hin untersucht. Dazu wurden verschiedene Aktienwerte (\texttt{Freddie Mac, Fannie Mae, Dax, Dow Jones, S \& P, Microsoft, IBM, American Express, Citigroup, BEARX}) ausgewählt und aus diesen wurden anschließend Portfolios aus jeweils zwei Aktien erstellt. Wiederum wurden dabei die entsprechenden Preisdaten von \cite{Yahoo08} bezogen. Zur Aufbereitung der Daten mussten zunächst jeweils korrespondierende Preisänderungen $x_t$ und $y_t$ der beiden ausgewählten Aktien anhand der Datumsangaben in den einzelnen Datensätzen zusammengeführt werden. Mithilfe dieser zusammengeführten Datensätze wurden anschließend die empirischen Verteilungsfunktionen $\hat{F}_1^\leftarrow (x)$ sowie $\hat{F}_2^\leftarrow(y)$ ermittelt. Ausgehend hiervon wurde schließlich ein entsprechender Copuladatensatz durch die Transformation $(x_i,y_i)\to(\hat{F}_1^\leftarrow(x_i),\hat{F}_2^\leftarrow(y_i))$ erzeugt, welcher dann als Grundlage für die zu schätzenden Copulamodelle diente. Es sei angemerkt, dass durch die Verwendung der empirischen Verteilungsfunktionen u.U. Verzerrungen bei der Erzeugung des Copuladatensatzes auftreten können, diese werden im folgenden jedoch als klein angenommen und können bei großen Datensätzen auch oft vernachlässigt werden. 
+
+\smallskip
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{data/copula_freddie_mac_fannie_mae/cdf_copula}
+\caption[Kumulative empirische Wahrscheinlichkeitsfunktion einzelner Aktien eines Portfolios und gemeinsame Preisänderungen]{(a) Kumulative empirische Wahrscheinlichkeitsfunktion der relativen Preisänderungen der Aktienwerte \texttt{Freddie Mac} und \texttt{Fannie Mae}. (b) Verteilung von $(\hat{F}_1^\leftarrow(x_i),\hat{F}_2^\leftarrow(y_i))$, berechnet auf Grundlage der empirischen Verteilungsfunktionen aus (a).} \label{fig:cdf_copula}
+\end{figure}
+
+
+Abb. \ref{fig:cdf_copula} illustriert die beschriebene Vorgehensweise. Abb. \ref{fig:cdf_copula}a zeigt dabei die empirischen Verteilungsfunktionen der Preisänderungen der beiden beispielhaft untersuchten Aktienwerte \texttt{Freddie Mac} und \texttt{Fannie Mae}, Abb. \ref{fig:cdf_copula}b zeigt die hieraus gewonnene Verteilung der entsprechenden Quantilwerte der jeweiligen Preisänderungen. Wie man leicht erkennen kann, weist das untersuchte Portfolio eine sehr starke Korrelation für extreme positive bzw. negative Preisänderungen auf. Solch eine erhöhte Korrelation im Randbereich der Verteilungen ist für die Risikoanalyse von großer Bedeutung und kann mithilfe eines passenden Copulamodells und den vorher besprochenen Risikomaßen abgeschätzt werden. 
+
+\smallskip
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{r|cccccc}
+Copula/Modell & Normal & Gumbel & Clayton & Frank & GP \\ \hline
+\texttt{Freddie Mac} / \texttt{Fannie Mae}  & 739.03 & 350.61 & 922.20 & 426.71 & 129.159 \\
+\texttt{Dax} / \texttt{BEARX} & 192.95 & --- & 934.16 & 942.12 & 98.36  \\
+\texttt{Dax} / \texttt{Dow Jones} & 1160.37 & 180.31 & 358.67 & 295.51 & 135.78 \\
+\texttt{S \& P} / \texttt{Dow Jones} & --- & --- & 1137.81 & 617.64 & 167.17 \\
+\texttt{Microsoft} / \texttt{IBM} & 289.10 & 222.72 & 467.99 & 220.79 & 101.62 \\
+\texttt{Amex} / \texttt{Citigroup} & 474.92 & 369.14 & 778.51 & 477.03 &  208.06 \\
+\texttt{Dow} / \texttt{BEARX} & 3040.43 & 1004.84 & 3033.63 & 3028.25 & 136.27 \\
+\end{tabular}
+\caption[Werte der $\chi^2$-Teststatistik der generierten Copulamodelle für die untersuchten Aktienportfolios]{Werte der $\chi^2$-Teststatistik der generierten Copulamodelle für die untersuchten Aktienportfolios. Die rechte Spalte enthält die Ergebnisse des GP-Algorithmus, die anderen Spalten die Testwerte für die Standardmodelle.} \label{tab:copula_results}
+\end{table}
+
+
+\bigskip
+
+Tab. \ref{tab:copula_results} zeigt die Ergebnisse der durchgeführten Untersuchung. Für alle sechs Portfolios wurden mehrere klassische, einparametrige Copulamodelle angepasst, ebenso wurde ein Copulamodell mithilfe der genetischen Programmierung generiert. Für jedes dieser Modelle wurde der resultierende Wert der $\chi^2$-Statistik angegeben. Wie sich zeigt, weisen alle klassischen Copulamodelle überkritische $\chi^2$-Werte auf. Die mittels genetischer Programmierung erzeugten Modelle hingegen weisen durchweg geringere (jedoch trotzdem teilweise überkritische) $\chi^2$-Werte auf und modellieren die Abhängigkeitsstruktur der untersuchten Aktienportfolios damit weitaus besser als die klassischen Modelle. Vom GP-Algorithmus werden dabei vorwiegend Lösungen generiert, die einer Mischung zwischen einer oder mehreren Normalcopulas mit einer oder mehreren archimedischen Copulas entsprechen. Für das \texttt{Dax / BEARX} Portfolio, welches eine starke negative Korrelation zwischen den beiden Aktienwerten aufweist, enthält die gefundene Lösung \texttt{mix(0.5364, normal(-0.686), mix(0.5364, normal(-0.686)), mix(0.0871, gumbel(4.868, mix(0.8135, mix(0.9846, frank(0.714), normal(0.0)),normal(0.0)))))} mehrere Normalcopulas mit negativer Korrelation sowie eine sehr geringe Beimischung von Copulas mit positiver Korrelation. Der Aktienwert \texttt{BEARX} entspricht dabei einem Fonds, der vorwiegend Short-Positionen enthält und somit eine Antikorrelation zu den meisten Aktienindizes aufweist. Diese Antikorrelation kann im Rahmen der ausgewählten einparametrigen Copulamodelle lediglich durch die Normalcopula modelliert werden, nichts desto trotz können einzelne Eigenschaften der empirischen Verteilung durch die Beimischung von Copulas mit positiver Korrelation besser modelliert werden. Das gefundene Copulamodell für das Portfolio \texttt{Freddie Mac / Fannie Mae}, \texttt{mix(0.8468, normal(0.814), mix(0.3545, mix(0.0109,clayton(6.862),gumbel(7.376)),normal(0.0)))} enthält hingegen lediglich Copulas mit positiver Korrelation und beinhaltet neben Normalcopulas auch Gumbel- bzw. Claytoncopulas als Beimischung. Abbn. \ref{fig:copula_freddie_mac_fannie_mae} und \ref{fig:copula_dow_bearx} zeigen für die beiden Portfolios \texttt{Freddie Mac / Fannie Mae} sowie \texttt{Dow Jones / BEARX} detailliert die Verteilung der Quantilwerte, die Wahrscheinlichkeitsdichte der ermittelten Copula sowie die Verteilung der relativen Preisänderungen der Portfolios. Man beachte bei beiden Werte die große Anzahl der extremen Preisänderungen, welche bspw. durch die konventionelle Modellierung im Rahmen der Portfoliotheorie\cite{Elton06} unter gaußscher Verteilungsannahme nicht erfasst werden könnte und für die eine Risikoanalyse unter Zuhilfenahme eines Copulamodells damit sehr sinnvoll ist.
+
+\smallskip
+
+Eine weitere Stärke des genetischen Verfahrens ist dabei, dass in der Praxis neben den in dieser Arbeit für die Modellierung verwendeten recht einfachen Copulamodellen viele weitere, (gegenenfalls hunderte) ein- und mehrparametrige Copulamodelle berücksichtigt werden können, was die Mächtigkeit des Verfahrens vervielfacht. Daher ist davon auszugehen, dass ein auf Praxisanforderungen zugeschnittenes und entsprechend optimiertes Verfahren der genetischen Programmierung noch weitaus bessere Ergebnisse als die hier vorgestellten liefern kann. 
+
+\subsection{Abschätzung von Risikomaßen}
+
+Aus den generierten Copulamodellen können Risikomaße wie z.B. die Tail-Koeffizienten nach Gln. (\ref{eq:ltd}$\hdots$\ref{eq:utd}) abgeschätzt werden. Da sämtliche generierten Modelle einfache Mischungen einparametriger Copulas sind, können diese Koeffizienten analytisch, aber auch numerisch abgeschätzt werden. Auch hierbei ist es von großem Vorteil, dass die mittels genetischer Programmierung erzeugten Copulamodelle leicht interpretierbar sind. So ist das generierte Copulamodell für das Portfolio \texttt{Microsoft / IBM} beispielsweise gegeben als \texttt{mix(0.3627,normal(0.0), mix(0.5676,frank(6.374), mix(0.0288,gumbel(2.36),gumbel(2.148))))}. Der Upper-Tail-Koeffizient wurde für dieses Modell numerisch abgeschätzt zu $\lambda_u\approx 0.163$. Analytisch kann der Koeffizient auch recht leicht berechnet werden, hierzu ist zu beachten, dass für die Gumbel- und Normalcopula $\lambda_u=0$ sowie für die Clayton-Copula $\lambda_u=2-2^{1/\theta}$ gilt. Damit ergibt sich unter Berücksichtigung der Mischfaktoren ein Wert	von  $\lambda_u=(1-0.3627)\cdot(1-0.567)\cdot(0.0288\cdot(2-2^{1/2.36})+(1-0.0288)\cdot(2-2^{1/2.148}))=0.17$, was recht nahe am numerischen Ergebnis liegt.
+
+
+\begin{figure}[ht!]
+\begin{center}
+(a)\includegraphics{data/copula_freddie_mac_fannie_mae/copula.eps} \\
+(b)\includegraphics{data/copula_freddie_mac_fannie_mae/density.eps}
+\end{center}
+\caption[Quantilwerte und Copulamodell eines Aktienportfolios]{(a) Verteilung der Quantilwerte des Aktienportfolios \texttt{Freddie Mac / Fannie Mae} sowie Wahrscheinlichkeitsverteilung der durch genetische Programmierung gefundenen Copula. (b) Verteilung der relativen Preisänderungen des Portfolios. Man beachte die extremen Ausprägungen.} \label{fig:copula_freddie_mac_fannie_mae}
+\end{figure}
+
+
+\begin{figure}[ht!]
+\begin{center}
+(a)\includegraphics{data/copula_dow_bearx/copula.eps} \\
+(b)\includegraphics{data/copula_dow_bearx/density.eps}
+\end{center}
+\caption[Quantilwerte und Copulamodell eines weiteren Aktienportfolios]{(a) Verteilung der Quantilwerte des Aktienportfolios \texttt{Dow Jones / BEARX} sowie Wahrscheinlichkeitsverteilung der durch genetische Programmierung gefundenen Copula. \texttt{BEARX} (Federated Prudent Bear Fund) enthält Short-Positionen und weist daher eine Anti-Korrelation mit dem Dow Jones auf. (b) Verteilung der relativen Preisänderungen des Portfolios.} \label{fig:copula_dow_bearx}
+\end{figure}
+
+\chapter{Schlussfolgerungen}
+
+Im letzten Kapitel wurde anhand zweier Fallbeispiele gezeigt, wie genetische Programmierung in der Risikoanalyse zum Einsatz kommen kann. Die folgenden Abschnitte sollen das Potential und mögliche Probleme der hierbei verwendeten Verfahren kurz erläutern.
+
+\section{Anwendbarkeit von genetischer Programmierung im Risikomanagement}
+
+Wie sich in dieser Arbeit gezeigt hat, kann genetische Programmierung in mehreren Bereichen der Risikoanalyse erfolgreich eingesetzt werden. Zum einen können die mittels genetischer Programmierung erstellen Modelle des Value at Risk (VaR) sowie des Conditional Value at Risk (CVaR) prinzipiell den von der Praxis verlangten fachlichen Anforderungen genügen und zeigen durchweg eine mit den heute gebräuchlichen Standardmodellen vergleichbare, hohe Qualität.
+
+\smallskip
+
+Der Hauptvorteil eines mittels genetischer Programmierung modellierten VaR/CVaR ist dabei sicherlich die Fähigkeit des GP-Algorithmus, sich auf eventuell auftretende Strukturbrüche und veränderte Eigenschaften der untersuchten Zeitreihe einzustellen und hierauf ''intelligent'' zu reagieren. Im Gegensatz zu vielen parametrischen VaR-Modellen werden dabei fast keine modelltheoretischen Annahmen über die Struktur der zugrunde liegenden Zeitreihe vorausgesetzt. Weiterhin ist es mittels des genetischen Verfahrens möglich, neben den üblichen Zielkriterien für den VaR (Erwartungswert der Anzahl an Überschreitungen, stochastische Unabhängigkeit zwischen einzelnen Überschreitungen) weitere Zielkriterien zu definieren und in die Fitnessfunktion des Algorithmus zu integrieren. Hierdurch können die generierten VaR-Modelle im Hinblick auf fast beliebige Kriterien optimiert werden, was bei konventionellen Verfahren nicht oder nur sehr schwer möglich ist.
+
+\smallskip
+
+Schließlich ist es im Rahmen des GP-Algorithmus überaus einfach, zusätzliche Terminal- und Nichtterminalsymbole zur Modellgenerierung heranzuziehen. Zusätzliche Terminalsymbole könnten dabei, wie vorher bereits ausgeführt z.B. aus Expertenschätzungen gewonnene Maßzahlen bzw. sonstige quantitative Werte jeglicher Natur sein. Eine Einbeziehung solcher zusätzlicher Informationen ist im Rahmen der klassischen VaR-Modellierung nicht oder nur unter großen Schwierigkeiten möglich, im Rahmen der genetischen Programmierung stellt sie jedoch kein Problem dar.
+
+\smallskip
+
+Bei der Modellierung von Copulas hat sich ebenfalls gezeigt, dass eine genetische Programmierung der Standardmodellierung u.U. überlegen sein kann. Auch hier können ohne menschliches Zutun qualitativ hochwertige Modelle erzeugt werden, welche vorher festgelegten Kriterien entsprechen. Dabei können im Prinzip beliebig viele ein- oder mehrparametrige Copulamodelle vom genetischen Algorithmus zu einem Gesamtmodell zusammengeführt werden, was im Rahmen der klassischen Modellierung nur schwer möglich ist. Weiterhin sind die mittels des genetischen Verfahrens erstellen Copulamodelle unmittelbar interpretierbar und erlauben die einfache Berechnung wesentlicher Risikomaße. Durch die Einführung weiterer Fitnesskriterien können die modellierten Copulas weiterhin auf beliebige zusätzliche Eigenschaften hin optimiert werden.
+
+\smallskip
+
+In beiden betrachteten Anwendungsfällen ist davon auszugehen, dass ein für die Praxis ausgelegter und vollständig optimierter GP-Algorithmus unter sorgfältiger Wahl der Terminalsymbole und der Fitnessfunktion noch weitaus bessere Resultate hervorbringen kann. Da weiterhin die für diese Arbeit zur Verfügung stehenden Computerresourcen beschränkt waren, konnten die untersuchten GP-Algorithmen nicht mit den heute in der Praxis gebräuchlichen Populationsgrößen ($\gg 10^6$!) ausgeführt werden. Eine solche Erhöhung der Populationsgrößen würde jedoch mit fast absoluter Sicherheit eine weitere Qualitäts- und Effizienzsteigerung der Verfahren zur Folge haben, weswegen davon ausgegangen werden kann, dass die betrachteten Algorithmen noch ein hohes, unausgeschöpftes Potential besitzen.
+
+\section{Probleme \& Verbesserungsmöglichkeiten}
+
+Problematisch an den hier betrachteten GP-Verfahren ist vor allem die Sensitivität der Ergebnisse im Hinblick auf die gewählte Fitnessfunktion. So schafft es ein sorgfältig entworfener GP-Algorithmus zwar fast mit Sicherheit, eine gegebene Fitnessfunktion über den zur Verfügung stehenden Suchraum zu maximieren, dies garantiert jedoch nicht zwangsläufig die damit einhergehende optimale Lösung des untersuchten Problems. Wäre z.B. im Falle des VaR das verwendete Fitnesskriterium lediglich anhand der Überschreitungen des VaR formuliert, so würde der GP-Algorithmus u.U. Lösungen hervorbringen, die zwar eine korrekte Anzahl an Überschreitungen, jedoch einen viel zu hohen durchschnittlichen Wert des VaR aufweisen könnten. Daher ist die für ein Optimierungsproblem zu nutzende Fitnessfunktion stets mit äußerster Sorgfalt zu wählen.
+
+\smallskip
+
+Je nach der Komplexität des zu lösenden Problems kann es weiterhin zu einer schlechten Effizienz des genetischen Verfahrens kommen, falls die Evolutionsparamter oder der zur Verfügung stehende Satz an Terminal- und Nichtterminalsymbolen nicht optimal gewählt wurde. Generell ist die Komplexität der in dieser Arbeit betrachteten Probleme jedoch überschaubar und stellt für einen gut optimierten GP-Algorithmus kein Problem dar. Trotzdem kann sich die passende Wahl von Terminal- und Nichtterminalsymbolen bei anderen Problemen in der Praxis als schwierig herausstellen.
+
+\smallskip
+
+Verbesserungsmöglichkeiten für den GP-Algorithmus liegen vor allem in der Realisierung der genetischen Operationen (Mutation, Crossover, Reproduktion). So sollte es für den GP-Algorithmus generell möglich sein, von jedem Element des Suchraumes durch die Anwendungen der genetischen Operationen zu jedem anderen Element zu gelangen. Ist dies nicht möglich, so verhält sich der Algorithmus nicht optimal und sucht nur in einem beschränkten Unterraum des gesamten Lösungsraums nach guten Lösungen. Gerade bei syntaktisch eingeschränkten Programmen wie z.B. bei der Copulamodellierung im letzten Kapitel ist es dabei nicht trivial, korrekte genetische Operatoren nach den obigen Erfordernissen zu implementieren. Hierin liegt daher zusätzliches Verbesserungspotential für die Algorithmen.
+
+\appendix
+
+\chapter{Programme \label{sec:appendix_design}}
+
+Zur Durchführung der numerischen Untersuchungen und der GP-Algorithmen im Rahmen dieser Diplomarbeit wurde ein Programmpaket für die genetische Programmierung in der Programmiersprache C++ \cite{Stroustrup00} erstellt. Die folgenden Abschnitte erläutern kurz die einzelnen Elemente dieses Programmpakets und beispielhaft auch dessen Benutzung. Das gesamte Programmpaket umfaßt dabei mehr als 6.000 Zeilen Quelltext und ist in vollständiger Form auf der beiliegenden CD enthalten.
+
+\bigskip 
+
+Alle Programmteile wurden in ISO-C++ geschrieben und können auf jeder konformen Plattform ausgeführt werden (dies schließt u.A. Linux, Unix sowie alle gängigen Windows-Varianten ein). Entsprechende Konfigurationsdateien/Makefiles liegen für Linux/Unix sowie Windows (Microsoft Visual Studio 2008) bei. Bei der Entwicklung des Programms wurde durchgängig auf einen objektorientierten Ansatz zurückgegriffen um die maximale Anpassungsfähigkeit der einzelnen Programmbestandteile zu garantieren. Die Kontrolle der einzelnen Programmteile geschieht über eine eingebettete Skriptsprache\cite{Lua09}, die einen hohen Wiederverwendungswert der geschriebenen Routinen ermöglichen soll.
+
+\section{Klassendiagramm}
+
+Folgende, für die genetische Programmierung relevante Klassen wurden implementiert.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics{figures/uml_class_diagram.1}
+\caption[UML-Klassendiagramm der erstellten Programme]{Vereinfachtes UML-Klassendiagramm der für die genetische Programmierung erstellten Programme.}
+\end{figure}
+
+\begin{itemize}
+\item \toindexi{Klassen!Node}{Node}: Basisklasse für \texttt{Branch}- und \texttt{Leaf}-Klassen. Repräsentiert einen Knoten im Programmbaum des genetischen Programms. Enthält u.a. Prototypfunktionen zur textuellen Ausgabe der Knoteneigenschaften und zur Evaluierung des Funktionswertes des Knotens. Enthält einen Vektor zur Modellierung von Unterknoten.
+\item \toindexi{Klassen!Leaf}{Leaf}: Unterklasse von \texttt{Node}. Modelliert ein Terminal-Symbol bzw. ''Blatt'' des genetischen Programms. Überschreibt die Evaluations- und Ausgabefunktion von \texttt{Node} und enthält als Funktionswert entweder eine numerische Konstante oder einen externen \texttt{float}-Wert, der als Zeiger angegeben werden kann.
+\item \toindexi{Klassen!Branch}{Branch}: Unterklasse von \texttt{Node}. Modelliert ein Nichtterminal-Symbol bzw. einen ''Ast'' des genetischen Programms. Überschreibt die Evaluations- und Ausgabefunktion von \texttt{Node} und enthält mindestens einen Unterknoten. Auf den Unterknoten wird eine bestimmte Operation ausgeführt, deren Ergebnis wird bei der Evaluierung zurückgegeben.
+\item \toindexi{Klassen!Program}{Program}: Basisklasse für ein genetisches Programm. Enthält Prototypfunktionen für die Evaluation der Programmfitness (\texttt{float Fitness()}), für die Ausgabe des Programms in eine Datei (\texttt{void Write(std::string directory,int generation}) sowie für die Durchführung von Crossover-, Mutations- und Shrink-Operationen. Spezifische genetische Programme erben von dieser Klasse und implementieren eigene \texttt{Fitness()} sowie \texttt{Write()}-Funktionen.
+\item \toindexi{Klassen!Population}{Population}: Verwaltet eine Menge von genetischen Programmen und führt die globale Fitnessberechnung und die Selektion einzelner Programme für die Crossover-, Mutations- und Shrink-Operationen durch. Gibt weiterhin Statistiken über relevante Populationsparameter aus und steuert den Ablauf des GP-Algorithmus.
+\end{itemize}
+
+\section{Genetische Programme}
+
+Für die im Rahmen der Diplomarbeit durchgeführten Untersuchungen wurden verschiedene Unterklassen von \texttt{Program} erstellt. Diese Unterklassen werden im folgenden kurz erläutert.
+
+\begin{itemize}
+\item \toindexi{Klassen!Program!VaRProgram}{VaRProgram}: Programm zur Berechnung des Value at Risk für einen Aktienwert oder einen Testdatensatz. Werden bei der Erzeugung keine Parameter angegeben, so wird ein Testdatensatz generiert. Es kann bei der Erzeugung ein Dateiname, ein Spaltenindex für die Datenspalte sowie ein Trennzeichen als Parameter angegeben werden. Beispiel: \texttt{pop.create(p,500,10, program.var, ''data/stocks/amex.csv'',6,'','');} erzeugt eine Population von 500 genetischen VaR-Programmen mit einer durchschnittlichen Länge von 10 und dem zugrunde liegenden Aktienwert von \texttt{American Express}, der sich in einer kommaseparierten Datei befindet deren sechste Spalte den Aktienpreis enthält.
+\item \toindexi{Klassen!Program!ESProgram}{ESProgram}: Programm zur Berechnung des Conditional Value at Risk (CVaR) bzw. Expected Shortfalls (ES). Eingabeparameter ist eine tabulatorseparierte Ausgabedatei einer VaRProgram-Klasse. Beispiel: \texttt{pop.create(p,10000,10,program.es, ''data/var\_dax\_good/best\_17.tsv'');} lädt das Ergebnis des besten Programms der 17. Generation einer VaRProgram-Population für den Aktienindex \texttt{Dax} als Eingabevektor.
+\item \toindexi{Klassen!Program!CopulaProgran}{CopulaProgram}: Programm zur Modellierung von Copulas. Enthält als Eingabeparameter entweder zwei Aktienwerte in der gleichen Syntax wie bei \texttt{VaRProgram}, einen Dateinamen der bereits eine vorher gespeicherte Ausgabedatei des Programms enthält oder überhaupt keinen Parameter, wodurch ein Testdatensatz erzeugt wird. Beispiel: \texttt{pop.create(p,10000,10, program.copula, ''data/stocks/amex.csv'', ''data/stocks/citigroup.csv'',6,'','');}
+\item \toindexi{Klassen!Program!DistributionProgram}{DistributionProgram}: Ähnlich zu \texttt{CopulaProgram}, jedoch zur Modellierung univariater Verteilungen.
+\item \toindexi{Klassen!Program!SymbolicProgram}{SymbolicProgram}: Führt eine symbolische Regression auf einem Testdatensatz durch und dient lediglich zum Testen der genetischen Operatoren der Basisklassen \texttt{Program} und \texttt{Population}.
+\end{itemize}
+
+Sämtliche Programme erzeugen in einem vorgegebenem Ausgabeverzeichnis eine Reihe von Dateien. U.a. werden verschiedene Logbücher angelegt (\texttt{event.log}, \texttt{script.log}, \texttt{error.log}), in denen vom Programm wichtige Informationen wie z.B. aktuelle Populationsparameter, Regressionswerte etc. abgelegt werden können. Weiterhin werden in jedem Schritt des GP-Algorithmus die Dateien \texttt{programs\_xxx.tsv}, \texttt{histo\_xxx.tsv} und \texttt{best\_xxx.tsv} erzeugt (\texttt{xxx} wird durch Nummer der jeweiligen Generation ersetzt). Erstere enthält die textuelle Darstellung aller Programme in der entsprechenden Population, die zweite enthält die aufbereitete Verteilung der Fitnesswerte innerhalb der Population und letztere enthält die programmspezifische Ausgabe des besten Individuums der entsprechenden Population. Weiterhin wird die Datei \texttt{stat.tsv} erzeugt, welche statistische Informationen über die Entwicklung der Programmlänge und der Fitness in Abhängigkeit der Generation enthält. Schließlich enthält die Datei \texttt{script.lua} eine Kopie des Skriptes, welches dem Programm zur Ausführung vorgegeben wurde.
+
+\section{Beispielskript}
+
+Nachfolgend ein Beispielskript, welches eine Population von genetischen Programmen zur Berechnung eines Copulamodells zweier Aktienwerte erstellt und den GP-Algorithmus über 100 Generationen ausführt. Sämtliche Ausgabedateien werden dabei wie oben beschrieben in einem Zielordner gespeichert. Das aufgeführte Skript kann als Muster für die Ausführung eigener Skripte herangezogen werden.
+
+\begin{verbatim}
+p=pop.new();
+
+dir="data/copula_dow_bearx";
+
+pop.output_dir(p,dir);
+
+logger.reopen(dir);
+
+print("Mutation rate:",pop.mutation_rate(p,0.05),"\n");
+print("Shrink rate:",pop.shrink_rate(p,0.025),"\n");
+print("Crossover size:",pop.crossover_size(p,0.2),"\n");
+print("Tournament size:",pop.tournament_size(p,6),"\n");
+
+pop.create(p,1000,10,program.copula, 										                        	->
+"data/stocks/dow.csv", "data/stocks/bearx.csv",6,",");
+pop.run(p,100);
+exit(0);
+\end{verbatim}
+
+\bibliographystyle{apalike}
+
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+
+\bibliography{diplomarbeit_bwl}
+
+\addcontentsline{toc}{chapter}{Index}
+
+\printindex
+
+\addchap{Danksagung}
+
+Ich danke zunächst Herrn Prof. \textbf{Michael Merz} für die Betreuung der Diplomarbeit und für die interessanten Diskussionen mit ihm. Weiterhin danke ich allen Mitarbeitern am Lehrstuhl für Statistik und empirische Wirtschaftsforschung für die gute Betreuung während meines Studiums.
+
+\bigskip
+
+Der \textbf{Stiftung der Deutschen Wirtschaft (SDW)} danke ich für die großzügige Förderung meines Physik- und BWL-Studiums und für die zahlreichen interessanten Seminare und Veranstaltungen.
+
+\bigskip
+
+Meinen Eltern \textbf{Bernadette} und \textbf{Richard} danke ich für die Unterstützung meines Studiums sowie für ihren Beistand und das Verständnis, das sie mir in allen Lebenslagen entgegen brachten.
+
+\newpage
+
+\pagestyle{empty}
+
+{\Huge Erklärung}
+
+\bigskip
+
+Hiermit versichere ich an Eides statt, dass ich die vorliegende Arbeit selbständig ohne unerlaubte fremde Hilfe und ohne
+Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Alle Stellen, die wörtlich oder sinngemäß aus Veröffentlichungen oder aus anderweitigen fremden Äußerungen entnommen worden sind, habe ich als solche einzeln kenntlich gemacht.
+
+\bigskip
+
+Tübingen, \today
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+(Andreas Dewes)
+
+\end{document}

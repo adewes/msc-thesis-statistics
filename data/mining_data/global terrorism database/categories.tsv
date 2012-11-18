@@ -1,0 +1,150 @@
+0_CASEID_0
+1_CODER_1
+2_EVENT_ID_2
+3_YEAR_3
+4_MONTH_4
+5_DAY_5
+6_APPROXIMATE_DATE_6	 	5	June 1-3,1999	On or before June 16, 1999	June 25-27, 1999	On or before June 11, 1999	April 1998	February 23 or 24, 2002	Overnight on February 27th/February 28th, 2002	On or around June 22, 1999	Late December 2001	18	April 3-5, 1999	April 4-5, 1999	7	On or before June 20, 1999	On or before June 10, 1999	On or before February 16, 2000.	Within the first 10 days of the month	2	May 4-5, 2007	9	10	On or before October 18, 2000	11	June 1998	Late November 1998	6	On or before June 9, 1999	On or around June 11, 1999	March 23 or 24, 2003
+7_EXTENDED_INCID_7	No	Yes	Unknown
+8_DATE_RESOLUTION_8	 	Unknown	10	6	5	11	3	7	8	9	4	1	12	2	37943
+9_REGION_10	South Asia	Middle East & North Africa	Sub-Saharan Africa	Russia & the Newly Independent States (NIS)	Southeast Asia	East Asia	Western Europe	North America	South America	Eastern Europe	Central America & Caribbean	Central Asia	Australasia & Oceania
+10_VICINITY__13	No	Yes	 
+11_LOCATIONA_14	 	Masked
+12_LOCATIONB_15	 	Masked
+13_GEO_CODES_16
+14_GEO_CODES0_17
+15_INCID_SUMMARYA_18	Masked
+16_INCID_SUMMARYB_19	Masked	 
+17_INCID_SUMMARYC_20	 	Masked
+18_INCID_SUMMARYD_21	 	Masked
+19_INCID_SUMMARYE_22	 	Masked
+20_INCID_SUMMARYF_23	 	Masked
+21_INCID_SUMMARYG_24	 	Masked
+22_INCID_SUMMARYH_25	 	Masked
+23_CRITERION1_26	Yes	No	 Yes
+24_CRITERION2_27	No	Yes
+25_CRITERION3_28	Yes	No
+26_DOUBT_TERRORISM_29	No	Yes
+27_ALT_DESIGNATION_30	 	Internecine Conflict Action	Purely Criminal Act	Insurgency/Guerilla Action	Mass Murder	Accident
+28_MULT_INCIDENT_31	No	Yes	 
+29_MULTI_PARTY_32	No	Yes	 
+30_SUCCESSFUL_33	Yes	Unknown	No
+31_SUICIDE_ATTACK__34	No	Yes	 
+32_ATTACK_TYPE_35	Basic Assault	Bombing	Kidnapping	Armed Intrusion	Arson	Assassination	Mass Disruption	Hijacking	Armed Assault	Sabotage	Other	Assasination	Maiming	CBRN attack	Bombing/Explosion	Basic Attack	 	Unknown
+33_ATTACK_TYPE0_36	Armed Assault	Unknown	Bombing/Explosion	Hostage taking (Kidnapping)	Facility / Infrastructure Attack	Assassination	Hijacking	 	Hostage taking (Barricade Incident)	Basic Assault
+34_ADD_ATTACK_TYPE_37	No	Yes	 
+35_SEC_ATTACK_TYPE_38	 	Basic Assault	Kidnapping	Assassination	Arson	No	Bombing	Mass Disruption	Armed Intrusion	Sabotage	Maiming	Other	CBRN attack	Hijacking	Armed Assault
+36_SEC_ATTACK_TYPE0_39	 	Unknown	Hostage taking (Kidnapping)	Armed Assault	Assassination	Bombing/Explosion	Facility / Infrastructure Attack	Hostage taking (Barricade Incident)	Hijacking
+37_TRD_ATTACK_TYPE_40	 	Basic Assault	Kidnapping	Other	Arson	No	Bombing	Hijacking	Sabotage	Armed Intrusion	Assassination
+38_TRD_ATTACK_TYPE0_41	 	Unknown	Hostage taking (Kidnapping)	Facility / Infrastructure Attack	Armed Assault	Bombing/Explosion	Hijacking	Assassination
+39_TARGET_TYPE_42	Military	Private Citizens & Property	Police	Government (General)	Other	Educational Institution	Airports & Airlines	NGO	Business	Utilities	Journalists & Media	Religious Figures/Institutions	Transportation	Maritime (includes Ports and Maritime facilities)	Transportation (other than aviation)	Abortion Related	Government (Diplomatic)	Unknown	Tourists	Telecommunication	Terrorists	Agriculture	Maritime	Food or Water Supply	Domestic Business	Government (diplomatic)	Government
+40_TARGET_ENTITY_43	Police/Military	Indiscriminate civilians / non-combatants	US Police/US Military	Other--Non US	Government	International	Transportation	Government (General)	Military/Police	US Business	Utilities	Foreign Business	Media	Domestic Business	Religious Figures/Institutions	Political Party	US Other	Diplomat	Unknown	US Indiscriminate civilians / non-combatants	Business	US Diplomat	US Government	Tourists	 	Private Citizens & Property	US Utilities	US Media	US Religious Figures/Institutions	Military	NGO	US Embassy
+41_NAME_OF_ENTITY_44	Masked	 
+42_SPECIFIC_TARGETA_45	Masked	 
+43_SPECIFIC_TARGETB_46	 	Masked
+44_ADD_TARGETS_48	No	Yes	 
+45_SEC_TARGET_TYPE_49	 	Private Citizens & Property	Media	NGO	Transportation (other than aviation)	Police	Military	Religious Figures/Institutions	Business	Government (Diplomatic)	Tourists	Government (General)	Utilities	Other	Educational Institution	Journalists & Media	Telecommunication	Maritime	Food or Water Supply	Indiscriminate civilians / non-combatants	Terrorists	Maritime (includes Ports and Maritime facilities)	Transportation	Unknown
+46_SEC_TARGETENTITY_50	 	Indiscriminate civilians / non-combatants	Journalists & Media	International	Transportation	Police/Military	Religious Figures/Institutions	Foreign Business	Domestic Business	US Diplomat	Military/Police	US Police/US Military	Government	Utilities	Other--Non US	Other	Diplomat	Media	US Indiscriminate civilians / non-combatants	US Religious Figures/Institutions	Political Party	Tourists	`	US Government	Unknown	US Business	Civilians	Indiscriminate citizens	Business
+47_SEC_ENTITY_NAME_51	 	Masked
+48_SEC_SPEC_TARGET_52	 	Masked
+49_SEC_NATIONALITY_53	 	Sudan	Georgia	United Kingdom	Nepal	Indonesia	United States	Yemen	United States of America	Uganda	Turkey	Multiple	Iraq	Egypt	Algeria	Spain	France	India	Colombia	Switzerland	Unknown	Northern Ireland	Saudi Arabia	Russian Federation	Nicaragua	Greece	Thailand	Australia	Philippines	Malaysia	Pakistan	Kyrgyzstan	China	Ireland	Northen Ireland	Angola	Burundi	Italy	Congo	A bus belonging to the [transport company]	Portugal	Namibia	Venezuela	Senegal	Israel	Sri Lanka	Bangladesh	Honduras	Nigeria	Tajikistan	Kenya	Croatia	Afghanistan	Belgium	Turkish	Bulgaria	Democratic Republic of Congo	Federal Republic of Yugoslavia (FRY)	CRPF officers	Iran	Guinea	Cote D’Ivoire	Macedonia	Norway	Togo	Zimbabwe	Belarus	Lebanon	Ukraine	Sierra Leone	Germany (West)	Bolivia	Cambodia	Bosnia and Herzegovina	El Salvador	Myanmar	Uzbekistan	Albania	Peru	Netherlands	Ethiopia	New Zealand	South Africa	Armenia
+50_TRD_TARGET_TYPE_54	 	Private Citizens & Property	Military	Government (General)	Telecommunication	Domestic Business	Government (Diplomatic)	Business	Transportation (other than aviation)	Police	NGO	No	Other	Tourists	Yes	Utilities	Airports & Airlines	Journalists & Media
+51_TRD_TARGETENTITY_55	 	Indiscriminate civilians / non-combatants	Police/Military	Government	Domestic Business	Transportation	Diplomat	US Police/US Military	Media	Foreign Business	International	Utilities	Other--Non US
+52_TRD_ENTITY_NAME_56	 	Masked
+53_TRD_SPEC_TARGET_57	 	Masked
+54_TRD_NATIONALITY_58	 	Sudan	Georgia	Nepal	Turkey	India	Colombia	United Kingdom	United States of America	Unknown	Philippines	Spain	Congo	Algeria	Namibia	Russian Federation	Bangladesh	Nigeria	Kenya	Ethiopia	Burundi	Australia	Japan	Multiple	Uganda	Federal Republic of Yugoslavia (FRY)	Norway	Ivory Coast	Indonesia	Iraq	Sri Lanka	Angola	Pakistan	South Korea	France	Canada	Italy	New Zealand	Somalia	Venezuela	Iran	Palestine	South Africa
+55_PERP_IND_NAMES_60	 	Masked
+56_PERP_GTYPE_61
+57_PERP_GSTYPE_62
+58_IDEO_INFLU_63
+59_ADD_PERP_GROUP_64	No	Yes	 
+60_SEC_PERP_GNAME_65	 	Forest Brothers	Islamic Army in Iraq (al-Jaish al-Islami fi al-Iraq)	Jihad Martyr's Companies in Iraq	Fuerzas Armadas Revolucionarias de Colombia (FARC)	National Liberation Army (NLA)	United Liberation Front of Assam	National Democratic Front of Bodoland (NDFB)	United People's Democratic Solidarity (UPDS)	Dima Halao Daoga (DHD)	Fighting Guerrillas of May	Revolutionaries of the Streets	Al-Qa`ida	Individual	Abu Sayyaf Group (ASG)	Moro Islamic Liberation Front (MILF)	Ulster Volunteer Force (UVF)	Council for the Defense of Democracy - Forces for the Defense of Democracy (CNDD-FDD)	Popular Front for the Liberation of Palestine (PLFP)	Hutu Rebels	Aitarak Militia	Oromo Liberation Front	Armed Forces Revolutionary Council (AFRC)	Al-Fatah	HAMAS	Saraya al Quds	Palestinian Islamic Jihad (PIJ)	Al Aqsa Martyrs' Brigades	Al-Aqsa Martyrs Brigade	White Wolves	Free Aceh Movement (GAM)	Hizb-ul-Mujahidin (HM)	al-Badr	Harkat-ul-Ansar	Jamaat-ul Mujahideen	Harakat ul-Mujahidin (HuM)	Jaysh-e Muhammad (Army of Muhammad)	Lashkar-e-Taiba (LeT)	Al-Mansurian [LeT Front]	Al-Madina [LeT Front]	Harkatul Jihad-e-Islami	Jaish-e-Mohammad	Tehreek-e-Jehad-e-Islami	Al-Mansoorian	Lashkar-e Taiba	Taliban	Hezb-e-Islami	Unknown	Lashkar-e-Fidayan-e-Islam	People's Revolutionary Militias (MRP)	Islamic Resistance (Hamas)	Izz-al-Din al-Qassam Brigades	Armed Islamic Group (GIA)	Group of Guerilla Combatants of Jose Maria Morelos y Pavon (CGNJMMP)	Nationalsocialistisk front (NSF)	Fatah	Aksa Martyr's Brigade	al-Quds Brigades	Asif Raza Commandoes	Moro National Liberation Front (MNLF)	New People's Army (NPA)
+61_SEC_PERP_GTYPE_66
+62_SEC_PERP_GSTYPE_67
+63_SEC_IDEO_INFLU_68
+64_TRD_PERP_GNAME_69	 	17	Jemaah Islamiyah	Al-Aqsa Martyrs Brigade	Harkatul Jihad-e-Islami	Jamaat-ul Mujahideen	Al-Barq	Gulbuddin Hekmatyar group	Hizb-e-Islami	Unknown	Achik National Volunteer Council (ANVC)	Palestinian Islamic Jihad (PIJ)	Fuerzas Armadas Revolucionarias de Colombia (FARC)	Popular Front for the Liberation of Palestine (PLFP)	Marxist Democratic Front for the Liberation of Palestine	Abu Ali Mustafa Brigades	Tanzim
+65_TRD_PERP_GTYPE_70
+66_TRD_PERP_GSTYPE_71
+67_TRD_IDEO_INFLU_72
+68_SPEC_MOTIVEA_73	Masked	 
+69_SPEC_MOTIVEB_74	 	Masked
+70_SPEC_MOTIVEC_75	 	Masked
+71_SUSP_UNCONFIRM_76	No	Yes	 
+72_NUM_PERPS_77
+73_NUM_MALE_PERPS_78
+74_NUM_FEMALE_PERPS_79
+75_NUM_PERPS_CAPT_80
+76_CLAIM_RESP_81	No	Yes	Unknown
+77_MODE_CLAIM_82	 	Other	Call (post-incident)	Unknown	Personal claim	Posted to website, blog, etc.	Personal Claim	Call (pre-incident)	Letter	Note left at scene	Video	E-mail	Statement (Post incident)	Telephone
+78_CLAIM_CONFIRMED__83	 	Yes	Unknown	No
+79_ADD_CLAIM_RESP_84	 	No	Yes	Unknown
+80_SEC_CLAIM_RESP_85	 	No	Yes	Unknown
+81_SEC_MODE_CLAIM_86	 	Posted to website, blog, etc.	Call (post-incident)	Unknown	Other	Personal Claim	Letter	E-mail
+82_SEC_CLAIMCONFIRM_87	 	No	Unknown	Yes
+83_TRD_CLAIM_RESP_88	 	No	Yes	Unknown
+84_TRD_MODE_CLAIM_89	 	Call (post-incident)	Unknown
+85_TRD_CLAIMCONFIRM_90	 	No	Unknown
+86_COMPETING_91	 	No	Yes	Unknown
+87_WEAPON_TYPE_92	Firearms	Unknown	Explosives/Bombs/Dynamite	Incendiary	Melee	Other	Vehicle (not to include vehicle-borne explosives, i.e., car or truck bombs)	Fake Weapons	Sabotage Equipment	Chemical	Biological
+88_WEAPON_SUB_TYPE_93	Unknown Gun Type	 	Projectile (rockets, mortars, RPGs, etc.)	Grenades	Arson/fire	Land mines	Unknown Explosive Type	Automatic Weapons	Suicide (carried bodily by human being)	Other Gun Type	Other Explosive Type	Rifle/Shotgun (non-automatic)	Handguns	Remote trigger	Unknown	Knives	Hands, Feet, Fists	Vehicle	Letter bombs	Time Fuse	Time fuse	Gasoline or Alcohol	Unknown Bomb Type	Sharp Objects Other Than Knives	Blunt Object	Poisoning	Grenade	Pressure Trigger	Pressure trigger	Firearms	Land Mine	Rockets	Land mine	Other	Handgun	Unknown Firearms	unknown	Acid
+89_ADD_WEAPONS_94	No	Yes	 
+90_SEC_WEAPON_TYPE_95	 	Firearms	Explosives/Bombs/Dynamite	Incendiary	Melee	Other	Unknown	Vehicle (not to include vehicle-borne explosives, i.e., car or truck bombs)	Sabotage Equipment	`	Fake Weapons	Chemical
+91_SEC_WEAPON_STYPE_96	 	Automatic Weapons	Unknown Gun Type	Grenades	Arson/fire	Rifle/Shotgun (non-automatic)	Knives	Rope or Other Strangling Devises	Other Explosive Type	Unknown Explosive Type	Projectile (rockets, mortars, RPGs, etc.)	Blunt Object	Other Gun Type	Gasoline or Alcohol	Handguns	Land mines	Unknown Explosive Device	Remote trigger	Grenade	Vehicle	Hands, Feet, Fists	Sharp Objects Other Than Knives	Suicide (carried bodily by human being)	Unknown	Unknown Gun type	Plane	Time fuse	Land mine	Handgun
+92_TRD_WEAPON_TYPE_97	 	Explosives/Bombs/Dynamite	Firearms	Other	Incendiary	Melee	No	Unknown
+93_TRD_WEAPON_STYPE_98	 	Grenades	Handguns	Unknown Explosive Type	Knives	Automatic Weapons	Other Explosive Type	Suicide (carried bodily by human being)	Blunt Object	Arson/fire	Rifle/Shotgun (non-automatic)	Hands, Feet, Fists	Projectile (rockets, mortars, RPGs, etc.)	Other Gun Type	Sharp Objects Other Than Knives	Gasoline or Alcohol	Unknown Gun Type	Land mines
+94_WEAPON_DETAILSA_99	 	Masked
+95_WEAPON_DETAILSB_100	 	Masked
+96_WEAPON_DETAILSC_101	 	Masked
+97_NUM_FATAL_102
+98_NUM_US_FATAL_103
+99_NUM_PERP_FATAL_104
+100_NUM_INJUR_105
+101_NUM_US_INJUR_106
+102_NUM_PERPS_INJUR_107
+103_PSYCHOSOCIAL_108	Minor	Moderate	None	Unknown	Major	 
+104_PROPERTY_DAMAGE__109	No	Yes	Unknown	Minor	no	yes	 
+105_EXTENT_PDAMAGE_110	 	Uncertain	Major (likely >$1 million but <$1 billion)	Minor (likely <$1 million)	Unknown	Minor	Catastrophic (likely >$1 billion)	uncertain
+106_VALUE_PDAMAGE_111	 	Unknown	$111000-$133000	$3 million	One billion pesos (approximately $513,000).	$1.5 million	At least $1,000,000	12	Approximately $132,000	$2.9 million	366000	10	K250,000 (approximately $86)	1.2e+007	10000	$3 Million; Source: [website]	$12 million+ (estimate, depends on specific model: [website])	3300	$73 million	$6.6 million	250	$1,000-$1,200	6200	8000	100000	400000	$1 million	500000	Approximately $13,200	157000	60000	Between $500,000 and $1,000,000 (reported as 1.5 billion Colombian pesos).	1500	3e+006	3.5e+008	70333	92590	5500
+107_PDAMAGE_COMMENTA_112	 	Masked
+108_PDAMAGE_COMMENTB_113	 	Masked
+109_PDAMAGE_COMMENTC_114	 	Masked
+110_PDAMAGE_COMMENTD_115	 	Masked
+111_PDAMAGE_COMMENTE_116	 	Masked
+112_HOST_KIDNAP_117	No	Yes
+113_NUM_KIDNAP_HOS_118
+114_NUM_USKIDNAP_HOS_119
+115_HOURS_120
+116_DAYS_121	 	-99	3	4	1	-106	2	27	8	12	-105	-100	9	7	13	11	311	10	24	370	64	34	150	112	1474	36	15	14	197	68	360	25	23	5	-107	43	-104	18	17	450	67	138	44	21	71	113	-103	42	33	65	22	16	30	6	-101	-102	228
+117_DIVERTED_122	 	Djibouti	Unknown	India	Tanzania	Azerbaijan	Saudi Arabia	Sudan	Uzbekistan	Colombia	Philippines	Russian Federation	Angola	Iraq	Gambia
+118_RESOLUTION_123	 	Djibouti	Unknown	Afghanistan	India	Israel	Jordan	Saudi Arabia	United Kingdom	Philippines	Russian Federation	Iraq
+119_RANSOM_DEMANDED__124	 	No	Yes	Unknown
+120_AMNT_DEMAND_125	 	Unknown	350000	Four Billion Rupee ($476,190 Dollars)	60000	1e+006	5	$15 million	$200 million (U.S.), the body of a dead comrade, and the release of a Muslim cleric and 35 other militants held in Indian jails.	8100	62	50000	-99	$5 million	No	400000	$2 million	Unspecified	50	300000	780000	$20,000-$200,000	$1 million dollars	$100,000 in Rubles (621,000)	0	P50,000	212800	$13 Million	$1.6 million	$26 million	25000	10	2000	2.5e+006	300	80000	$30 Million	5e+006	160
+121_AMNT_DEMAND_US_126	 	0	60000	Unknown	$15 million	None	-99	400000	Unspecified	300000	$20,000-$200,000	80000
+122_AMNT_PAIDA_127	 	Unknown	0	-99	They settled for the release of three prominent militants: [indiv's name], [indiv's name], and [indiv's name]. One of the released was a cleric who leads a group seeking independence for Indian-held K	48000	Unspecified	10000	$100,000 in Rubles (621,000)	None	$26 million	34000	25000	10	$12,000 (P700,000)
+123_AMNT_PAIDB_128	 	ashmir.
+124_AMNT_PAID_US_129	 	0	Unknown	None	-99	48000	Unspecified	10000	34000
+125_RANSOM_NOTESA_130	 	Masked
+126_RANSOM_NOTESB_131	 	Masked
+127_OUTCOME_132	 	Unknown	Combination	Hostage(s) released by perpetrators	Hostages killed (not during rescue attempt)	Hostages escaped (not during rescue attempt)	Successful rescue	Hostages killed (not during rescue attempt).	Attempted rescue
+128_NUM_REL_ESC_RES_133	 	-99	7	4	0	1	2	3	91	95	38	26	27	15	92	17	6	188	11	10	21	12	61	8	14	13	50	58	144	  	16	5	496	9	3.5	29	97	172	104	183	151	90	34	22	856	83	750	40	25	230	24	70	136	64	39	165	130	81	105
+129_ADD_NOTESA_134	 	Masked
+130_ADD_NOTESB_135	Masked	 
+131_ADD_NOTESC_136	 	Masked
+132_ADD_NOTESD_137	 	Masked
+133_ADD_NOTESE_138	 	Masked
+134_ADD_NOTESF_139	 	Masked
+135_ADD_NOTESG_140	 	Masked
+136_ADD_NOTESH_141	 	Masked
+137_NAME_OF_SOURCE_142	Masked	 
+138_SOURCE_PUB_DATE_143
+139_FULL_CITATIONA_144	Masked
+140_FULL_CITATIONB_145	 	Masked
+141_NAME_SEC_SOURCE_146	 	Masked
+142_SEC_PUB_DATE_147	 	1	10	7	6	3	11	8	2	4	5	37112	9	12	38278	38285	38291	38331	37133	37216	37127	37947	37995	38332	37117	37037	37395	38222	38333	37223	38001	37115	37953	37289	37118	37219	37988	37989	38025	38086	38091	38194	38329	38085	37779	38226	37944	38283	38225	38289	38279	38351	37777	37114	38228	37220	38292	38327	38290
+143_SEC_FULL_CITA_148	 	Masked
+144_SEC_FULL_CITB_149	 	Masked
+145_NAME_TRD_SOURCE_150	 	Masked
+146_TRD_PUB_DATE_151	 	1	10	7	6	3	8	4	37112	9	2	11	12	38278	38285	38290	5	37132	37219	37127	38331	37116	37395	38291	37223	37115	37955	37118	37987	38086	38092	38195	38085	37779	38226	37126	38351	37778	37113	38228	37221	38292	37111
+147_TRD_FULL_CITA_152	 	Masked
+148_TRD_FULL_CITB_153	 	Masked
+149_PREVAILING_154	Masked	 

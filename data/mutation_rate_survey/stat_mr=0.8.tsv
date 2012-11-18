@@ -1,0 +1,40 @@
+#Generation	Deleted programs	Maximum size	Minimum size	Average size	Maximum fitness	Minimum fitness	Average fitness	Best program
+1	913	87	1	4.01034	-0.0487064	-79.76	-2.38962	 avg(max,mu_tot) 
+2	528	87	1	5.08034	-0.0451074	-61.7562	-1.89207	  ma_sigma^2 / log(sigma)  
+3	545	91	1	6.12004	-0.0451074	-73.9286	-1.61419	  ma_sigma^2 / log(sigma)  
+4	584	95	1	6.93638	-0.0451074	-50.8295	-1.44345	  ma_sigma^2 / log(sigma)  
+5	589	100	1	7.85942	-0.0461977	-64.6833	-1.38877	 mix( mix(ma|sigma_tot,max) | sqrt(sigma_t) , log(-3.024) ) 
+6	570	92	1	8.62492	-0.0461977	-68.0366	-1.33206	 mix( mix(ma|sigma_tot,max) | sqrt(sigma_t) , log(-3.024) ) 
+7	629	92	1	9.45726	-0.0445901	-79.2442	-1.27613	  mix( 0.608+sigma |ma_sigma, sigma_tot*min_tot ) ^2 
+8	569	97	1	10.3864	-0.0451897	-39.0709	-1.31186	   min(sigma, max(max,mu_tot) ) + min_tot*2.81  * sqrt(sigma_t)  
+9	617	97	1	11.0708	-0.0452669	-30.7087	-1.24629	  mix(   avg( log(-9.696) , mu_tot/-2.638 ) -ma_sigma ^2 | max(sigma_t,max_tot) , mix(max_tot|max_tot,max_tot) ) * max(4.158,sigma)  
+10	622	104	1	11.9614	-0.0445901	-75.3912	-1.31797	  mix( 0.608+sigma |ma_sigma, sigma_tot* exp( min(max,min_tot) )  ) ^2 
+11	614	104	1	12.631	-0.0445901	-56.7221	-1.28722	  mix( 0.608+sigma |ma_sigma, sigma_tot* exp( min(max,max) )  ) ^2 
+12	594	104	1	13.541	-0.0445901	-83.4563	-1.26271	  mix( 0.608+sigma |ma_sigma, sigma_tot* min( min(max,max) ,sigma_t)  ) ^2 
+13	560	104	1	14.1942	-0.0462653	-66.1465	-1.26428	 max* sqrt( mix( min( mix( avg(min_tot,ma_sigma) | max(min_tot,1.174) , max(  min(5.904,mu_tot) + sqrt(ma)  ,sigma) ) , sqrt(7.53) ) | log(min_tot) ,ma_sigma) )  
+14	607	105	1	14.9439	-0.0472353	-72.6295	-1.25604	 avg( min(max,sigma) , max( min( max(sigma_t,min_tot) ,  log( log(  avg(sigma_tot,sigma_t) * sqrt( avg(sigma_t,ma) )  ) ) ^2 ) , sqrt(-8.714) ) ) 
+15	619	110	1	15.6513	-0.04486	-76.0693	-1.25387	 log(  sigma_t-max_tot ^  sqrt( avg( min( ma_sigma^2 ,6.274) ,ma) ) * avg(max, avg( max+min ,sigma) )   ) 
+16	577	105	1	16.3208	-0.04486	-83.9283	-1.22026	 log(  sigma_t-max_tot ^  sqrt( avg( min( ma_sigma^2 ,6.274) ,ma) ) * avg(max, avg( max+min ,sigma) )   ) 
+17	608	98	1	17.049	-0.0454909	-61.6603	-1.21457	 mix( avg( avg( min_tot+ min(  mix( exp(max_tot) | 8.078*sigma , max(max_tot,ma_sigma) ) * max_tot+max  , ma_sigma+max_tot )  ,   log( min( avg( max( min(8.466,sigma_t) , sqrt( log( min(max,    min_tot^ma_sigma ^ max(0.794,ma_sigma)  -max_tot ^sigma ) ) ) ) ,max) ,min_tot) ) -max_tot ^2 ) , log(3.934) ) | ma_sigma^2 , ma/-8.588 ) 
+18	586	105	1	17.7828	-0.0464866	-81.9785	-1.21387	 avg( min( min(ma_sigma,sigma_t) , mix( mu_tot^min_tot |  exp(-4.39) - max( mix(sigma|ma_sigma,ma) , min( -2.142*min_tot , mix(1.776|6.942,mu_tot) ) )  ,mu_tot) ) , avg(min,sigma_tot) ) 
+19	583	109	1	18.4589	-0.0464436	-50.0286	-1.2113	  max(max,min_tot) *  sqrt( avg( mu_tot* sqrt( ma^-5.698 )  ,sigma) ) + sqrt(max_tot)   
+20	576	113	1	19.3015	-0.045736	-60.6577	-1.11633	  mix( min( max(max_tot,-7.354) ,min) | -4.78^2 , min+ma ) * max(ma,max_tot)  
+21	614	117	1	20.074	-0.0446934	-65.3535	-1.17523	 avg( mix( log(max_tot) | mix( ma_sigma^2.964 | avg(sigma_t, sigma_tot^0.576 ) , sigma_t+min_tot ) , ma_sigma^2 ) , max*sigma ) 
+22	584	117	1	20.5297	-0.0446934	-86.4862	-1.1806	 avg( mix( log(max_tot) | mix( ma_sigma^2.964 | avg(sigma_t, sigma_tot^0.576 ) , sigma_t+min_tot ) , ma_sigma^2 ) , max*sigma ) 
+23	573	117	1	21.2626	-0.0460313	-60.276	-1.15676	 min( max(min,3.684) ,  mix( sqrt(ma_sigma) | min(ma_sigma,0.46) , min( avg( min+max , mix( exp(mu_tot) |  min(  max(-0.944,  sigma_tot^-2.13 ^2 ) +  sqrt( max( max(  exp(min) *max_tot ,sigma_tot) ,min_tot) ) +min_tot  , mix(min|1.086,mu_tot) ) + exp(max)  , max(min_tot,min_tot) ) ) , mix(ma|1.758,max_tot) ) ) * ma_sigma+ma  ) 
+24	597	120	1	21.5967	-0.0460313	-88.1178	-1.15973	 min( max(min,3.684) ,  mix( sqrt(ma_sigma) | min(ma_sigma,0.46) , min( avg( min+max , mix( exp(mu_tot) |  min(  max(-0.944,  sigma_tot^-2.13 ^2 ) +  sqrt( max( max(  exp(min) *max_tot ,sigma_tot) ,min_tot) ) +min_tot  , mix(min|1.086,mu_tot) ) + exp(max)  , max(min_tot,min_tot) ) ) , mix(ma|1.758,max_tot) ) ) * ma_sigma+ma  ) 
+25	563	124	1	22.173	-0.0452859	-64.4583	-1.16415	 avg( ma_sigma^2 , min( ma_sigma-mu_tot , min( max*ma_sigma , sqrt(ma) ) ) ) 
+26	617	127	1	22.9315	-0.0452859	-85.2735	-1.1481	 avg( ma_sigma^2 , min( ma_sigma-mu_tot , min( max*ma_sigma , sqrt(ma) ) ) ) 
+27	588	129	1	23.4573	-0.0459832	-86.1521	-1.17391	   min( sqrt( ma_sigma* sigma-ma  ) ,0.308) ^2 * exp(min_tot)  
+28	563	135	1	24.1788	-0.0457478	-69.1477	-1.1231	  avg( min( log( avg(9.224,max) ) ,5.314) ,  max( avg(ma_sigma,sigma) , mix( avg(min_tot,ma_sigma) | max(ma,max) ,max) ) ^2 ) * ma_sigma^2  
+29	587	139	1	24.6328	-0.0457478	-79.1515	-1.18451	  avg( min( log( avg(9.224,max) ) ,5.314) ,  max( avg(ma_sigma,sigma) , mix( avg(min_tot,ma_sigma) | max(ma,max) ,max) ) ^2 ) * ma_sigma^2  
+30	561	139	1	25.2902	-0.0458934	-53.996	-1.15148	 max( sigma_tot-max_tot ,   max( mix(min_tot|-9.842,max) ,  sqrt(  max( avg( log(-1.608) , log( max( sqrt(sigma_tot) ,sigma) ) ) ,sigma_t) -   min(-3.78,sigma_tot) - max_tot/min_tot  / log( sqrt(sigma) )   ) ^2 ) ^2 - ma_sigma/-8.272  ) 
+31	580	137	1	25.9393	-0.0450826	-70.9542	-1.0901	 max( min(5.292,-6.224) ,  sigma_t-sigma_t - mix(  avg(  min( max(sigma,8.346) ,ma) - mix(sigma|max_tot,max)  ,  max( exp(-2.758) , sqrt(max) ) +max ) +min_tot |ma_sigma,mu_tot)  ) 
+32	591	137	1	26.6035	-0.0450826	-88.3058	-1.11673	 max( min(5.292,-6.224) ,  sigma_t-sigma_t - mix(  avg(  min( max(sigma,8.346) ,ma) - mix(sigma|max_tot,max)  ,  max( exp(-2.758) , sqrt(max) ) +max ) +min_tot |ma_sigma,mu_tot)  ) 
+33	604	143	1	26.6821	-0.0442248	-86.2459	-1.12532	 ma_sigma* avg(max,sigma)  
+34	555	178	1	27.1606	-0.0467612	-79.018	-1.07536	 sqrt(  min(  mix( min*-4.932 |sigma_t,ma) + log(sigma_tot)  ,   avg(min_tot,5.98) ^ log(max)  ^2 ) / avg(sigma_t,8.788)  ) 
+35	589	182	1	27.482	-0.0447921	-71.9464	-1.11079	 max( max-sigma , mix( max_tot+ma_sigma | sqrt(  min(max,sigma) * mix( -4.79* ma_sigma^2  | max-sigma_t , avg(sigma_t, sqrt( max* exp(min)  ) ) )  ) , min(max,sigma_tot) ) ) 
+36	586	150	1	28.2151	-0.045602	-34.6213	-1.05389	 avg( sqrt(-7.828) , min(max,  mix(sigma|4.77,-0.278) ^2 ) ) 
+37	556	157	1	29.0228	-0.045602	-31.9788	-1.06272	 avg( sqrt(-7.828) , min(max,  mix(sigma|4.77,-0.278) ^2 ) ) 
+38	592	157	1	29.6617	-0.046047	-65.5882	-1.06519	  max^2 + max(mu_tot, min( sigma_t^2 , sqrt( log(2.93) ) ) )  
+39	595	164	1	29.9261	-0.0451916	-87.6103	-1.04755	  avg( sqrt(  min( sqrt(  avg(sigma,   4.274*ma * max(ma_sigma,  log( log( log(9.402) ) ) ^2 )  ^2 ) - -7.428^2  ) , log( exp( ma_sigma*-1.296 ) ) ) ^2 ) ,max) ^2 

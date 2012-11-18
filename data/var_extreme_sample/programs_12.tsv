@@ -1,0 +1,993 @@
+ avg(max, avg( exp( sqrt( sqrt(  log(8.886) +max_tot ) ) ) ,max_tot) ) 
+ avg( log(volume) , max( sigma+ sigma_t+sigma_tot  ,mu_tot) ) 
+  sigma_tot/-9.244 ^2 
+ max( avg(mu_tot,sigma_tot) , mix(sigma_t|sigma_t,min) ) 
+ max*mu_tot 
+ avg( log( avg(max, ma_sigma+max ) ) , max( sigma+ sigma_t+sigma_tot  ,mu_tot) ) 
+  max- sqrt( max(  sqrt(min) +7.016 , min(sigma_tot,-1.08) ) )  -min_tot 
+ 9.758*sigma_t 
+ avg(sigma_tot,sigma_t) 
+ max( log(    sigma_t--9.26 + mix(-1.198|ma_sigma,mu_tot)  ^9.568 -max ) ,volume) 
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+  exp(mu_tot) + sqrt(sigma_t)  
+sigma_tot
+ min( max^2 ,sigma_tot) 
+ sigma_tot- log(max_tot)  
+sigma_tot
+  sqrt(-5.962) ^sigma_tot 
+ mix( max(ma,sigma) |5.676, avg(4.866,min_tot) ) 
+ avg(volume,sigma_tot) 
+ avg(sigma_tot, ma_sigma+max ) 
+max_tot
+ avg( sigma_t^2 , avg( min(sigma_t,  -9.894* 0.894+-7.784  ^2 ) ,max_tot) ) 
+ 5.848^2 
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+ mix( ma*-9.944 | sqrt( max( mu_tot+volume , max*min ) ) , mu_tot+ma_sigma ) 
+sigma_tot
+ avg( mix( log(volume) | exp(sigma_t) , sigma/max ) ,sigma_tot) 
+max_tot
+ max( avg(mu_tot,sigma_tot) , mix(  log(-2.516) ^ sigma_tot-max  |max,sigma) ) 
+ sigma_tot^2 
+sigma_tot
+sigma_tot
+ avg( max( -3.774^2 , min(mu_tot, max_tot+-3.774 ) ) , avg(min,max_tot) ) 
+ exp(mu_tot) 
+sigma_tot
+sigma_tot
+ -5.582*-7.964 
+sigma_tot
+ avg(volume,sigma_tot) 
+sigma_tot
+ avg(max, avg(min,max_tot) ) 
+ sqrt( mix(sigma_tot| sqrt(max) ,min) ) 
+sigma_tot
+ exp(mu_tot) 
+ max( log(    sigma_t--9.26 + mix(-1.198|ma_sigma,mu_tot)  ^9.568 -max ) ,0.426) 
+ sigma_tot+min 
+sigma_tot
+ 6.86^2 
+  9.758*sigma + sqrt(-3.61)  
+sigma_tot
+sigma_tot
+sigma_tot
+ sqrt(  min_tot*mu_tot ^2 ) 
+  7.246^2 +min_tot 
+sigma_tot
+ sigma_tot- log(max_tot)  
+max_tot
+sigma_tot
+sigma_tot
+sigma_tot
+ avg( max(sigma_tot,min) , ma_sigma+max ) 
+sigma_tot
+sigma_tot
+max_tot
+sigma_tot
+ avg( mix( sqrt( sigma/5.746 ) |min_tot, -9.894* 0.894+-7.784  ) ,max_tot) 
+sigma_tot
+sigma_tot
+ log(  sigma_tot- sqrt( max(  sqrt(min) +7.016 , min(sigma_tot,-1.08) ) )  -mu_tot ) 
+sigma_tot
+ avg(volume,sigma_tot) 
+sigma_tot
+ mix( sqrt(ma) |sigma_tot, 5.416/ma ) 
+sigma_tot
+sigma_tot
+sigma_tot
+ max( log(    sigma_t--9.26 + mix(-1.198|ma_sigma,mu_tot)  ^9.568 -max ) ,volume) 
+sigma_tot
+ max(-0.262, avg(volume,sigma_tot) ) 
+  exp(mu_tot) +6.898 
+sigma_tot
+ avg( mix( sqrt( sigma/5.746 ) |min_tot,mu_tot) ,max_tot) 
+sigma_tot
+ exp(mu_tot) 
+ mu_tot^mu_tot 
+ 8.3*sigma 
+sigma_tot
+sigma_tot
+ avg( max( -3.774^2 , min(  exp(mu_tot) *sigma , max_tot+-3.774 ) ) , avg(min,max_tot) ) 
+sigma_tot
+ max( avg(mu_tot,sigma_tot) , mix(  log(-2.516) ^ sigma_tot-sigma_tot  |min_tot,sigma) ) 
+  avg( avg(sigma_tot,min) ,8.344) + mu_tot+ma_sigma  
+ sigma_tot+min 
+sigma_tot
+ mu_tot^mu_tot 
+sigma_tot
+  mix(max|9.218,-0.67) / avg(volume,max)  
+sigma_tot
+max_tot
+sigma_tot
+sigma_tot
+ max( log(   mix( sigma_t--9.26 | mix(-1.198|ma_sigma,mu_tot) ,min) ^9.568 -max ) ,volume) 
+ max(max, -4.6^2 ) 
+sigma_tot
+ avg( mu_tot^2 ,max_tot) 
+ max( avg(mu_tot,sigma_tot) , mix(  log(-2.516) ^ min_tot-sigma_tot  |min_tot,5.256) ) 
+sigma_tot
+sigma_tot
+sigma_tot
+ max( log(    sigma_t--9.26 + mix(-1.198|ma_sigma,mu_tot)  ^9.568 -max ) , avg(sigma_tot,sigma) ) 
+ mix( ma*-9.944 | sqrt( max( mu_tot+volume , mu_tot*min ) ) , mu_tot+ma_sigma ) 
+ min( max^2 ,sigma_tot) 
+sigma_tot
+ sigma_tot--7.47 
+sigma_tot
+max_tot
+sigma_tot
+ ma_sigma- min(ma_sigma,min_tot)  
+sigma_tot
+  max(min_tot, max(-3.774, 2.338^2 ) ) ^2 
+sigma_tot
+ volume+sigma_tot 
+sigma_tot
+ min( min(-6.232,max) , avg(sigma_tot,sigma) ) 
+ avg( avg(max_tot, ma_sigma+max ) , min(volume,ma_sigma) ) 
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+ avg(sigma_tot,mu_tot) 
+sigma_tot
+sigma_tot
+sigma_tot
+ sqrt( mix(sigma_tot| sqrt(sigma) ,max_tot) ) 
+sigma_tot
+ avg( max(sigma_tot,min) ,mu_tot) 
+ sqrt(  6.768*max_tot - avg(-7.154,sigma_t)  ) 
+sigma_tot
+sigma_tot
+sigma_tot
+ max(sigma_t,sigma_tot) 
+  mu_tot/sigma_tot -sigma_tot 
+sigma_tot
+sigma_tot
+ max( max_tot+-1.658 ,1.22) 
+sigma_tot
+sigma_tot
+  exp(mu_tot) - sqrt(ma_sigma)  
+ -5.582*-7.964 
+max_tot
+max_tot
+ avg(max_tot, min(max_tot,7.948) ) 
+sigma_tot
+ exp(mu_tot) 
+sigma_tot
+  sigma_tot/-6.208 + mix(6.854|7.86,volume)  
+sigma_tot
+sigma_tot
+sigma_tot
+ max( max(ma,sigma_tot) ,max) 
+ avg( max(max,min) ,sigma_tot) 
+max_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+max_tot
+ exp(mu_tot) 
+ avg( max(max,min) ,sigma_tot) 
+ sigma_t*7.944 
+sigma_tot
+sigma_tot
+ sqrt( mix(sigma_tot| sqrt(sigma) , min(ma_sigma, min( log( 4.194+max_tot ) ,  sqrt(max) *min ) ) ) ) 
+ avg( sqrt( min_tot^2 ) ,max_tot) 
+ max( avg(mu_tot,sigma_tot) , mix(  log(-2.516) ^ sigma_tot-max  |min_tot,sigma) ) 
+sigma_tot
+sigma_tot
+  min(mu_tot,min_tot) +sigma_tot 
+ min( exp(mu_tot) , sqrt(mu_tot) ) 
+ avg( mix( sqrt( sigma/5.746 ) |min_tot,mu_tot) ,max_tot) 
+ 6.898^2 
+  max( exp(mu_tot) , min/ma ) + log(ma)  
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+ mix( max(ma,sigma) |5.676, avg(4.866,min_tot) ) 
+sigma_tot
+ avg( max(sigma_tot,min) , max+max ) 
+sigma_tot
+ max_tot- log(ma_sigma)  
+sigma_tot
+max_tot
+ avg( volume^2 , avg( avg( ma_sigma+max , min(sigma_t,  sigma_tot* -9.894* 0.894+-7.784   ^2 ) ) ,max_tot) ) 
+ exp(mu_tot) 
+ max(5.206,sigma_tot) 
+max_tot
+sigma_tot
+sigma_tot
+  exp( mu_tot- max( min( sqrt( log(volume) ) ,sigma_t) , min_tot*max_tot )  ) +mu_tot 
+ max( avg(mu_tot,sigma_tot) , mix(  log(-2.516) ^ sigma_tot-max  |min_tot,sigma_tot) ) 
+sigma_tot
+ min_tot+max_tot 
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+ 8.344- min(ma_sigma,min_tot)  
+sigma_tot
+ sqrt( sigma_tot^2 ) 
+sigma_tot
+sigma_tot
+max_tot
+ avg(  max( volume^2 , min(mu_tot,sigma_tot) ) ^2 , avg(min,max_tot) ) 
+  5.462- sqrt( max(  sqrt(min) +7.016 , min(sigma_tot,-1.08) ) )  -min_tot 
+ max*sigma 
+ mix(5.848|1.738,-5.968) 
+sigma_tot
+max_tot
+ avg(sigma_tot, ma_sigma+max ) 
+max_tot
+sigma_tot
+  log(mu_tot) ^ exp(mu_tot)  
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+ exp(mu_tot) 
+ exp(mu_tot) 
+sigma_tot
+sigma_tot
+sigma_tot
+ 6.86^2 
+ max( log(    sigma_t--9.26 + mix(-1.198|ma_sigma,mu_tot)  ^9.568 -max ) ,volume) 
+sigma_tot
+ sigma_tot-  exp(ma) ^ avg(min_tot,volume)   
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+ sqrt( mix(sigma_tot|max_tot,ma) ) 
+ volume+sigma_tot 
+ avg(sigma_tot,sigma) 
+sigma_tot
+ sigma_tot- log(volume)  
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+ 6.898^2 
+sigma_tot
+sigma_tot
+  max_tot+ sigma/5.746  + min_tot+ma_sigma  
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+ 0.426+sigma_tot 
+max_tot
+ 6.898^2 
+ max_tot+ mix(sigma|3.852, max(sigma,min_tot) )  
+sigma_tot
+ sigma_tot- log(sigma)  
+sigma_tot
+sigma_tot
+sigma_tot
+  exp(mu_tot) *sigma 
+sigma_tot
+sigma_tot
+ max(sigma_t,sigma_tot) 
+max_tot
+sigma_tot
+ sigma_tot+ min_tot+ma_sigma  
+sigma_tot
+sigma_tot
+  max(-9.668,sigma_tot) +sigma 
+ max( min(mu_tot,sigma) ,sigma_tot) 
+ sigma_tot/sigma_t 
+ volume+max_tot 
+ exp(mu_tot) 
+sigma_tot
+ avg(sigma_tot,sigma) 
+max_tot
+ max(5.206,sigma_tot) 
+ avg( avg(max_tot,min) , max_tot-sigma_tot ) 
+  -6.77/sigma_tot +sigma_tot 
+sigma_tot
+ mix( sqrt(ma) |sigma_tot,-1.314) 
+sigma_tot
+sigma_tot
+sigma_tot
+ avg(mu_tot, avg(max,max_tot) ) 
+sigma_tot
+max_tot
+sigma_tot
+max_tot
+sigma_tot
+max_tot
+  max(-9.668,sigma_tot) +sigma 
+ min( mu_tot^max_tot ,max_tot) 
+sigma_tot
+max_tot
+ max(max,sigma_tot) 
+sigma_tot
+sigma_tot
+ avg( max(sigma_tot,min) ,sigma_tot) 
+max_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+sigma_tot
+ exp(mu_tot) 
+ mix( sigma-3.012 | ma/ma_sigma ,sigma_tot) 
+ 5.848^2 
+sigma_tot
+sigma_tot
+ max( log(    sigma_t--9.26 + mix(-1.198|ma_sigma,mu_tot)  ^9.568 -max ) ,sigma_tot) 
+ 7.246+sigma_tot 
+sigma_tot
+ max(ma,sigma_tot) 
+sigma_tot
+ sigma_tot+ avg(min_tot, log(  max( sqrt(sigma_t) , log(volume) ) *  sqrt(max) ^2  ) )  
+max_tot
+sigma_tot
+ max(ma, mix(sigma_tot|3.852, max(sigma,min_tot) ) ) 
+ max(-6.68,sigma_tot) 
+max_tot
+ sigma_tot- log(min_tot)  
+sigma_tot
+sigma_tot
+sigma_tot
+ sigma_tot+ mu_tot+ma_sigma  
+sigma_tot
+sigma_tot
+sigma_tot
+  3.594- max( min(max_tot,sigma_t) , min_tot*max_tot )  +max_tot 
+ exp(mu_tot) 
+sigma_tot
+sigma_tot
+sigma_tot
+ max( sigma+0.958 ,7.944) 
+ avg(sigma_tot, avg(min,sigma_tot) ) 
+max_tot
+ sigma_tot+ max(7.976, mix( volume*2.132 | ma^2 , avg(mu_tot,-6.662) ) )  
+sigma_tot
+sigma_tot
+sigma_tot
+max_tot
+ avg( max( -3.774^2 , min(mu_tot,sigma_tot) ) , avg(min,max_tot) ) 
+sigma_tot
+ avg(  max( volume^2 , min(mu_tot,sigma_tot) ) ^2 , avg(min,max_tot) ) 
+ max( sigma+ mix(sigma_t|   mix( max(-8.744,min) |9.208,ma) * mu_tot^  min-7.076 * avg( max( max_tot-min_tot , sqrt(sigma_tot) ) ,8.56)    ^2 ,sigma)  ,sigma_tot) 
+sigma_tot
+max_tot
+  log(sigma_tot) - volume-  mu_tot^sigma + sqrt(sigma_t)    
+sigma_tot
+sigma_tot
+ max(max_tot,max) 
+ max( max(sigma_tot, max_tot^0.606 ) ,max) 
+sigma_tot
+sigma_tot
+max_tot
+max_tot
+max_tot
+max_tot
+max_tot
+ max( exp( sqrt( sqrt(  min( log(8.886) , -1.984*ma_sigma ) +max_tot ) ) ) ,  sqrt(max_tot) + sqrt(-6.998)  ) 
+sigma_tot
+max_tot
+sigma_tot
+sigma_tot
+max_tot
+ max(sigma_tot,  mix(volume| max(  sigma_tot+ma_sigma / avg(volume,1.852)  ,sigma_tot) ,8.586) ^2 ) 
+max_tot
+sigma_tot
+sigma_tot
+max_tot
+max_tot
+sigma_tot
+sigma_tot
+sigma_tot
+ 0.426+sigma_tot 
+max_tot
+  sigma_tot- sqrt( max(  sqrt(min) +7.016 , min(sigma_tot,-1.08) ) )  --0.558 
+sigma_tot
+ avg(sigma_tot, ma_sigma+max ) 
+ volume+sigma_tot 
+  exp( 3.594- max( min(max_tot,sigma_t) , min_tot*max_tot )  ) +sigma_tot 
+ sqrt( mix(sigma_tot|max_tot,mu_tot) ) 
+max_tot
+max_tot
+sigma_tot
+max_tot
+sigma_tot
+max_tot
+sigma_tot
+ 7.944+sigma_tot 
+sigma_tot
+sigma_tot
+sigma_tot
+ max_tot+mu_tot 
+sigma_tot
+sigma_tot
+sigma_tot
+max_tot
+max_tot
+sigma_tot
+max_tot
+ 7.618^2 
+sigma_tot
+max_tot
+max_tot
+max_tot
+max_tot
+ 3.432+sigma_tot 
+sigma_tot
+max_tot
+  sigma_tot+ma_sigma / avg(volume,1.852)  
+max_tot
+max_tot
+max_tot
+sigma_tot
+sigma_tot
+max_tot
+max_tot
+max_tot
+sigma_tot
+sigma_tot
+ max( sigma+ 2.412+sigma_tot  ,sigma_tot) 
+max_tot
+ 0.426+sigma_tot 
+sigma_tot
+sigma_tot
+sigma_tot
+ max( sigma+ sigma_t+sigma_tot  ,sigma_tot) 
+sigma_tot
+ sigma_tot+ exp(min_tot)  
+sigma_tot
+sigma_tot
+sigma_tot
+max_tot
+max_tot
+max_tot
+ sigma_tot+ mu_tot+min_tot  
+  max(-9.668,sigma_tot) +sigma 
+max_tot
+max_tot
+ max( avg(mu_tot,sigma_tot) , mix(  log(-2.516) ^ min_tot-sigma_tot  |min_tot,sigma) ) 
+sigma_tot
+ max(-2.354,max_tot) 
+max_tot
+sigma_tot
+max_tot
+ max( exp( sqrt( sqrt(  min( log(8.886) , -1.984+ma_sigma ) +max_tot ) ) ) ,  sqrt(1.556) + sqrt(-6.998)  ) 
+ max( ma^2 ,sigma_tot) 
+ max(5.206,ma_sigma) 
+max_tot
+sigma_tot
+ max(sigma_t,sigma_tot) 
+max_tot
+sigma_tot
+sigma_tot
+ sigma_tot+7.012 
+ max(sigma_tot,max) 
+max_tot
+sigma_tot
+sigma_tot
+max_tot
+sigma_tot
+sigma_tot
+max_tot
+max_tot
+max_tot
+ sigma_tot- log(min_tot)  
+sigma_tot
+ max(2.338,sigma_tot) 
+ volume+max_tot 
+max_tot
+sigma_tot
+max_tot
+ max(ma_sigma,sigma_tot) 
+ sigma_tot+9.31 
+max_tot
+max_tot
+max_tot
+sigma_tot
+max_tot
+  max(mu_tot,  mix(volume|-4.67,8.586) ^2 ) ^2 
+max_tot
+max_tot
+max_tot
+  sigma_tot+ma_sigma +-3.188 
+max_tot
+max_tot
+max_tot
+ avg( log(    mix(  max( ma^2 , exp(ma) ) ^2 | volume*  3.476+-8.26 ^ min/sigma_t   ,-7.406) * max_tot*sigma_t  / sqrt(-2.542)  /7.088 ) , max-min_tot ) 
+sigma_tot
+ avg( log(volume) , max( sigma_tot+ sigma_t+sigma_tot  ,mu_tot) ) 
+  max(-9.668,sigma_tot) +sigma 
+ 5.256*mu_tot 
+ mix( max( exp( sqrt( sqrt(  log(8.886) +max_tot ) ) ) ,  sqrt(max_tot) + sqrt(max_tot)  ) | ma+-9.592 , max(ma_sigma,1.164) ) 
+max_tot
+max_tot
+max_tot
+max_tot
+ max(sigma_tot, sqrt(-8.754) ) 
+max_tot
+max_tot
+ mix( max(-6.452,ma) | max^2 ,sigma_tot) 
+max_tot
+max_tot
+ sigma_tot+ exp(sigma)  
+max_tot
+sigma_tot
+max_tot
+ max( exp( sqrt( sqrt(  min( log(8.886) , -1.984+ma_sigma ) +max_tot ) ) ) ,  sqrt(1.556) + sqrt(max)  ) 
+ max_tot+mu_tot 
+ log( exp(sigma_tot) ) 
+max_tot
+ log( max( log(    sigma_t--9.26 + mix(-1.198|ma_sigma,sigma_tot)  ^ma_sigma -max ) ,sigma_tot) ) 
+sigma_tot
+max_tot
+ max(sigma_tot, sigma_t*volume ) 
+ max+max_tot 
+ exp(mu_tot) 
+max_tot
+max_tot
+max_tot
+max_tot
+sigma_tot
+ sqrt(  max_tot*max_tot - avg(-7.154,sigma_t)  ) 
+max_tot
+max_tot
+max_tot
+max_tot
+max_tot
+ max_tot+sigma_tot 
+ max(sigma_tot, mix( min_tot^2 | max(-8.42,-6.526) , exp(max) ) ) 
+sigma_tot
+  mix(max|9.218,-0.67) / avg(volume,max)  
+max_tot
+sigma_tot
+ max(sigma_tot, max_tot+-1.658 ) 
+max_tot
+ avg(  avg( max(volume,min) , ma_sigma+max ) ^2 , avg( avg(-4.944, min(sigma_t,  sigma_tot* -9.894* 0.894+-7.784   ^2 ) ) ,max_tot) ) 
+ sigma_tot- log(min_tot)  
+max_tot
+sigma_tot
+max_tot
+max_tot
+ max_tot-ma_sigma 
+max_tot
+max_tot
+max_tot
+max_tot
+max_tot
+sigma_tot
+max_tot
+ sigma_tot*sigma 
+sigma_tot
+max
+ 9.758*9.546 
+max_tot
+max_tot
+max_tot
+max_tot
+max_tot
+max_tot
+max_tot
+max_tot
+ min( sigma_t^2 ,max_tot) 
+sigma_tot
+ sqrt(max_tot) 
+ max( 0.574*ma ,  max( exp(4.712) ,sigma_tot) +sigma ) 
+ max_tot+max 
+ max( log(    sigma_t--9.26 + mix(-1.198|ma_sigma,mu_tot)  ^ma_sigma -max ) ,sigma_tot) 
+ sigma_tot- log(sigma)  
+max_tot
+  7.618^2 / exp(ma)  
+ mix( max_tot+-7.34 |sigma, sqrt(ma) ) 
+max_tot
+max_tot
+max_tot
+max_tot
+max_tot
+ max+sigma_tot 
+sigma_tot
+ max+sigma_tot 
+  min*mu_tot * min( mix(sigma_t|mu_tot, log(sigma) ) , mix(sigma_t|   mix( max(-8.744,min) |9.208,max_tot) * mu_tot^  min-7.076 * avg( max( max_tot-min_tot , sqrt(sigma_tot) ) ,8.56)    ^2 ,sigma) )  
+ avg( volume^2 , avg( avg( ma_sigma+max , min(sigma_t, sigma_tot* -9.894* 0.894+-7.784   ) ) ,max_tot) ) 
+max_tot
+max_tot
+ max(max_tot,sigma_tot) 
+ max_tot+  max(min,sigma_t) ^2  
+max_tot
+ avg( max(max,min) , 6.998+max ) 
+max_tot
+max_tot
+max_tot
+ max(max_tot,sigma_tot) 
+  7.246^2 +-1.268 
+ sigma_t*max 
+ max_tot+ sigma/5.746  
+sigma_tot
+max_tot
+max_tot
+max_tot
+ mix( exp(min_tot) | sigma_tot/ma , max_tot+ 7.944/5.746  ) 
+max_tot
+max_tot
+sigma_tot
+max_tot
+ ma_sigma+ log( exp(max_tot) )  
+ ma_sigma+ log( exp(max_tot) )  
+max_tot
+ max_tot+-1.658 
+ sigma_tot+sigma_tot 
+ sigma_tot/sigma_t 
+ max* sqrt(sigma_tot)  
+max_tot
+ sigma_tot+sigma_tot 
+max_tot
+ max( log(    sigma_t--9.26 + mix(-1.198|ma_sigma,mu_tot)  ^ma_sigma -max ) ,max) 
+ max_tot+3.866 
+ max*sigma 
+ 5.256*mu_tot 
+max_tot
+max_tot
+sigma_tot
+ max( exp(mu_tot) ,max_tot) 
+ max( sigma+ 2.412+max_tot  ,sigma_tot) 
+max_tot
+max_tot
+ max*sigma 
+ max(sigma_tot,max_tot) 
+max_tot
+ max_tot+ max/5.746  
+ max_tot+sigma_tot 
+max_tot
+max_tot
+ max+   max(0.53,  max-sigma_tot / ma*sigma_t  ) ^volume ^ exp(sigma_tot)   
+max_tot
+max_tot
+sigma_tot
+ max+ sqrt(ma)  
+ max( min(mu_tot,ma) ,max_tot) 
+sigma_tot
+ avg( avg(sigma_tot, min(max,max_tot) ) , sqrt(min) ) 
+ sigma_tot+max_tot 
+ max( sigma_tot+ 2.412+sigma_tot  ,sigma_tot) 
+max_tot
+ 9.758*9.546 
+max_tot
+sigma_tot
+ max_tot-sigma_tot 
+ max_tot+mu_tot 
+ max(mu_tot,  mix(volume|-4.67,8.586) ^2 ) 
+max_tot
+ sigma_tot+max 
+ avg( avg(sigma_tot,min) ,8.344) 
+sigma_tot
+max_tot
+ max_tot+ sigma/5.746  
+ max(2.338,sigma_tot) 
+max_tot
+ max( max(-6.268,volume) ,sigma_tot) 
+ max(  sigma_tot+ma_sigma / avg(volume,1.852)  ,max_tot) 
+ avg(mu_tot, avg(min,max_tot) ) 
+  sigma_t^2 + max( avg(sigma, sigma_t+sigma_tot ) ,sigma_tot)  
+ ma_sigma+ log( exp(max) )  
+ max_tot+   max(0.53,  max-sigma_tot /max_tot ) ^volume ^ exp(sigma_tot)   
+ max+sigma_tot 
+ 8.238^2 
+max_tot
+ max_tot+max_tot 
+ sqrt( min_tot^2 ) 
+ max_tot+  max(min,ma_sigma) ^2  
+ sqrt( exp(5.462) ) 
+ mix( exp(min_tot) |  min( exp(max_tot) ,sigma_t) /ma , max_tot+ 7.944/5.746  ) 
+ 5.256*mu_tot 
+ max( max(ma,  exp( volume/ exp( -1.994+5.704 )  ) ^0.606 ) ,max_tot) 
+ avg(sigma_tot,max_tot) 
+ max_tot--7.47 
+ volume+max_tot 
+ sigma_tot+sigma_tot 
+ sigma_tot*ma_sigma 
+ sqrt( mix(-8.062|min,max) ) 
+max_tot
+ max( min(ma,ma) ,max_tot) 
+max_tot
+ mix( exp(min_tot) |  min( exp(max_tot) ,sigma_t) /ma , max_tot+ sigma_tot/5.746  ) 
+ sigma_tot+sigma_tot 
+max_tot
+ min( mu_tot^max_tot , sigma_t*sigma_tot ) 
+ max( max(-6.268,volume) ,max_tot) 
+max
+  min* log(max_tot)  * min( mix(sigma_t|mu_tot, log(sigma) ) , mix(sigma_t|   mix( max(-8.744,min) |9.208,ma) * mu_tot^  min-7.076 * avg( max( max_tot-min_tot , sqrt(sigma_tot) ) ,8.56)    ^2 ,sigma) )  
+max_tot
+ max(max_tot, max(volume,sigma_tot) ) 
+ max+max_tot 
+ 9.758*7.86 
+ max_tot+ max(7.976, mix( volume*2.132 | ma^2 , max(mu_tot,-6.662) ) )  
+ max_tot+ log( exp(max_tot) )  
+ avg( max^2 , avg( avg(-4.944, min(sigma_t,  sigma_tot* -9.894* 0.894+-7.784   ^2 ) ) ,min) ) 
+  6.768*max - avg(-7.154,sigma_t)  
+max_tot
+ sigma_tot*sigma 
+sigma_tot
+  exp(mu_tot) +max_tot 
+ max( exp(ma_sigma) ,max) 
+ ma_sigma+max 
+ sigma_tot+sigma_tot 
+ 8.238^2 
+max_tot
+ max( max* sqrt(sigma_tot)  , exp(sigma) ) 
+ ma_sigma+max 
+ max+mu_tot 
+ max*7.86 
+max_tot
+ max(mu_tot,  mix(volume|max,8.586) ^2 ) 
+ max(mu_tot,  mix(volume| max(  sigma_tot+ma_sigma / avg(volume,1.852)  ,sigma_tot) ,8.586) ^2 ) 
+ max_tot+sigma_tot 
+max
+max_tot
+  exp( sigma- max( min( sqrt( log(volume) ) ,sigma_t) , min_tot*max_tot )  ) +max_tot 
+ 6.898+max_tot 
+  sqrt(max) +7.37 
+  exp( 3.594- max( min(mu_tot,sigma_t) , min_tot*  min(-8.588,min_tot) * mix(-9.26|max_tot,-8.148)   )  ) +max_tot 
+max_tot
+ 5.256* min(max_tot,sigma)  
+ sigma_tot+sigma_tot 
+ mix(7.652| min(ma,sigma) , sqrt( sqrt( 0.626^2 ) ) ) 
+ min( log(max_tot) , exp(sigma_t) ) 
+max
+  min*mu_tot * min( mix(sigma_t|mu_tot,min_tot) , mix(sigma_t|   mix( max(-8.744,min) |9.208,ma) * mu_tot^  min-7.076 * avg( max( max_tot-min_tot , sqrt(sigma_tot) ) ,8.56)    ^2 ,sigma) )  
+ sqrt(  max_tot- sigma_t^2  +max ) 
+ max_tot+ sigma/5.746  
+  max(-9.668,7.86) +sigma 
+ mix( volume^sigma_t |  log(mu_tot) --8.082 , mix(1.742|9.432,mu_tot) ) 
+  exp( 3.594- max( min(max_tot,sigma_t) , min_tot*max_tot )  ) +7.86 
+max
+max_tot
+ sigma_tot*sigma 
+ sqrt(  min_tot*-8.566 ^2 ) 
+ max(max_tot,sigma) 
+ sigma_tot+sigma_tot 
+  ma_sigma*max_tot / avg( max( ma_sigma^2 ,min) , 6.998+max )  
+ max(3.594,  mix(volume| max(  sigma_tot+ma_sigma / avg(volume,1.852)  ,sigma_tot) ,8.586) ^2 ) 
+  max(-9.668,max) +sigma 
+max
+   exp( sigma- max( min( sqrt( log(volume) ) ,sigma_t) , min_tot*max_tot )  ) +mu_tot ^2 
+  avg(sigma,max) * sigma_t/0.216  
+max_tot
+ ma_sigma+max_tot 
+9.758
+ 5.256*mu_tot 
+max_tot
+max
+max
+ max*6.898 
+ sqrt( sigma_tot*sigma ) 
+ mu_tot+max 
+max
+ avg( volume^2 , avg( avg(-4.944, min(sigma_t,  sigma_tot* -9.894* 0.894+-7.784   ^2 ) ) ,max_tot) ) 
+ avg( max^2 , avg( avg(-4.944, min(sigma_tot,  sigma_tot* -9.894* 0.894+-7.784   ^2 ) ) ,min) ) 
+  max_tot-mu_tot +max 
+  ma+ sqrt( min(volume,max) )  + max_tot/8.188  
+  log( mix( exp(mu_tot) | max_tot^2 , min-sigma_tot ) ) ^2 
+ exp(sigma_t) 
+ sigma_tot*sigma 
+ 9.31^2 
+max
+ avg(  max( volume^2 , min(mu_tot,-7.46) ) ^2 , avg(min,max_tot) ) 
+ sigma_tot+ log( exp(max_tot) )  
+ max_tot+  sigma_tot+7.012 /5.746  
+max_tot
+  ma+sigma ^ min( exp( min(  max(  mu_tot/max_tot / log(ma)  ,sigma) *max ,  3.064^ mix( min/sigma_t | sqrt(-6.796) , exp(min_tot) )  ^volume ) ) , avg(max_tot, avg(   max( -3.176/-6.406 , max+max ) ^ sqrt( log(ma) )  ^ max_tot^2  , max(-4.048, min/ma_sigma ) ) ) )  
+ max+sigma 
+max
+max
+sigma_tot
+max_tot
+ min( mu_tot^max_tot , sigma_t* sigma/5.746  ) 
+max_tot
+ avg( max(max_tot,min) ,sigma_tot) 
+5.256
+ max(max_tot,sigma_tot) 
+sigma_tot
+max
+ sigma_tot+sigma_tot 
+ sigma_tot+sigma_tot 
+sigma_tot
+ max( avg(mu_tot,sigma_tot) , mix(  log(-2.516) ^ sigma_tot-sigma_tot  |min_tot,sigma) ) 
+sigma_tot
+ avg( mix( sqrt( sigma/5.746 ) |min_tot, -9.894* 0.894+sigma_tot  ) ,max_tot) 
+ sigma_tot+sigma_tot 
+ max( log(    sigma_t--9.26 + mix(-1.198|ma_sigma,mu_tot)  ^ma_sigma -max ) , sigma_tot*ma_sigma ) 
+ max(max_tot,sigma_tot) 
+sigma_tot
+ sqrt(  -6.77/sigma_tot +sigma_tot ) 
+ max(sigma_tot,max) 
+sigma_tot
+  sigma_tot- sqrt( max(  sqrt(min) +7.016 , min(sigma_tot,-1.08) ) )  -sigma_tot 
+mu_tot
+-6.208
+max_tot
+max_tot
+max_tot
+max_tot
+sigma_tot
+max_tot
+max
+ avg(max_tot, mix(-4.318|volume,max) ) 
+ max(sigma_tot,sigma_tot) 
+sigma_tot
+sigma_tot
+max_tot
+ 9.758+sigma_tot 
+ avg(max_tot,sigma_tot) 
+sigma_tot
+ max(6.898,sigma_tot) 
+  mix(max_tot|9.218,-0.67) / avg(volume,max)  
+ max( log(    sigma_t--9.26 + mix(-1.198|ma_sigma,mu_tot)  ^ma_sigma -max ) , sigma_tot*max_tot ) 
+sigma_tot
+ max_tot+sigma_tot 
+  exp(mu_tot) +max_tot 
+sigma_tot
+7.246
+ avg( avg(sigma_tot, min(max,max_tot) ) , sqrt(max_tot) ) 
+sigma_tot
+sigma_tot
+ max(max_tot,max) 
+ max(max_tot,sigma_tot) 
+sigma_tot
+sigma_tot
+min_tot
+ max(mu_tot,sigma) 
+ 6.898* sqrt(sigma_tot)  
+max_tot
+max
+sigma_tot
+ max( exp(mu_tot) ,sigma_tot) 
+sigma_tot
+  max_tot- sigma_t^2  +max_tot 
+sigma_tot
+mu_tot
+sigma_tot
+ max^2 
+ ma_sigma+ log( exp(sigma_tot) )  
+sigma_tot
+ avg(volume,1.852) 
+ sigma_t+max_tot 
+ max( min(mu_tot,sigma) ,sigma_tot) 
+8.3
+sigma_tot
+sigma_tot
+max_tot
+max_tot
+ sigma_tot*-7.964 
+ max(  sigma_tot+ma_sigma / avg(max_tot,1.852)  ,max_tot) 
+ mu_tot+sigma_tot 
+ log( exp(max_tot) ) 
+sigma_tot
+ max*mu_tot 
+ max( sigma+ 2.412+sigma_tot  ,mu_tot) 
+sigma_tot
+ 7.618^2 
+sigma_tot
+ avg( mix( sqrt( sigma/5.746 ) |min_tot, -9.894* sigma+-7.784  ) ,max_tot) 
+ max_tot+sigma_tot 
+sigma_tot
+volume
+ sqrt(max) 
+  max(-9.668,sigma_tot) +min_tot 
+max_tot
+  max(-9.668,7.86) +max_tot 
+7.976
+7.86
+max_tot
+ max(sigma_t,sigma_tot) 
+ sigma_tot-sigma_tot 
+ max_tot-sigma_tot 
+sigma_tot
+ 7.618^2 
+ max( ma^2 ,sigma_tot) 
+ avg(sigma_tot,max_tot) 
+sigma_tot
+max
+sigma_tot
+ma_sigma
+max
+sigma_tot
+ max(max_tot,volume) 
+max_tot
+8.3
+ sigma_tot+sigma_tot 
+  7.246^2 +sigma_tot 
+sigma_tot
+ avg( mix( sqrt( max_tot/5.746 ) |min_tot, -9.894* 0.894+-7.784  ) ,max_tot) 
+sigma_tot
+sigma_tot
+ min(sigma_tot, 0.372*-7.562 ) 
+ avg( volume^2 , avg( avg( ma_sigma+sigma_tot , min(sigma_t, sigma_tot* -9.894* 0.894+-7.784   ) ) ,max_tot) ) 
+sigma_tot
+ exp(mu_tot) 
+sigma_tot
+min_tot
+ 7.618^2 
+sigma_tot
+max_tot
+max_tot
+max
+max_tot
+sigma_tot
+ max_tot-  exp(ma) ^ avg(min_tot,volume)   
+ sigma_tot- log(sigma_tot)  
+volume
+ max( log(    sigma_t--9.26 +-1.378 ^9.568 -max ) ,max_tot) 
+ max( min(mu_tot,sigma) ,max_tot) 
+  7.246^2 +max_tot 
+sigma_tot
+ max(sigma_tot,sigma_tot) 
+max_tot
+ 7.618- log(min_tot)  
+max_tot
+max_tot
+max_tot
+ sigma_tot*ma_sigma 
+sigma_tot
+max_tot
+ sqrt(max) 
+sigma_tot
+ mix(7.652| min(max_tot,sigma) , sqrt( sqrt( sigma_tot^2 ) ) ) 
+max_tot
+  max_tot-mu_tot +max 
+ max(ma,sigma_tot) 
+ log(sigma_tot) 
+ sqrt(sigma_tot) 
+sigma_tot
+max_tot
+ avg( mix( sqrt( sigma/5.746 ) |min_tot, -9.894* 0.894+sigma_tot  ) ,7.86) 
+max_tot
+sigma_tot
+max
+  sigma_tot/-6.208 + mix(6.854|7.86,volume)  
+sigma_tot
+max_tot
+max_tot
+max_tot
+sigma_t
+7.86
+max
+ max( exp(ma_sigma) ,max) 
+  sqrt(max_tot) +7.37 
+sigma_tot
+sigma_tot
+max_tot
+ sqrt(ma) 
+5.848
+ 8.238^2 
+ max(max_tot, 9.758*9.546 ) 
+max_tot
+ max_tot^2 
+sigma_tot
+ sqrt( max( log(  ma^9.568 -max ) ,sigma_t) ) 
+sigma_tot
+max_tot
+max
+-1.984
+ max_tot+  sigma_tot+7.012 /5.746  
+sigma_tot
+ max_tot+ max(7.976, mix( volume*2.132 | ma^2 , max(max_tot,-6.662) ) )  
+sigma_tot
+max_tot
+ sqrt( exp(sigma_tot) ) 

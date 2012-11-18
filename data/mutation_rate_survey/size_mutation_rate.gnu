@@ -1,0 +1,13 @@
+load "../common.gnu";
+set out "size_mutation_rate.eps";
+mr_00="stat_mr=0.0.tsv";
+mr_05="stat_mr=0.05.tsv";
+mr_25="stat_mr=0.25.tsv";
+mr_50="stat_mr=0.5.tsv";
+mr_80="stat_mr=0.8.tsv";
+set key left top;
+set xrange [:35];
+set ylabel "{/Italic s} - Average program size";
+set xlabel "{/Italic n} - Generation";
+offset=2.5;
+plot mr_00 u 1:($5+offset) w lp t "{/Symbol m}=0.0",mr_05 u 1:($5+offset) w lp t "{/Symbol m}=0.05",mr_25 u 1:($5+offset) w lp t "{/Symbol m}=0.25",mr_50 u 1:($5+offset) w lp t "{/Symbol m}=0.5",mr_80 u 1:($5+offset) w lp t "{/Symbol m}=0.8";

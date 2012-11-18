@@ -1,0 +1,13 @@
+p=pop.new();
+--dir="data/copula_freddie_mac_fannie_mae";
+dir="data/var_amex";
+pop.output_dir(p,dir);
+logger.reopen(dir);
+print("Mutation rate:",pop.mutation_rate(p,0.05),"\n");
+print("Shrink rate:",pop.shrink_rate(p,0.025),"\n");
+print("Crossover size:",pop.crossover_size(p,0.8),"\n");
+print("Tournament size:",pop.tournament_size(p,6),"\n");
+--pop.create(p,1000,10,program.copula,"data/stocks/fannie_mae.csv","data/stocks/freddie_mac.csv",6,",");
+pop.create(p,1000,10,program.var,"data/stocks/msft.csv",6,",");
+pop.run(p,100);
+exit(0);
